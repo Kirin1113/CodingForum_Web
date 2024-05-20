@@ -1,9 +1,7 @@
 <template>
   <div class="container-fluid mt-4">
-
     <div class="row">
       <div class="col-lg-8 mb-4 mb-xxl-0">
-
         <el-main style="padding:0" v-loading="video_loading" element-loading-text="影片載入中"
           element-loading-background="rgba(0, 0, 0)">
           <router-link :to="{ name: 'Video', params: { post_id: post.post_id } }">
@@ -19,7 +17,6 @@
               <div class="title_font mb-3">
                 {{ uva_topic.show }}
               </div>
-
               <div class="comment__author " style="align-self: flex-start;" v-if="post.length != 0">
                 <img class="userimg comment__avatar " :src="$global_url + post.user_picture" alt="" />
                 <h3 class="comment__title" style="margin:0">
@@ -30,23 +27,15 @@
                   CPE星數: <i class="fa-solid fa-star-of-david" v-for="star in post.uva_topic.star"></i>
                   <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div> 。
                   語言: {{ post.code_type }}。
-
                 </div>
                 <div class="breakline"></div>
-
-
               </div>
-
-
               <div class="mt-2">
                 <textarea class="form-control" id="content" v-model="post.content" rows="4" readonly></textarea>
-                <!-- {{ post.content }} -->
-
               </div>
             </div>
           </div>
         </el-main>
-
       </div>
       <div class="col-lg-4">
         <div class="card" style="height: 100%;">
@@ -61,14 +50,12 @@
               @click="showcode = !showcode">查看程式碼</soft-button>
             <div class="mb-3 pc">
               <label>程式碼</label>
-
               <Codemirror v-model:value="post.code" :options="cmOptions" border ref="cmRef" height="600" width="100%"
                 @change="onChange" @input="onInput" @ready="onReady" :key="selete_loading">
               </Codemirror>
             </div>
             <div class="mb-3 mobileshow" v-if="showcode">
               <label>程式碼</label>
-
               <Codemirror v-model:value="post.code" :options="cmOptions" border ref="cmRef" height="600" width="100%"
                 @change="onChange" @input="onInput" @ready="onReady" :key="selete_loading">
               </Codemirror>
@@ -77,17 +64,18 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import { ElMessage } from "element-plus";
 import { YoutubeVue3 } from 'youtube-vue3'
-const axios = require('axios');
 import SoftButton from "../components/SoftButton.vue";
 import PDFViewer from 'pdf-viewer-vue'
 import download from 'downloadjs'
+
+const axios = require('axios');
+
 export default {
   name: "Billing",
   components: {
@@ -140,7 +128,6 @@ export default {
     };
   },
   created() {
-
     this.$watch(
       () => ({
         temp_post_id: this.temp_post_id,
@@ -157,22 +144,17 @@ export default {
     );
   },
   mounted() {
-    // console.log(window.innerWidth)
     if (this.$cookies.isKey("now_user_pic_url"))
       this.now_user_pic_url = this.$cookies.get("now_user_pic_url")
-
     const that = this;
-
     function get_post(temp_post_id) {
       return axios
         .post("/api/forum/get_temp_post", {
           temp_post_id: temp_post_id,
         });
     }
-
     this.axios.all([get_post(this.temp_post_id)]).then(
       this.axios.spread((res1) => {
-
         console.log(res1);
         this.post = res1.data.success;
         if (this.post.code == null) {
@@ -189,21 +171,16 @@ export default {
           autofocus: true,
           readOnly: true,
         }
-
         this.video_loading = false;
         this.uva_topic = res1.data.success.uva_topic;
-
         this.loading++
       })
     )
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.status);
-
           ElMessage.error("影片不存在");
           that.$router.push({ name: 'Dashboard' });
-
-
         }
       }
       );
@@ -226,9 +203,7 @@ export default {
           this.$refs.pdfviewer.handleToggleFullpage()
         });
       });
-
     },
-
     checklogin() {
       if (!this.token) {
         ElMessage.error("請先登入以進行操作");
@@ -239,6 +214,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .comment__author {
   flex-wrap: wrap;
@@ -256,7 +232,6 @@ export default {
 
 
 }
-
 
 @media (max-width: 1200px) {
   .title_font {
@@ -285,6 +260,7 @@ textarea:focus {
   height: 100vh;
 }
 </style>
+
 <style>
 .tagcolor {
   background-color: #e9f1ff;

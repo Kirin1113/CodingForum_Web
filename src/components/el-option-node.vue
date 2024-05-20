@@ -16,7 +16,6 @@ export default {
                 return {}
             }
         },
-
     }
 }
 </script>

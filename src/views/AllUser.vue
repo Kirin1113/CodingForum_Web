@@ -6,11 +6,8 @@
                     <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
                         element-loading-background="rgb(248 248 248)">
                         <div class="card-body">
-
                             <div class="container-fluid p-0" v-for="user in users">
-
                                 <router-link class="" :to="{ name: 'Profile', params: { user_account: user.account } }">
-
                                     <div class="mt-4  overflow-hidden card card-body blur shadow-blur user_cover" :style="{
                                         backgroundImage:
                                             'url(' + $global_url + user.cover + ')',
@@ -41,16 +38,13 @@
                             </div>
                         </div>
                     </el-main>
-
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
-<script>
-import { ElMessage } from "element-plus";
 
+<script>
 import SoftButton from "../components/SoftButton.vue";
 
 export default {
@@ -75,6 +69,5 @@ export default {
                 console.log(res.data.success);
             })
     },
-
 };
 </script>

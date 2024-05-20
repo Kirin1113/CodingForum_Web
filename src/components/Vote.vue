@@ -10,7 +10,6 @@
             { positive: num > 0 },
             { negative: num < 0 },
         ]">
-
             <transition-slide>
                 <div v-if="isVisible" class="box">
                     <span class="vote__count-n"> <i class="fa-solid fa-heart"></i> x {{ num }} </span>
@@ -23,26 +22,18 @@
                     stroke-linejoin="round" />
             </svg>
         </div>
-        <!-- num :{{ num }} count:{{ count }}
-        liked:{{ liked }} disliked:{{ disliked }}
-        limit:{{ limit }} loading:{{ loading }} -->
-
     </div>
 </template>
   
 <script>
-
 import { ElMessage } from "element-plus";
 import { TransitionSlide } from '@morev/vue-transitions';
 
-
 export default {
     components: { TransitionSlide },
-
     unmounted() {
         clearTimeout(this.timer);
     },
-
     props: {
         count: {
             type: Number,
@@ -78,7 +69,6 @@ export default {
             isVisible: true,
         };
     },
-
     created() {
         this.$watch(
             () => ({
@@ -97,8 +87,6 @@ export default {
                 }
                 this.liked = this.isLiked;
                 this.disliked = this.isDisliked;
-
-
             },
             { deep: true, immediate: true }
         );
@@ -134,14 +122,11 @@ export default {
         upvote() {
             this.check();
             if (this.liked != true && !this.limit) {
-
                 this.num++
-
                 this.$emit('like_function', 1);
                 this.limit = true;
                 this.change(0);
                 setTimeout(this.timelimit, 1000);
-
             }
         },
         changetofalse() {
@@ -153,7 +138,6 @@ export default {
                 this.changetofalse();
             else
                 this.isVisible = true
-
         }
     },
 };

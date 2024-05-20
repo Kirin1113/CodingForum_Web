@@ -5,11 +5,9 @@
         <el-main style="padding:0" v-loading="post_check" element-loading-text="上傳中"
           element-loading-background="rgb(248 248 248)">
           <div class="card z-index-0">
-
             <div class="card-body">
               <form role="form" @submit.prevent="post" class="mx-auto col-xl-9">
                 <p>圖片會自動套用當初上傳Youtube之圖片 因此若要更改 請至Youtube</p>
-
                 <div class="mb-3">
                   <label>影片網址(只限Youtube)</label>
                   <input class="form-control" v-model="video_url" id="video_url" type="text" placeholder="請貼入網址"
@@ -17,12 +15,9 @@
                 </div>
                 <div class="mb-3">
                   <label>內容</label>
-
                   <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入貼文內容"
                     required></textarea>
-
                 </div>
-
                 <div class="mb-3">
                   <label>請選擇題目</label>
                   <SelectUva ref="SelectUva" />
@@ -45,14 +40,12 @@
                   <soft-button color="warning" full-width variant="gradient" class="mb-5 mt-5"
                     @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 </div>
-
               </form>
             </div>
           </div>
         </el-main>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -61,7 +54,6 @@ import SelectUva from "../components/SelectUva.vue";
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import Codemirror from "codemirror-editor-vue3"
-
 // language
 import "codemirror/mode/clike/clike.js";
 import "codemirror/mode/python/python.js";
@@ -69,7 +61,6 @@ import "codemirror/mode/python/python.js";
 import "codemirror/addon/display/placeholder.js";
 // theme
 import "codemirror/theme/lucario.css";
-
 
 export default {
   name: "Upload",
@@ -126,7 +117,6 @@ export default {
       { deep: true, immediate: true }
     );
   },
-
   methods: {
     post() {
       if (!this.token) {
@@ -152,13 +142,10 @@ export default {
             }
           })
           .then((res) => {
-
             console.log(res);
-
             this.$router.push({
               name: 'Video', params: { post_id: res.data.post_id }
             });
-
             ElMessage({
               message: "上傳成功",
               type: "success",
@@ -170,15 +157,11 @@ export default {
               console.log(error.response);
               that.post_check = false
               ElMessage.error(error.response.data.error);
-
             }
           });
       }
     },
-
   },
-
-
 }
 </script>
 

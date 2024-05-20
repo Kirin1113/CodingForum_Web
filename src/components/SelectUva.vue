@@ -8,7 +8,6 @@
 </template>
   
 <script>
-
 import virtualList from 'vue3-virtual-scroll-list'
 import ElOptionNode from '@/components/el-option-node';
 
@@ -32,9 +31,6 @@ export default {
                 select_uva: this.select_uva,
             }),
             () => {
-                // if (this.$route.name != 'Dashboard' || this.$route.name != 'Profile') {
-                //     return;
-                // }
                 this.$nextTick(() => {
                     this.$parent.$parent.$emit('changepost', { type: 99, select_uva: this.select_uva })
                 });
@@ -50,7 +46,6 @@ export default {
                 this.reload++;
             })
     },
-
     methods: {
         return_select_uva() {
             return this.select_uva;
@@ -68,17 +63,12 @@ export default {
         },
         visibleVirtualoptions(bool) {
             if (!bool) {
-                // this.selreload++
             }
             if (this.select_uva) {
                 this.$refs.VirtualList.scrollToIndex(this.select_uva.value - 3)
-
             }
         },
-
     },
-
-
 }
 </script>
   

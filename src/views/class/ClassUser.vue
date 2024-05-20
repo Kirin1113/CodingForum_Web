@@ -8,9 +8,7 @@
                         <div class="card-body">
                             <h5>教授</h5>
                             <div class="container-fluid p-0" v-for="teacher in teachers">
-
                                 <router-link class="" :to="{ name: 'Profile', params: { user_account: teacher.account } }">
-
                                     <div class="mt-4  overflow-hidden card card-body blur shadow-blur user_cover" :style="{
                                         backgroundImage:
                                             'url(' + $global_url + teacher.cover + ')',
@@ -42,9 +40,7 @@
                             <div class="line my-5"></div>
                             <h5>TA</h5>
                             <div class="container-fluid p-0" v-for="TA in TAs">
-
                                 <router-link class="" :to="{ name: 'Profile', params: { user_account: TA.account } }">
-
                                     <div class="mt-4  overflow-hidden card card-body blur shadow-blur user_cover" :style="{
                                         backgroundImage:
                                             'url(' + $global_url + TA.cover + ')',
@@ -76,9 +72,7 @@
                             <div class="line my-5"></div>
                             <h5>學生</h5>
                             <div class="container-fluid p-0" v-for="user in users">
-
                                 <router-link class="" :to="{ name: 'Profile', params: { user_account: user.account } }">
-
                                     <div class="mt-4  overflow-hidden card card-body blur shadow-blur user_cover" :style="{
                                         backgroundImage:
                                             'url(' + $global_url + user.cover + ')',
@@ -109,7 +103,6 @@
                             </div>
                         </div>
                     </el-main>
-
                 </div>
             </div>
         </div>
@@ -117,10 +110,7 @@
 </template>
   
 <script>
-
-
 export default {
-
     data() {
         return {
             users: [],
@@ -149,6 +139,5 @@ export default {
                 console.log(res.data.success);
             })
     },
-
 };
 </script>

@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
                         <router-link :to="{ name: 'OperateAssignment', params: { coding_class_id: this.coding_class_id } }">
                             <soft-button color="dark" full-width variant="gradient"
@@ -29,7 +28,6 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column label="繳交人數" prop="hand_in_count" />
-
                                 <el-table-column align="right" min-width="250%">
                                     <template #header>
                                         <el-input v-model="search" placeholder="作業名稱搜尋" />
@@ -38,18 +36,14 @@
                                         <router-link
                                             :to="{ name: 'CheckAssignment', params: { coding_class_id: this.coding_class_id, assignment_id: scope.row.id } }">
                                             <el-button class="mx-1 my-1">
-
                                                 學生繳交狀況
                                             </el-button>
                                         </router-link>
-
                                         <router-link
                                             :to="{ name: 'OperateAssignment', params: { coding_class_id: this.coding_class_id, assignment_id: scope.row.id } }">
                                             <el-button class="mx-1 my-1">
-
                                                 調整作業
                                             </el-button>
-
                                         </router-link>
                                     </template>
                                 </el-table-column>
@@ -59,14 +53,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
-import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
 
 export default {
@@ -125,13 +116,10 @@ export default {
             });
         },
     },
-
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -145,6 +133,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

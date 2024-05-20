@@ -3,31 +3,24 @@
     <div class="row">
       <div class="col-12">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
                 <p>目前封面</p>
                 <p>若手機無法顯示上傳圖片 請使用電腦版</p>
-
                 <img :src="$global_url + cover" alt="" class="user_pic">
-
                 <p v-if="max_pic" class="mt-4">待更新封面</p>
-
                 <div class="upload-example__cropper-wrapper">
                   <cropper ref="cropper" class="upload-example__cropper" check-orientation :src="image.src"
                     :stencil-props="{
                       aspectRatio: 5 / 1,
                     }" :auto-zoom="true" />
                   <div class="vertical-buttons">
-
                     <square-button title="Maximize" @click="maximize()" v-if="max_pic">
                       <img :src="require('@/assets/img/resize-maximize.svg')" />
                     </square-button>
                   </div>
-
                 </div>
-
                 <div class="upload-example__buttons-wrapper">
                   <button class="upload-example__button" type="button" @click="$refs.file.click()">
                     <input ref="file" type="file" accept="image/*" @change="loadImage($event)" />
@@ -35,11 +28,7 @@
                   </button>
                 </div>
                 <p v-if="max_pic">調整裁切圖片的區域後 直接按下方更新就好</p>
-
-
-
               </div>
-
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="edit()"
                   v-if="max_pic">更新</soft-button>
@@ -53,7 +42,6 @@
         </div>
       </div>
     </div>
-
   </div>
   <div class="modal fade" id="deletepic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -74,7 +62,6 @@
 </template>
 
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import SquareButton from "../components/SquareButton.vue";
 import { ElMessage } from "element-plus";
@@ -135,7 +122,6 @@ export default {
         }
       })
       .then((res) => {
-
         console.log(res);
         this.cover = res.data.user.cover
       })
@@ -148,7 +134,6 @@ export default {
         }
       });
   },
-
   methods: {
     edit() {
       if (!this.token) {
@@ -168,14 +153,10 @@ export default {
               }
             })
             .then((res) => {
-
               console.log(res);
-
               this.$router.push({
                 name: 'Profile', params: { user_account: this.token_user_account }
               })
-              // .then(() => { this.$router.go() });
-
               ElMessage({
                 message: "更新成功",
                 type: "success",
@@ -190,7 +171,6 @@ export default {
                 }
               }
             });
-
         }, 'image/jpeg');
       }
     },
@@ -213,14 +193,6 @@ export default {
         }
         // 2. Create the blob link to the file to optimize performance:
         const blob = URL.createObjectURL(files[0]);
-        // 3. The steps below are designated to determine a file mime type to use it during the
-        // getting of a cropped image from the canvas. You can replace it them by the following string,
-        // but the type will be derived from the extension and it can lead to an incorrect result:
-        //
-        // this.image = {
-        //    src: blob;
-        //    type: files[0].type
-        // }
         // Create a new FileReader to read this image binary data
         const reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
@@ -234,7 +206,6 @@ export default {
           };
           this.max_pic = true
           this.maximize()
-
         };
         // Start the reader job - read file as a data url (base64 format)
         reader.readAsArrayBuffer(files[0]);
@@ -268,7 +239,6 @@ export default {
         ElMessage.error("請先登入以進行操作");
         this.$router.push({ name: 'Sign In' });
       }
-
       this.axios
         .post("/api/auth/edit_user", {
           cover: 'default_cover.jpeg',
@@ -279,14 +249,10 @@ export default {
           }
         })
         .then((res) => {
-
           console.log(res);
-
           this.$router.push({
             name: 'Profile', params: { user_account: this.token_user_account }
           })
-          // .then(() => { this.$router.go() });
-
           ElMessage({
             message: "回復成功",
             type: "success",
@@ -301,15 +267,12 @@ export default {
             }
           }
         });
-
     },
   },
-
-
 }
 </script>
 
-<style >
+<style>
 .el-select-dropdown__item {
   width: 300px;
   width: 100%;

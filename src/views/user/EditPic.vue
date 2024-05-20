@@ -3,30 +3,24 @@
     <div class="row">
       <div class="col-12">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
                 <p>目前頭貼</p>
                 <p>若手機無法顯示上傳圖片 請使用電腦版</p>
                 <img :src="$global_url + picture" alt="" class="user_pic">
-
                 <p v-if="max_pic" class="mt-4">待更新頭貼</p>
-
                 <div class="upload-example__cropper-wrapper">
                   <cropper ref="cropper" class="upload-example__cropper" check-orientation :src="image.src"
                     :stencil-props="{
                       aspectRatio: 1 / 1,
                     }" :auto-zoom="true" />
                   <div class="vertical-buttons">
-
                     <square-button title="Maximize" @click="maximize()" v-if="max_pic">
                       <img :src="require('@/assets/img/resize-maximize.svg')" />
                     </square-button>
                   </div>
-
                 </div>
-
                 <div class="upload-example__buttons-wrapper">
                   <button class="upload-example__button" type="button" @click="$refs.file.click()">
                     <input ref="file" type="file" accept="image/*" @change="loadImage($event)" />
@@ -34,30 +28,21 @@
                   </button>
                 </div>
                 <p v-if="max_pic">調整裁切圖片的區域後 直接按下方更新就好</p>
-
-
-
               </div>
-
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="edit()"
                   v-if="max_pic">更新</soft-button>
-
                 <soft-button color="warning" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
-
                 <soft-button color="danger mt-4" full-width variant="gradient" class="mt-2 mb-2" data-bs-toggle="modal"
                   data-bs-target="#deletepic" @click.stop.prevent="">回復預設頭貼</soft-button>
-
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
-
   </div>
-
   <div class="modal fade" id="deletepic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -77,7 +62,6 @@
 </template>
 
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import SquareButton from "../components/SquareButton.vue";
 import { ElMessage } from "element-plus";
@@ -105,7 +89,6 @@ function getMimeType(file, fallback = null) {
       return fallback;
   }
 }
-
 export default {
   name: "EditPic",
   components: {
@@ -138,7 +121,6 @@ export default {
         }
       })
       .then((res) => {
-
         console.log(res);
         this.picture = res.data.user.picture
       })
@@ -151,7 +133,6 @@ export default {
         }
       });
   },
-
   methods: {
     edit() {
       if (!this.token) {
@@ -171,14 +152,10 @@ export default {
               }
             })
             .then((res) => {
-
               console.log(res);
-
               this.$router.push({
                 name: 'Profile', params: { user_account: this.token_user_account }
               })
-              // .then(() => { this.$router.go() });
-
               ElMessage({
                 message: "更新成功，請重新登入",
                 type: "success",
@@ -193,7 +170,6 @@ export default {
                 }
               }
             });
-
         }, 'image/jpeg');
       }
     },
@@ -216,14 +192,6 @@ export default {
         }
         // 2. Create the blob link to the file to optimize performance:
         const blob = URL.createObjectURL(files[0]);
-        // 3. The steps below are designated to determine a file mime type to use it during the
-        // getting of a cropped image from the canvas. You can replace it them by the following string,
-        // but the type will be derived from the extension and it can lead to an incorrect result:
-        //
-        // this.image = {
-        //    src: blob;
-        //    type: files[0].type
-        // }
         // Create a new FileReader to read this image binary data
         const reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
@@ -237,7 +205,6 @@ export default {
           };
           this.max_pic = true
           this.maximize()
-
         };
         // Start the reader job - read file as a data url (base64 format)
         reader.readAsArrayBuffer(files[0]);
@@ -271,7 +238,6 @@ export default {
         ElMessage.error("請先登入以進行操作");
         this.$router.push({ name: 'Sign In' });
       }
-
       this.axios
         .post("/api/auth/edit_user", {
           picture: 'default_user.png',
@@ -282,14 +248,10 @@ export default {
           }
         })
         .then((res) => {
-
           console.log(res);
-
           this.$router.push({
             name: 'Profile', params: { user_account: this.token_user_account }
           })
-          // .then(() => { this.$router.go() });
-
           ElMessage({
             message: "回復成功",
             type: "success",
@@ -304,11 +266,8 @@ export default {
             }
           }
         });
-
     },
   },
-
-
 }
 </script>
 
@@ -405,6 +364,7 @@ export default {
   transform: translateY(-50%);
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
   .user_pic {

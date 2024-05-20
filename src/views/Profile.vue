@@ -21,15 +21,11 @@
       </div>
     </div>
   </div>
-
-
   <div class="pb-4 container-fluid">
     <infinite-scroll @infinite-scroll="loadDataFromServer" :message="message" :noResult="noResult">
-
       <div class="mt-xl-3 row">
         <!-- 個人介紹 -->
         <div class="mt-4 col-12 col-md-4 col-xl-4 mt-md-0">
-
           <div class="card h-100">
             <div class="p-3 pb-0 card-header">
               <div class="row">
@@ -75,17 +71,13 @@
             </div>
           </div>
         </div>
-        <!-- 貼文 -->
+        <!-- 影片 -->
         <div class="mt-4 col-12 col-md-8 col-xl-8 mt-md-0">
-
           <div class="card">
             <div class="card-body p-3">
-
               <div class="row">
-
                 <soft-button color="dark" full-width variant="gradient" style="    font-size: 15px;" @click="upload"
                   v-if="token_user_account == this.$route.params.user_account">上傳貼文</soft-button>
-
                 <h4 v-if="posts.length == 0" style="text-align: center;">無符合條件之貼文</h4>
                 <div class="col-lg-4" v-for="post in posts" :key="post.id">
                   <div class="card mb-2" aria-hidden="true">
@@ -93,7 +85,6 @@
                       <router-link :to="{ name: 'Video', params: { post_id: post.id } }"><img
                           class="card-img-top youtube_img_fix" :src="post.video_pic_url" alt=""></router-link>
                     </div>
-
                     <div class=" card-body" style="    text-align: center;">
                       <h5 class="card-title placeholder-glow">
                         {{ post.uva_topic.serial + "-" + post.uva_topic.title }}
@@ -101,7 +92,6 @@
                       <p>CPE星數: <i class="fa-solid fa-star-of-david" v-for="star in post.uva_topic.star"></i>
                       <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div>
                       <br>
-
                       語言: {{ post.code_type }}
                       <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
                         style="display: inline;">
@@ -115,7 +105,6 @@
                         :to="{ name: 'EditPost', params: { post_id: post.id } }">
                         <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>編輯貼文</router-link>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -148,10 +137,8 @@
 
 <script>
 import ProfileInfoCard from "./components/ProfileInfoCard.vue";
-
 import InfiniteScroll from "infinite-loading-vue3";
 import { ElMessage } from "element-plus";
-
 import SoftButton from "../components/SoftButton.vue";
 
 export default {
@@ -185,7 +172,6 @@ export default {
   },
   created() {
     const that = this;
-
     this.$watch(
       () => ({
         user_account: this.$route.params.user_account
@@ -234,15 +220,12 @@ export default {
             }
           });
         this.loadDataFromServer()
-
       },
       { deep: true, immediate: true }
     );
-
   },
   methods: {
     logout() {
-
       this.axios
         .post("/api/auth/logout", {
         }, {
@@ -323,8 +306,6 @@ export default {
         console.log(options.select_uva)
         this.send_serial = options.select_uva.serial
       }
-
-
       this.posts = [];
       this.noResult = false
       this.loadDataFromServer()
@@ -346,7 +327,6 @@ export default {
               sort: this.sort,
               user_account: this.$route.params.user_account,
               serial: this.send_serial
-
             })
             .then((res) => {
               let allsame = true;
@@ -365,23 +345,20 @@ export default {
                   this.posts.push(item);
                   newpostcount++;
                   allsame = false;
-
                 }
               });
               if (allsame)
                 this.noResult = true
-
             })
         }
         this.loading = false;
-
         this.more_lock = false;
-
       }
     }
   },
 };
 </script>
+
 <style scoped>
 @media (min-width: 1200px) {
   .user_cover {

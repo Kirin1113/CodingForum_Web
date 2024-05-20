@@ -3,10 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
-
-
                         <form role="form" class="mx-auto col-xl-9">
                             <div class="mb-3">
                                 <label>作業名稱</label>
@@ -29,12 +26,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import FileUpload from "@/components/FileUpload.vue";
@@ -93,8 +88,6 @@ export default {
                         }
                     })
                     .then((res) => {
-
-
                         this.in_time = res.data.success.in_time
                         this.name = res.data.success.name
                         this.content = res.data.success.content
@@ -104,8 +97,6 @@ export default {
                             this.showfile = true
                         }
                         this.$refs.ShowFileUpload.files = res.data.success.file
-
-
                     }).catch(function (error) {
                         if (error.response) {
                             ElMessage.error(error.response.data.error);
@@ -116,13 +107,10 @@ export default {
             { deep: true, immediate: true }
         );
     },
-
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -136,6 +124,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

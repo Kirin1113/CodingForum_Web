@@ -6,9 +6,6 @@
 </template>
   
 <script>
-
-
-
 export default {
     name: "SelectUser",
     props: ["TA_user_ids", "disabled"],
@@ -34,7 +31,6 @@ export default {
                 this.users = this.virtualoptions;
             })
     },
-
     methods: {
         return_TA_user_ids() {
             return this.real_TA_user_ids;
@@ -50,14 +46,11 @@ export default {
                 this.users = this.virtualoptions;
             }
         },
-
     },
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 100%;
 }

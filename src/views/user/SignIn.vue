@@ -1,8 +1,7 @@
 <template>
-  <navbar btn-background="bg-gradient-primary" />
-  <div class="pt-5 m-3 page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
+  <div class="page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
     backgroundImage:
-      'url(' + require('@/assets/img/curved-images/curveda' + randompic + '.jpg') + ')',
+      'url(' + require('@/assets/img/gradiented-images/gradiented' + randompic + '.jpg') + ')',
   }">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container">
@@ -10,7 +9,7 @@
         <div class="mx-auto text-center col-lg-5">
           <h1 class="mt-5 mb-2 text-white">歡迎回來!</h1>
           <p class="text-white text-lead">
-            讓我們繼續展開學習之旅吧!
+            登入後繼續你的學習旅程吧!
           </p>
         </div>
       </div>
@@ -20,7 +19,6 @@
     <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
       <div class="mx-auto col-xl-4 col-lg-5 col-md-7">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" @submit.prevent="login">
               <div class="mb-3">
@@ -34,7 +32,6 @@
                   name="password" />
               </div>
               <el-switch v-model="remember_me" active-text="記住我" />
-
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2">登入</soft-button>
               </div>
@@ -56,14 +53,9 @@
       </div>
     </div>
   </div>
-  <app-footer />
 </template>
 
-
-
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
-import AppFooter from "@/examples/PageLayout/Footer.vue";
 import SoftButton from "@/components/SoftButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import { mapMutations } from "vuex";
@@ -72,8 +64,6 @@ import { ElMessage } from "element-plus";
 export default {
   name: "SignIn",
   components: {
-    Navbar,
-    AppFooter,
     SoftButton,
   },
   data() {
@@ -81,7 +71,7 @@ export default {
       account: this.$cookies.get("account"),
       password: this.$cookies.get("password"),
       remember_me: true,
-      randompic: Math.floor(Math.random() * 9)
+      randompic: Math.floor(Math.random() * 18)
 
     };
   },
@@ -108,14 +98,11 @@ export default {
             this.$cookies.set("account", this.account, "2d");
             this.$cookies.set("password", this.password, "2d");
           } else {
-            // if (this.$cookies.isKey(account) && this.$cookies.isKey(password)) {
             this.$cookies.remove("account");
             this.$cookies.remove("password");
-            // }
           }
           console.log(res);
           const user_account = res.data.user.account;
-
           this.$cookies.set("token", res.data.success, "1d");
           this.$cookies.set("user_account", user_account, "1d");
           this.$cookies.set("user_id", res.data.user.id, "1d");
@@ -146,7 +133,6 @@ export default {
             }
           }
         });
-
     },
   },
 };

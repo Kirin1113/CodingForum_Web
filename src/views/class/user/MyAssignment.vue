@@ -3,9 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
-
                         <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
                             element-loading-background="rgb(248 248 248)">
                             <el-table :data="filteredAssignment" empty-text="目前尚無作業" :row-class-name="tableRowClassName">
@@ -40,14 +38,12 @@
                                         <el-input v-model="search" placeholder="作業名稱搜尋" />
                                     </template>
                                     <template #default="scope">
-
                                         <router-link
                                             :to="{ name: 'AssignmentIntro', params: { coding_class_id: scope.row.coding_class_id, assignment_id: scope.row.id } }">
                                             <el-button class="mx-1 my-1">
                                                 作業介紹
                                             </el-button>
                                         </router-link>
-
                                         <router-link
                                             :to="{ name: 'TempVideo', params: { temp_post_id: scope.row.temp_post_id } }"
                                             v-if="scope.row.temp_post_id != null" target='_blank'>
@@ -55,7 +51,6 @@
                                                 查看暫存作業影片
                                             </el-button>
                                         </router-link>
-
                                         <router-link
                                             :to="{ name: 'HandInAssignment', params: { coding_class_id: scope.row.coding_class_id, assignment_id: scope.row.id } }"
                                             v-if="scope.row.hand_in_assignment_id == null && scope.row.in_time == true">
@@ -63,13 +58,11 @@
                                                 繳交作業
                                             </el-button>
                                         </router-link>
-
                                         <el-button
                                             v-if="scope.row.hand_in_assignment_id == null && scope.row.in_time == false"
                                             disabled class="mx-1 my-1">
                                             不在繳交期限內
                                         </el-button>
-
                                         <router-link
                                             :to="{ name: 'HandInAssignment', params: { coding_class_id: scope.row.coding_class_id, assignment_id: scope.row.id, hand_in_assignment_id: scope.row.hand_in_assignment_id } }"
                                             v-if="scope.row.hand_in_assignment_id != null && scope.row.in_time == true">
@@ -77,7 +70,6 @@
                                                 編輯已繳作業
                                             </el-button>
                                         </router-link>
-
                                         <router-link
                                             :to="{ name: 'HandInAssignment', params: { coding_class_id: scope.row.coding_class_id, assignment_id: scope.row.id, hand_in_assignment_id: scope.row.hand_in_assignment_id } }"
                                             v-if="scope.row.hand_in_assignment_id != null && scope.row.in_time == false">
@@ -85,7 +77,6 @@
                                                 不可編輯，查看已繳作業
                                             </el-button>
                                         </router-link>
-
                                     </template>
                                 </el-table-column>
                             </el-table>
@@ -94,12 +85,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
@@ -135,7 +124,6 @@ export default {
                     this.$router.push({ name: 'MyClass' });
                     return;
                 }
-
                 const that = this;
                 this.axios
                     .post("/api/class/get_assignment", {
@@ -153,7 +141,6 @@ export default {
                         ElMessage.error(error.response.data.error)
                         that.$router.push({ name: 'MyClass' });
                     })
-
             },
             { deep: true, immediate: true }
         );
@@ -173,25 +160,18 @@ export default {
         tableRowClassName({ row, rowIndex }) {
             if (row.hand_in_assignment_id == null && row.in_time == true) //繳交作業
                 return 'none-row';
-
             if (row.hand_in_assignment_id == null && row.in_time == false) //不在繳交期限內
                 return 'fail-row';
-
             if (row.hand_in_assignment_id != null && row.in_time == true) //編輯已繳作業
                 return 'success-row';
-
             if (row.hand_in_assignment_id != null && row.in_time == false) //不可編輯，查看已繳作業
                 return 'notedit-row';
-
-
         }
     }
-
-
 }
 </script>
   
-<style >
+<style>
 .el-table tbody tr:hover>td {
     background-color: initial !important
 }
@@ -212,8 +192,6 @@ export default {
     background-color: rgba(106, 158, 108, 0.479);
 }
 
-
-
 .blue-row {
     background-color: blue !important;
 }
@@ -231,6 +209,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

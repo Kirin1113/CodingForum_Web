@@ -1,11 +1,8 @@
 <template>
   <infinite-scroll ref="test" @infinite-scroll="loadDataFromServer" :message="message" :noResult="noResult">
-
     <div class="container-fluid mt-4">
-
       <div class="row">
         <div class="col-lg-8 mb-4 mb-xxl-0">
-
           <el-main style="padding:0" v-loading="video_loading" element-loading-text="影片載入中"
             element-loading-background="rgba(0, 0, 0)">
             <div class="container_video" style="background-color: black;">
@@ -16,7 +13,6 @@
                 <div class="title_font mb-3">
                   {{ uva_topic.show }}
                 </div>
-
                 <div class="comment__author " style="align-self: flex-start;" v-if="post.length != 0">
                   <img class="userimg comment__avatar " :src="$global_url + post.user_picture" alt="" />
                   <h3 class="comment__title" style="margin:0">
@@ -27,11 +23,9 @@
                     CPE星數: <i class="fa-solid fa-star-of-david" v-for="star in post.uva_topic.star"></i>
                     <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div> 。
                     語言: {{ post.code_type }}。
-
                   </div>
                   <div class="breakline"></div>
-                  <timeago :datetime="post.created_at.replaceAll('/', '-')" v-if="post.length != 0" />
-                  。
+                  <timeago :datetime="post.created_at.replaceAll('/', '-')" v-if="post.length != 0" />。
                   <Vote @like_function="like_post" v-bind="{
                       post_id: post.id,
                       count: this.post_likes,
@@ -44,17 +38,12 @@
                     :to="{ name: 'EditPost', params: { post_id: post.id } }">
                     <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>編輯貼文</router-link>
                 </div>
-
-
                 <div class="mt-2">
                   <textarea class="form-control" id="content" v-model="post.content" rows="4" readonly></textarea>
-                  <!-- {{ post.content }} -->
-
                 </div>
               </div>
             </div>
           </el-main>
-
         </div>
         <div class="col-lg-4">
           <div class="card" style="height: 100%;">
@@ -69,14 +58,12 @@
                 @click="showcode = !showcode">查看程式碼</soft-button>
               <div class="mb-3 pc">
                 <label>程式碼</label>
-
                 <Codemirror v-model:value="post.code" :options="cmOptions" border ref="cmRef" height="600" width="100%"
                   @change="onChange" @input="onInput" @ready="onReady" :key="selete_loading">
                 </Codemirror>
               </div>
               <div class="mb-3 mobileshow" v-if="showcode">
                 <label>程式碼</label>
-
                 <Codemirror v-model:value="post.code" :options="cmOptions" border ref="cmRef" height="600" width="100%"
                   @change="onChange" @input="onInput" @ready="onReady" :key="selete_loading">
                 </Codemirror>
@@ -85,12 +72,10 @@
           </div>
         </div>
       </div>
-
       <div class="row mt-4">
         <div class="col-md-5 col-12 mb-4 mobileshow" v-if="window.innerWidth < 1200">
           <div class="card">
             <div class="card-body p-3">
-
               <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
                 @click="showpdf = !showpdf">查看題目說明</soft-button>
               <soft-button v-if="post.length != 0 && showpdf" color="dark" full-width variant="gradient"
@@ -136,13 +121,10 @@
                       all_user: all_user,
                       type: 1
                     }" />
-
                 </div>
-
               </div>
             </div>
           </div>
-
         </div>
         <div class="col-md-5 pc" v-if="window.innerWidth > 1200">
           <div class="card">
@@ -155,7 +137,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </infinite-scroll>
 </template>
@@ -166,11 +147,13 @@ import { YoutubeVue3 } from 'youtube-vue3'
 import Comment from "@/components/Comment.vue";
 import CommentTextArea from "@/components/CommentTextArea.vue";
 import Vote from "@/components/Vote.vue";
-const axios = require('axios');
 import InfiniteScroll from "infinite-loading-vue3";
 import SoftButton from "../components/SoftButton.vue";
 import PDFViewer from 'pdf-viewer-vue'
 import download from 'downloadjs'
+
+const axios = require('axios');
+
 export default {
   name: "Billing",
   components: {
@@ -228,7 +211,6 @@ export default {
     };
   },
   created() {
-
     this.$watch(
       () => ({
         post_id: this.post_id,
@@ -245,12 +227,9 @@ export default {
     );
   },
   mounted() {
-    // console.log(window.innerWidth)
     if (this.$cookies.isKey("now_user_pic_url"))
       this.now_user_pic_url = this.$cookies.get("now_user_pic_url")
-
     const that = this;
-
     function get_post(post_id) {
       return axios
         .post("/api/forum/get_post", {
@@ -308,7 +287,6 @@ export default {
           autofocus: true,
           readOnly: true,
         }
-
         this.video_loading = false;
         this.post_likes = res1.data.success.likes
         this.uva_topic = res1.data.success.uva_topic;
@@ -337,18 +315,13 @@ export default {
             document.getElementById("comment_" + this.comment_id).classList.add('tagcolor');
             document.getElementById("comment_" + this.comment_id).scrollIntoView({ block: "center" });
           });
-
         } else {//無tag
           this.comments = res2.data.success.slice(0, 3);
         }
-
-        //else parentcomment + childrencomment 前全部 + 被tag留言
-
         if (res3 == '') {
           this.loading++
         }
         this.user_post_like = res3.data.user_post_like
-
         switch (this.user_post_like) {
           case null:
             this.isLiked = false;
@@ -367,7 +340,6 @@ export default {
             this.isDisliked = false;
             break;
         }
-
         this.user_comment_like = res3.data.user_comment_like;
         this.loading++
       })
@@ -375,11 +347,8 @@ export default {
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.status);
-
           ElMessage.error("影片不存在");
           that.$router.push({ name: 'Dashboard' });
-
-
         }
       }
       );
@@ -404,7 +373,6 @@ export default {
       });
 
     },
-
     checklogin() {
       if (!this.token) {
         ElMessage.error("請先登入以進行操作");
@@ -458,7 +426,6 @@ export default {
               break;
           }
           this.loading++
-
         })
     },
     timelimit() {
@@ -496,19 +463,15 @@ export default {
               });
               if (allsame)
                 this.noResult = true
-
             })
         }
-
         this.more_lock = false;
-
       }
     }
-
-
   },
 };
 </script>
+
 <style scoped>
 .comment__author {
   flex-wrap: wrap;
@@ -526,7 +489,6 @@ export default {
 
 
 }
-
 
 @media (max-width: 1200px) {
   .title_font {
@@ -555,6 +517,7 @@ textarea:focus {
   height: 100vh;
 }
 </style>
+
 <style>
 .tagcolor {
   background-color: #e9f1ff;

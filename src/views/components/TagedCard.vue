@@ -12,14 +12,15 @@
                 @click="all_tag_view">全部已讀</soft-button>
             <virtual-list ref="VirtualList" :key="reload" style="max-height: 245px; overflow-y: auto;" :data-key="'id'"
                 :data-sources="tags" :data-component="itemComponent" :keeps="20" />
-
         </ul>
     </li>
 </template>
+
 <script>
 import virtualList from 'vue3-virtual-scroll-list'
 import SoftButton from "@/components/SoftButton.vue";
 import TagedCardNode from './TagedCardNode.vue';
+
 export default {
     name: "TagedCard",
     components: {
@@ -66,12 +67,10 @@ export default {
                     this.$emit("TagedCardkeyadd");
                 })
         },
-
     },
-
-
 };
 </script>
+
 <style>
 #myDropdown .rednotification {
     color: red !important;
@@ -84,6 +83,5 @@ export default {
         width: 85vw;
         top: 100% !important;
     }
-
 }
 </style>

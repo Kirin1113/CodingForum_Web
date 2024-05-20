@@ -15,28 +15,22 @@ import EditPic from "@/views/user/EditPic.vue";
 import EditCover from "@/views/user/EditCover.vue";
 import EditPassword from "@/views/user/EditPassword.vue";
 import AllUser from "@/views/AllUser.vue";
-
 import TeacherClass from "@/views/class/admin/TeacherClass.vue";
 import OperateTeacherClass from "@/views/class/admin/OperateTeacherClass.vue";
 import Assignment from "@/views/class/admin/Assignment.vue";
 import CheckAssignment from "@/views/class/admin/CheckAssignment.vue";
 import OperateAssignment from "@/views/class/admin/OperateAssignment.vue";
-
 import TAClass from "@/views/class/TA/TAClass.vue";
 import TAAssignment from "@/views/class/TA/TAAssignment.vue";
 import TACheckAssignment from "@/views/class/TA/TACheckAssignment.vue";
-
 import ClassUser from "@/views/class/ClassUser.vue";
-
 import UserClass from "@/views/class/user/UserClass.vue";
 import MyClass from "@/views/class/user/MyClass.vue";
 import MyAssignment from "@/views/class/user/MyAssignment.vue";
 import HandInAssignment from "@/views/class/user/HandInAssignment.vue";
 import AssignmentIntro from "@/views/class/user/AssignmentIntro.vue";
-
 import { ElMessage } from "element-plus";
 import axios from "axios";
-const opensource = { template: "<div>opensource</div>" };
 
 function islogin(to, from, next) {
   if (!$cookies.get("token")) {
@@ -114,15 +108,6 @@ function user_post_check(to, from, next) {
 
 const routes = [
   {
-    path: "/opensource",
-    beforeEnter() {
-      location.href = "https://github.com/PUCodingForum";
-    },
-    name: "OpenSource",
-    component: opensource,
-  },
-  {
-    // path: "*",
     path: "/:catchAll(.*)",
     name: "NotFound",
     redirect: { name: "Dashboard" },
@@ -350,13 +335,9 @@ const routes = [
 
 const router = createRouter({
   mode: "hash",
-  // base: process.env.BASE_URL,
   history: createWebHistory(process.env.BASE_URL),
   routes,
   linkActiveClass: "active",
-  // scrollBehavior() {
-  //   document.getElementById("app").scrollIntoView({ behavior: "smooth" });
-  // },
   scrollBehavior(to, from, savedPosition) {
     return { top: 0 };
   },

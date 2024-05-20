@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-12">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
@@ -28,7 +27,6 @@
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
                   @click.stop.prevent="teacher_class()">{{ showtext }}</soft-button>
-
                 <soft-button color="warning" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 <soft-button color="danger" full-width variant="gradient" class="mt-5" data-bs-toggle="modal"
@@ -39,9 +37,7 @@
         </div>
       </div>
     </div>
-
   </div>
-
   <div class="modal fade" :id="'staticBackdrop'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -68,10 +64,10 @@
 </template>
 
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
+
 export default {
   name: "OperateTeacherClass",
   components: {
@@ -186,13 +182,10 @@ export default {
           }
         })
         .then((res) => {
-
           console.log(res);
-
           this.$router.replace({
             name: 'TeacherClass'
           });
-
           ElMessage({
             message: "刪除成功",
             type: "success",
@@ -203,19 +196,14 @@ export default {
           if (error.response) {
             that.check = '';
             ElMessage.error(error.response.data.error);
-
           }
         });
-
     },
-
   },
-
-
 }
 </script>
 
-<style >
+<style>
 .el-select-dropdown__item {
   width: 300px;
   width: 100%;
@@ -229,6 +217,7 @@ export default {
   display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
   .video_pic {

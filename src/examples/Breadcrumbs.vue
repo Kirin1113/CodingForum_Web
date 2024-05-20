@@ -6,7 +6,6 @@
           {{ $app_name }}
         </router-link>
       </li>
-
       <li class="text-sm breadcrumb-item active" :class="textWhite ? 'text-white' : 'text-dark'" aria-current="page"
         v-for="list in lists.list">
         <router-link :to="{ name: list.route_name, params: list.params }">
@@ -72,8 +71,6 @@ export default {
           route_name: 'AllUser',
           name: '所有使用者',
         },
-
-
         {
           route_name: 'UserClass',
           name: '選課系統',
@@ -97,8 +94,6 @@ export default {
           name: '繳交作業',
           list: [{ route_name: 'MyClass', name: '我的課程' }, { route_name: 'MyAssignment', name: '作業', params: { coding_class_id: this.$route.params.coding_class_id } }]
         },
-
-
         {
           route_name: 'TeacherClass',
           name: '教授課程',
@@ -123,8 +118,6 @@ export default {
           name: '操作課程作業',
           list: [{ route_name: 'TeacherClass', name: '教授課程' }, { route_name: 'Assignment', name: '課程作業', params: { coding_class_id: this.$route.params.coding_class_id } }]
         },
-
-
         {
           route_name: 'TAClass',
           name: 'TA課程',
@@ -154,7 +147,6 @@ export default {
       { deep: true, immediate: true }
     );
   },
-
   props: {
     currentPage: {
       required: true,

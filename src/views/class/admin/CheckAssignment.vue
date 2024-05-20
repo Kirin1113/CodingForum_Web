@@ -4,7 +4,6 @@
             <div class="col-12">
                 <div class="card z-index-0">
                     <div class="card-body">
-
                         <soft-button color="dark" full-width variant="gradient" style="    font-size: 15px;"
                             @click="ouput_file" v-if="file_exist">匯出所有學生所交檔案</soft-button>
                         <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
@@ -13,7 +12,6 @@
                                 :row-class-name="tableRowClassName">
                                 <el-table-column label="學生學號" prop="account"
                                     :min-width="window.innerWidth < 1200 ? '120%' : ''" />
-
                                 <el-table-column label="學生名稱" :min-width="window.innerWidth < 1200 ? '120%' : ''">
                                     <template #default="scope">
                                         <router-link :to="{ name: 'Profile', params: { user_account: scope.row.account } }"
@@ -44,7 +42,6 @@
                                         </div>
                                     </template>
                                 </el-table-column>
-
                                 <el-table-column align="right" :min-width="window.innerWidth < 1200 ? '250%' : ''">
                                     <template #header>
                                         <el-input v-model="search" placeholder="學生學號 名稱搜尋" />
@@ -57,9 +54,7 @@
                                             <el-button>
                                                 查看暫存影片
                                             </el-button>
-
                                         </router-link>
-
                                     </template>
                                 </el-table-column>
                             </el-table>
@@ -68,12 +63,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
@@ -98,7 +91,6 @@ export default {
             data_loading: true,
             file_exist: false,
             finishloading: 0,
-
         };
     },
     created() {
@@ -130,7 +122,6 @@ export default {
                         console.log(res)
                         this.users = res.data.success.user
                         this.finishloading++
-
                     })
                 this.axios
                     .post("/api/class/get_hand_in_assignment", {
@@ -152,7 +143,6 @@ export default {
                         })
                         this.finishloading++
                     })
-
             },
             { deep: true, immediate: true }
         );
@@ -169,9 +159,7 @@ export default {
                         this.get_hand_in_assignment.forEach((user_assignment, index2) => {
                             if (user.id == user_assignment.user_id) {
                                 const newObj = { ...this.users[index1], user_assignment };
-
                                 this.users.splice(index1, 1, newObj);
-
                                 return
                             }
                         })
@@ -223,7 +211,6 @@ export default {
                 })
                 .then((res) => {
                     console.log(this.users)
-
                     const targetObj = this.users.find(item => item.id == user_id);
                     if (targetObj) {
                         targetObj.user_assignment.status = res.data.status;
@@ -237,9 +224,7 @@ export default {
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response);
-
                         ElMessage.error(error.response.data.error);
-
                     }
                 });
         },
@@ -282,12 +267,9 @@ export default {
                 .catch(function (error) {
                     if (error.response) {
                         console.log(error.response);
-
                         ElMessage.error(error.response.data.error);
-
                     }
                 });
-
         },
         tableRowClassName({ row, rowIndex }) {
             if (row.user_assignment) //繳交作業
@@ -295,14 +277,11 @@ export default {
             else
                 return 'fail-row';
         }
-
     },
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -316,6 +295,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

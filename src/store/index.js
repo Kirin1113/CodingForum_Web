@@ -10,10 +10,8 @@ export default createStore({
     color: "",
     isNavFixed: true,
     isAbsolute: false,
-    showNavs: true,
     showSidenav: true,
     showNavbar: true,
-    showFooter: true,
     showMain: true,
     navbarFixed:
       "position-sticky blur shadow-blur left-auto top-1 z-index-sticky px-0 mx-4",
@@ -42,13 +40,6 @@ export default createStore({
     cardBackground(state, payload) {
       state.color = payload;
     },
-    // navbarFixed(state) {
-    //   if (state.isNavFixed === false) {
-    //     state.isNavFixed = true;
-    //   } else {
-    //     state.isNavFixed = false;
-    //   }
-    // },
     toggleEveryDisplay(state) {
       state.showNavbar = !state.showNavbar;
       state.showSidenav = !state.showSidenav;

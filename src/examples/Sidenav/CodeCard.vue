@@ -7,15 +7,14 @@
         </div>
     </a>
 </template>
-<script>
 
+<script>
 export default {
     name: "CodeCard",
     props: ["type", "sort", "comment"],
     data() {
         return {
             star: [],
-
         };
     },
     mounted() {
@@ -48,7 +47,7 @@ export default {
                     document.getElementById('a' + this.type).classList.toggle('code-links')
 
                 }
-            } else if (this.type >= 13 && this.type <= 17) { //星數
+            } else if (this.type >= 13 && this.type <= 17) { //程式語言
                 if (this.type == 13) {
                     document.getElementById('a13').classList.add('bg-blue', 'text-white', 'code-links')
                     for (let number = 14; number <= 17; number++)
@@ -58,18 +57,16 @@ export default {
                     document.getElementById('a' + this.type).classList.toggle('bg-blue',)
                     document.getElementById('a' + this.type).classList.toggle('text-white')
                     document.getElementById('a' + this.type).classList.toggle('code-links')
-
                 }
             }
-
             this.$nextTick(() => {
                 this.$parent.$parent.$emit('changepost', { type: this.type })
             });
-
         }
     }
 };
 </script>
+
 <style>
 .sameline {
     display: inline-block !important;

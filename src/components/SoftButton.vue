@@ -32,7 +32,6 @@ export default {
   methods: {
     getClasses: (variant, color, size, fullWidth, active) => {
       let colorValue, sizeValue, fullWidthValue, activeValue;
-
       // Setting the button variant and color
       if (variant === "gradient") {
         colorValue = `bg-gradient-${color}`;
@@ -41,13 +40,9 @@ export default {
       } else {
         colorValue = `btn-${color}`;
       }
-
       sizeValue = size ? `btn-${size}` : null;
-
       fullWidthValue = fullWidth ? `w-100` : null;
-
       activeValue = active ? `active` : null;
-
       return `${colorValue} ${sizeValue} ${fullWidthValue} ${activeValue}`;
     },
   },

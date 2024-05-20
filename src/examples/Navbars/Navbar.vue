@@ -6,16 +6,12 @@
       <div class="mt-2 collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4" id="navbar">
         <div class="pe-md-3 d-flex align-items-center ms-md-auto">
         </div>
-
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
-
             <router-link v-if="user_account" :to="{ name: 'Profile', params: { user_account: user_account } }"
               class="px-0 nav-link font-weight-bold text-body">
               <img class="userimg comment__avatar " :src="now_user_pic_url" alt="" />
-
             </router-link>
-
             <div v-if="!user_account" @click="login" class="px-0 nav-link font-weight-bold text-body"
               style="cursor:pointer">
               <i class="fa fa-user me-2 fa-xl"></i>
@@ -37,10 +33,10 @@
     </div>
   </nav>
 </template>
+
 <script>
 import Breadcrumbs from "../Breadcrumbs.vue";
 import { mapMutations, mapActions } from "vuex";
-import { ElMessage } from "element-plus";
 import TagedCard from "../../views/components/TagedCard.vue";
 
 export default {
@@ -71,7 +67,6 @@ export default {
           return;
         }
         this.post_id = this.$route.params.post_id
-
       },
       { deep: true, immediate: true }
     );
@@ -90,7 +85,6 @@ export default {
     );
   },
   methods: {
-
     ...mapMutations(["navbarMinimize"]),
     ...mapActions(["toggleSidebarColor"]),
     TagedCardkeyadd() {
@@ -105,7 +99,6 @@ export default {
         this.$cookies.set("go_login_then_backpost", this.post_id, "3min");
       }
       this.$router.push({ name: 'Sign In' });
-
     },
     test() {
       console.log(this.$refs.SelectUva.return_select_uva())
@@ -113,7 +106,6 @@ export default {
   },
   computed: {
     currentRouteName() {
-
     },
   },
   updated() {

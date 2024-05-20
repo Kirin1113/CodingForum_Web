@@ -3,9 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
-
                         <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
                             element-loading-background="rgb(248 248 248)">
                             <el-table :data="filteredCodingClasses" style="width: 100%" empty-text="目前尚無課程">
@@ -14,7 +12,6 @@
                                     <template #default="scope">
                                         {{ scope.row.name }}
                                     </template>
-
                                 </el-table-column>
                                 <el-table-column label="目前加選人數" prop="student_count"
                                     :min-width="window.innerWidth < 1200 ? '120%' : ''">
@@ -59,14 +56,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
-import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
 
 export default {
@@ -108,13 +102,10 @@ export default {
             });
         },
     },
-
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -128,6 +119,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

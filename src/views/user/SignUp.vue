@@ -1,16 +1,15 @@
 <template>
-  <navbar btn-background="bg-gradient-primary" />
-  <div class="pt-5 m-3 page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
+  <div class="page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
     backgroundImage:
-      'url(' + require('@/assets/img/curved-images/curveda' + randompic + '.jpg') + ')',
+      'url(' + require('@/assets/img/gradiented-images/gradiented' + randompic + '.jpg') + ')',
   }">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container">
       <div class="row justify-content-center">
         <div class="mx-auto text-center col-lg-5">
-          <h1 class="mt-5 mb-2 text-white">同學歡迎!</h1>
+          <h1 class="mt-5 mb-2 text-white">同學你好!</h1>
           <p class="text-white text-lead">
-            同學你好，歡迎來到這個平台！為了能夠更好地使用這個平台的功能<br>請先註冊一個帳號。註冊後，你就可以享受到更多的學習資源和互動機會，讓你的學習之路更加豐富多彩。謝謝！
+            歡迎來到這個平台！為了能夠更好地使用這個平台<br>註冊解鎖更多功能哦!
           </p>
         </div>
       </div>
@@ -20,7 +19,6 @@
     <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
       <div class="mx-auto col-xl-4 col-lg-5 col-md-7">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" @submit.prevent="register">
               <div class="">
@@ -44,7 +42,6 @@
                 <label>中文姓名</label>
                 <input class="form-control" v-model="name" type="text" placeholder="中文姓名" aria-label="中文姓名" />
               </div>
-
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2">註冊</soft-button>
               </div>
@@ -60,22 +57,16 @@
       </div>
     </div>
   </div>
-  <app-footer />
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
-import AppFooter from "@/examples/PageLayout/Footer.vue";
 import SoftButton from "@/components/SoftButton.vue";
-
 import { mapMutations } from "vuex";
 import { ElMessage } from "element-plus";
 
 export default {
   name: "SignupBasic",
   components: {
-    Navbar,
-    AppFooter,
     SoftButton,
   },
   data() {
@@ -85,8 +76,7 @@ export default {
       password: "",
       repeat_password: "",
       email: "",
-      randompic: Math.floor(Math.random() * 9)
-
+      randompic: Math.floor(Math.random() * 18)
     };
   },
   created() {
@@ -121,7 +111,6 @@ export default {
             password: this.password,
             email: this.email,
           })
-
           .then((res) => {
             console.log(res);
             ElMessage({
@@ -131,7 +120,6 @@ export default {
             });
             this.$router.push({ name: 'Sign In' });
           })
-
           .catch(function (error) {
             if (error.response) {
               console.log(error.response.status);

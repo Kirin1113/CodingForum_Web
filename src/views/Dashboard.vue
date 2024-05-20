@@ -1,19 +1,16 @@
 <template>
   <div class="py-4 container-fluid">
-
     <infinite-scroll @infinite-scroll="loadDataFromServer" :message="message" :noResult="noResult">
       <div class="card">
         <div class="card-body p-3">
-
           <div class="row">
-            <h4 v-if="posts.length == 0" style="text-align: center;">無符合條件之貼文</h4>
+            <h4 v-if="posts.length == 0" style="text-align: center;">無符合條件之影片</h4>
             <div class="col-lg-3" v-for="post in posts" :key="post.id">
               <div class="card mb-2" aria-hidden="true">
                 <div style="overflow: hidden;">
                   <router-link :to="{ name: 'Video', params: { post_id: post.id } }"><img
                       class="card-img-top youtube_img_fix" :src="post.video_pic_url" alt=""></router-link>
                 </div>
-
                 <div class=" card-body" style="    text-align: center;">
                   <h5 class="card-title placeholder-glow">
                     {{ post.uva_topic.serial + "-" + post.uva_topic.title }}
@@ -21,7 +18,6 @@
                   <p>CPE星數: <i class="fa-solid fa-star-of-david" v-for="star in post.uva_topic.star"></i>
                   <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div>
                   <br>
-
                   語言: {{ post.code_type }}
                   <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
                     style="display: inline;">
@@ -33,9 +29,7 @@
                   <p class="card-text placeholder-glow">
                     <router-link class="" :to="{ name: 'Profile', params: { user_account: post.user_account } }">
                       作者 : {{ post.user_name }}。 </router-link>
-
                     <timeago :datetime="post.created_at.replaceAll('/', '-')" />
-
                   </p>
                 </div>
               </div>
@@ -63,17 +57,10 @@
         </div>
       </div>
     </infinite-scroll>
-
   </div>
 </template>
+
 <script>
-import TimelineList from "./components/TimelineList.vue";
-import TimelineItem from "./components/TimelineItem.vue";
-import US from "../assets/img/icons/flags/US.png";
-import DE from "../assets/img/icons/flags/DE.png";
-import GB from "../assets/img/icons/flags/GB.png";
-import BR from "../assets/img/icons/flags/BR.png";
-import { ElMessage } from "element-plus";
 import InfiniteScroll from "infinite-loading-vue3";
 import {
   faHandPointer,
@@ -81,6 +68,7 @@ import {
   faCreditCard,
   faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
+
 export default {
   name: "Dashboard",
   data() {
@@ -90,7 +78,6 @@ export default {
       faScrewdriverWrench,
       faUsers,
       faHandPointer,
-
       posts: [],
       loading: true,
       noResult: false,
@@ -103,11 +90,8 @@ export default {
     };
   },
   components: {
-    TimelineList,
-    TimelineItem,
     InfiniteScroll
   },
-
   mounted() {
     this.loadDataFromServer()
   },
@@ -169,9 +153,6 @@ export default {
         console.log(options.select_uva)
         this.send_serial = options.select_uva.serial
       }
-
-
-
       this.posts = [];
       this.noResult = false
       this.loadDataFromServer()
@@ -210,21 +191,16 @@ export default {
                   this.posts.push(item);
                   newpostcount++;
                   allsame = false;
-
                 }
               });
               if (allsame)
                 this.noResult = true
-
             })
         }
         this.loading = false;
-
         this.more_lock = false;
-
       }
     }
   },
-
 };
 </script>

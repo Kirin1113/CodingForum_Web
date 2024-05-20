@@ -3,21 +3,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
-
                         <router-link :to="{ name: 'TeacherClass' }"> <soft-button color="dark" full-width variant="gradient"
                                 style="    font-size: 15px;">管理課程</soft-button></router-link>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 
 export default {
@@ -25,7 +21,6 @@ export default {
     components: {
         SoftButton,
     },
-
 }
 </script>
   
@@ -43,6 +38,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

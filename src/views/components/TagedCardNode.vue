@@ -24,8 +24,6 @@
 </template>
   
 <script>
-
-
 export default {
     name: 'item-component',
     props: {
@@ -62,6 +60,7 @@ export default {
     }
 }
 </script>
+
 <style>
 .notview {
     background-color: #e9ecef !important;

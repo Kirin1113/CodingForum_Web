@@ -1,6 +1,5 @@
 <template>
     <div class="example-full">
-
         <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
             <h3>Drop files to upload</h3>
         </div>
@@ -30,7 +29,6 @@
                                     <a :href="$global_assignment_url + '/' + assignment_id + '/' + user_account + '/' + file.name"
                                         target="_blank">
                                         {{ file.name }}</a>
-
                                 </div>
                                 <div class="progress" v-if="file.active || file.progress !== '0.00'">
                                     <div :class="{ 'progress-bar': true, 'progress-bar-striped': true, 'bg-danger': file.error, 'progress-bar-animated': file.active }"
@@ -40,7 +38,6 @@
                                 </div>
                             </td>
                             <td>{{ formatSize(file.size) }}</td>
-
                             <td v-if="file.error">{{ file.error }}</td>
                             <td v-else-if="file.success">成功</td>
                             <td v-else-if="file.active">上傳中</td>
@@ -52,7 +49,6 @@
                                         @click.prevent="$refs.upload.update(file, { active: true, error: '', progress: '0.00' })">Retry
                                         upload</el-button>
                                     <el-button type="danger" @click.prevent="$refs.upload.remove(file)">Remove</el-button>
-
                                 </div>
                             </td>
                         </tr>
@@ -70,20 +66,18 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </template>
     
 <script>
 import { ElMessage } from "element-plus";
 import FileUpload from 'vue-upload-component'
+
 export default {
     components: {
         FileUpload,
     },
     props: ["teacher"],
-
     data() {
         return {
             files: [],
@@ -115,10 +109,8 @@ export default {
         },
         // add, update, remove File Event
         inputFile(newFile, oldFile) {
-
             if (newFile && oldFile) {
                 // update
-
                 if (newFile.active && !oldFile.active) {
                     // beforeSend
                     newFile.data = { 'assignment_id': this.assignment_id };
@@ -128,15 +120,12 @@ export default {
                         this.$refs.upload.update(newFile, { error: 'size' })
                     }
                 }
-
                 if (newFile.progress !== oldFile.progress) {
                     // progress
                 }
-
                 if (newFile.error && !oldFile.error) {
 
                 }
-
                 if (newFile.success && !oldFile.success) {
                     this.$parent.assignment(1);
                     ElMessage({
@@ -146,12 +135,9 @@ export default {
                     });
                 }
             }
-
-
             if (!newFile && oldFile) {
                 // remove
                 const that = this;
-
                 console.log(oldFile.name)
                 if (oldFile.success) {
                     this.axios
@@ -178,8 +164,6 @@ export default {
                         });
                 }
             }
-
-
             // Automatically activate upload
             if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
                 if (this.uploadAuto && !this.$refs.upload.active) {
@@ -187,8 +171,6 @@ export default {
                 }
             }
         },
-
-
     }
 }
 </script>

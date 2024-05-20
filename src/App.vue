@@ -3,22 +3,18 @@
     this.$store.state.isTransparent,
     'fixed-start',
   ]" v-if="this.$store.state.showSidenav" @changepost="ref_changepost" @resetpost="ref_resetpost" />
-
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <navbar :class="[navClasses]" :textWhite="this.$store.state.isAbsolute ? 'text-white opacity-8' : ''"
       :minNav="navbarMinimize" v-if="this.$store.state.showNavbar" :key="$route.fullPath" />
-
     <router-view v-slot="{ Component }">
       <component ref="view" :is="Component" :key="$route.fullPath" />
     </router-view>
-
-    <app-footer v-show="this.$store.state.showFooter" />
   </main>
 </template>
+
 <script>
 import Sidenav from "./examples/Sidenav";
 import Navbar from "@/examples/Navbars/Navbar.vue";
-import AppFooter from "@/examples/Footer.vue";
 import { mapMutations } from "vuex";
 
 export default {
@@ -26,7 +22,6 @@ export default {
   components: {
     Sidenav,
     Navbar,
-    AppFooter,
   },
   methods: {
     ...mapMutations(["navbarMinimize"]),
@@ -54,11 +49,7 @@ export default {
 
 };
 </script>
-<!-- @font-face {
-  font-family: "Pixel";
-  src: local("Pixel"),
-    url(@/assets/K8x12.ttf) format("truetype");
-} -->
+
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
 
@@ -158,8 +149,6 @@ button {
     display: contents !important;
   }
 }
-
-
 
 @media (max-width: 1200px) {
   .footer_logoicon {

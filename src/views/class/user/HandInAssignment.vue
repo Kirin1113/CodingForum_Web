@@ -3,10 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
-
-
                         <form role="form" class="mx-auto col-xl-9">
                             <div class="mb-3">
                                 <label>作業名稱</label>
@@ -26,17 +23,14 @@
                                 <SelectPost ref="SelectPost" :disabled="!in_time" />
                                 <soft-button color="dark" variant="gradient" class="mt-2 mb-2"
                                     @click="this.$router.push({ name: 'Upload' });">尚未發文，去發文</soft-button>
-
                             </div>
                             <div class="mb-3" v-show="type != 1">
                                 <label>檔案</label>
                                 <FileUpload ref="FileUpload" :in_time="in_time" />
                             </div>
-
                             <div class="text-center">
                                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
                                     @click.stop.prevent="hand_in_assignment()" v-if="in_time">{{ showtext }}</soft-button>
-
                                 <soft-button color="warning" full-width variant="gradient" class="mb-5"
                                     @click.stop.prevent="$router.go(-1)">取消</soft-button>
                             </div>
@@ -45,12 +39,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import FileUpload from "@/components/FileUpload.vue";
@@ -126,13 +118,10 @@ export default {
                                 this.$router.push({ name: 'MyAssignment', params: { coding_class_id: this.coding_class_id } });
                             }
                         }
-
-
                     }).catch(function (error) {
                         ElMessage.error(error.response.data.error);
                         that.$router.push({ name: 'MyAssignment', params: { coding_class_id: this.coding_class_id } });
                     });
-
                 if (this.hand_in_assignment_id) {
                     this.showtext = '更新作業'
                     this.axios
@@ -147,8 +136,6 @@ export default {
                             console.log(res.data.success)
                             this.$refs.SelectPost.post_id = res.data.success.post_id
                             this.$refs.FileUpload.files = res.data.success.file
-
-
                         }).catch(function (error) {
                             ElMessage.error(error.response.data.error);
                             that.$router.push({ name: 'MyAssignment', params: { coding_class_id: this.coding_class_id } });
@@ -161,12 +148,10 @@ export default {
     methods: {
         hand_in_assignment(updatefile) {
             const that = this;
-
             if (!this.token) {
                 ElMessage.error("請先登入以進行操作");
                 this.$router.push({ name: 'Sign In' });
             }
-
             var file_ = []
             if (this.type != 1) {
                 var FileUpload = this.$refs.FileUpload.returnFiles();
@@ -175,7 +160,6 @@ export default {
                         file_.push({ 'name': value.name, 'size': value.size, "success": true, "progress": "100.00", "id": value.id })
                 });
             }
-
             this.axios
                 .post("/api/class/hand_in_assignment", {
                     assignment_id: this.assignment_id,
@@ -188,7 +172,6 @@ export default {
                     }
                 })
                 .then((res) => {
-
                     console.log(res);
                     if (updatefile != 1) {
                         this.$router.push({
@@ -218,16 +201,12 @@ export default {
                         });
                     }
                 });
-
         },
-
     },
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -241,6 +220,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

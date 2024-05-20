@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
                         <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
                             element-loading-background="rgb(248 248 248)">
@@ -24,7 +23,6 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column label="繳交人數" prop="hand_in_count" />
-
                                 <el-table-column align="right" :min-width="window.innerWidth < 1200 ? '250%' : ''">
                                     <template #header>
                                         <el-input v-model="search" placeholder="作業名稱搜尋" />
@@ -50,14 +48,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
-import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
 
 export default {
@@ -116,13 +111,10 @@ export default {
             });
         },
     },
-
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -136,6 +128,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

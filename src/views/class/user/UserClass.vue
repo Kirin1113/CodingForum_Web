@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
                         <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
                             element-loading-background="rgb(248 248 248)">
@@ -34,7 +33,6 @@
                                         <el-button v-if="scope.row.enable == 1 && scope.row.is_take == 0"
                                             data-bs-toggle="modal" :data-bs-target="'#staticBackdrop' + scope.row.id">
                                             加選
-
                                         </el-button>
                                         <el-button v-if="scope.row.enable == 0 && scope.row.is_take == 0" disabled>
                                             未開放加選
@@ -65,7 +63,6 @@
                         <br>
                         課程名稱: {{ CodingClass.name }}
                         <br>
-
                         課程教授: {{ CodingClass.teacher_name }}
                     </div>
                     <div class="modal-footer">
@@ -80,7 +77,6 @@
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
@@ -125,7 +121,6 @@ export default {
         },
     },
     methods: {
-
         user_class(coding_class_id) {
             if (!this.token) {
                 ElMessage.error("請先登入以進行操作");
@@ -140,9 +135,7 @@ export default {
                     }
                 })
                 .then((res) => {
-
                     console.log(res);
-
                     this.$router.push({
                         name: 'UserClass'
                     }).then(() => { this.$router.go() });
@@ -159,16 +152,12 @@ export default {
 
                     }
                 });
-
         },
-
     },
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -182,6 +171,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

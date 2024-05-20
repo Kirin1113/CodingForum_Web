@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-12">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
@@ -18,26 +17,21 @@
                 <label>自我介紹</label>
                 <textarea class="form-control" v-model="intro" rows="5" placeholder="Hi,I'm XXX"></textarea>
               </div>
-
               <div class="mb-3">
                 <label>github</label>
                 <input class="form-control" v-model="github" type="text" placeholder="請貼入網址" />
               </div>
-
               <div class="mb-3">
                 <label>instagram</label>
                 <input class="form-control" v-model="instagram" type="text" placeholder="請貼入網址" />
               </div>
-
               <div class="mb-3">
                 <label>facebook</label>
                 <input class="form-control" v-model="facebook" type="text" placeholder="請貼入網址" />
               </div>
-
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
                   @click.stop.prevent="edit()">更新</soft-button>
-
                 <soft-button color="warning" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
               </div>
@@ -46,15 +40,12 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
-
 
 export default {
   name: "EditPost",
@@ -86,7 +77,6 @@ export default {
         }
       })
       .then((res) => {
-
         console.log(res);
         this.email = res.data.user.email
         this.name = res.data.user.name
@@ -104,7 +94,6 @@ export default {
         }
       });
   },
-
   methods: {
     edit() {
       if (!this.token) {
@@ -125,13 +114,10 @@ export default {
           }
         })
         .then((res) => {
-
           console.log(res);
-
           this.$router.push({
             name: 'Profile', params: { user_account: this.token_user_account }
           });
-
           ElMessage({
             message: "更新成功",
             type: "success",
@@ -146,11 +132,8 @@ export default {
             }
           }
         });
-
     },
   },
-
-
 }
 </script>
 

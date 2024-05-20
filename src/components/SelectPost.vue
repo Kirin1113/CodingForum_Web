@@ -3,19 +3,11 @@
         no-data-text="未發布貼文過" loading-text="貼文加載中..." :disabled="disabled">
         <el-option v-for="post in posts" :key="post.id"
             :label="post.uva_topic.show + ' 語言:' + post.code_type + ' 上傳時間: ' + post.created_at" :value="post.id">
-            <!-- <div style="display:flex;align-items: center;">
-                <el-image style="width:10%;margin-right:20px;border-radius: 100px;" :src="post.video_pic_url"
-                    fit="fill"></el-image>
-                <div>{{ post.uva_topic.show }}</div>
-            </div> -->
         </el-option>
     </el-select>
 </template>
   
 <script>
-
-
-
 export default {
     name: "SelectPost",
     props: ["disabled"],
@@ -41,7 +33,6 @@ export default {
                 this.posts = this.virtualoptions;
             })
     },
-
     methods: {
         return_post_id() {
             return this.post_id;
@@ -57,14 +48,11 @@ export default {
                 this.posts = this.virtualoptions;
             }
         },
-
     },
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 100%;
     height: auto !important;

@@ -4,9 +4,6 @@
             :readOnly="readOnly" :placeholder="placeholder"
             :class="[readOnly ? 'read ql-container ql-snow ql-disabled' : 'ql-container ql-snow ']" :key="key" />
     </div>
-    <!-- {{ all_user }} -->
-    <!-- {{ incontent }} -->
-    <!-- {{ value }} -->
 </template>
 
 <script>
@@ -29,7 +26,6 @@ export default {
             this.$router.push({ name: 'Profile', params: { user_account: event.value.id } });
 
         }, false);
-
     },
     props: ["content", "readOnly", "newcomment", "newchildcomment", "comment_id", "change_readOnly", "all_user", "updatevalue", "parent_comment_id", "type"],
     //type: 0影片留言 1父 ，2child
@@ -124,7 +120,6 @@ export default {
                 });
         },
     },
-
     data() {
         return {
             token: this.$cookies.get("token"),
@@ -134,25 +129,16 @@ export default {
             placeholder: this.content ? '' : '發表留言:',
             post_id: this.$route.params.post_id,
             editorOptions: {
-
                 modules: {
-
-                    mention: {  // 重点： 提醒功能配置项
-
-                        // allowedChars: /^[A-Za-z\s]*$/, // 正则匹配
+                    mention: {  // 重點： 提醒功能配置項
+                        // allowedChars: /^[A-Za-z\s]*$/, // 正則匹配
                         allowedChars: /^[\u4e00-\u9fa5A-Za-z0-9\s]*$/,
-                        mentionDenotationChars: ['@'], // 匹配符号，匹配到@符号弹出提醒框
-
+                        mentionDenotationChars: ['@'], // 匹配符號，匹配到@符號彈出提醒框
                         offsetLeft: 4,
-
                         source: (searchTerm, renderList, mentionChar) => {
-
                             const values = this.all_user.map(item => ({
-
                                 id: item.account,
-
                                 value: item.name,
-
                             }))
                             if (searchTerm.length === 0) {
                                 renderList(values, searchTerm);
@@ -165,38 +151,24 @@ export default {
                                         matches.push(values[i]);
                                 renderList(matches, searchTerm);
                             }
-
                         },
-
-                        onSelect: (data, insertItem) => { // 注意：选中后的回调函数
-
+                        onSelect: (data, insertItem) => { // 注意：選中後的回調函數
                             const item = {
-
                                 text: `@${data.value}`,
-
                                 name: data.value,
-
                                 id: data.id,
-
                             }
-
-                            insertItem(data) // 注意：这个函数必须加上，有这个才会在文本框显示选中的值
-
+                            insertItem(data) // 注意：這個函數必須加上，有這個才會在文本框顯示選中的值
                             console.log(item)
-
                         },
-
                     },
-
                 },
-
             },
-
         };
     },
-
 };
 </script>
+
 <style>
 .ql-container.ql-snow {
     border-top: none !important;

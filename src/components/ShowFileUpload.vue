@@ -7,7 +7,6 @@
                         <tr>
                             <th>名稱</th>
                             <th>大小</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -17,9 +16,7 @@
                                     <a :href="$global_assignment_url + '/' + assignment_id + '/' + user_account + '/' + file.name"
                                         target="_blank">
                                         {{ file.name }}</a>
-
                                 </div>
-
                             </td>
                             <td>{{ formatSize(file.size) }}</td>
                         </tr>
@@ -27,20 +24,16 @@
                 </table>
             </div>
         </div>
-
-
     </div>
 </template>
     
 <script>
-import { ElMessage } from "element-plus";
 import FileUpload from 'vue-upload-component'
 export default {
     components: {
         FileUpload,
     },
     props: ["teacher"],
-
     data() {
         return {
             files: [],
@@ -66,8 +59,6 @@ export default {
             const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
             return `${Math.round(bytes / Math.pow(1024, i), 2)} ${sizes[i]}`;
         },
-
-
     }
 }
 </script>

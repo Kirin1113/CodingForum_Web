@@ -9,19 +9,14 @@
                     <h3 class="comment__title ms-4 ms-xxl-0">
                         <router-link class="" :to="{ name: 'Profile', params: { user_account: user_account } }">
                             {{ user_name }} </router-link>
-
                     </h3>
-
                     <p class="comment__body ms-3 ms-xxl-0">
                         <CommentTextArea @change_readOnly="change_readOnly" @updatevalue="updatevalue" ref="comment"
                             :content="real_content" :readOnly="readOnly" :comment_id="comment_id" :key="textrefresh"
                             :all_user="all_user" />
-                        <!-- {{ real_content }} -->
-                        <!-- {{ real_children_comment_count }} -->
                     </p>
                     <div class="commenttoolbar">
                         <timeago :datetime="created_at.replaceAll('/', '-')" />
-
                         <Vote @like_function="like_comment" v-bind="{
                                 id: comment_id,
                                 count: likes,
@@ -31,14 +26,12 @@
                                 type: 1 //0post //1comment
                             }" />
                         <div class="breakline"></div>
-
                         <a class="btn btn-link text-dark px-3 mb-0" @click="reply" v-if="token_user_id">
                             <i class="fa-solid fa-comment  me-2"></i>回應
                         </a>
                         <a class="btn btn-link text-dark px-3 mb-0" v-if="token_user_id == user_id" @click="edit">
                             <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>{{ showtext }}
                         </a>
-
                         <a class="btn btn-link text-dark px-3 mb-0" v-if="!readOnly" @click="$refs.comment.save()">
                             <i class="fa-solid fa-floppy-disk  me-2"></i>保存
                         </a>
@@ -47,10 +40,7 @@
                             <i class="fa-solid fa-trash me-2"></i>刪除
                         </a>
                     </div>
-
                 </div>
-
-
             </div>
             <div class="row mt-4" v-if="open_reply">
                 <div class="col-2 col-xl-1 px-0" style="    text-align: center;">
@@ -86,19 +76,9 @@
                         type: 2
 
                     }" />
-                <!-- <div v-if="!noResult && index === real_children_comments.length - 1">
-                    <soft-button color="dark" variant="gradient" class="my-4 mb-2"
-                        @click="get_children_comment(comment_id)">查看更多回覆</soft-button>
-                </div> -->
             </template>
         </div>
-        <!-- <div v-if="!noResult && real_children_comment_count > 0 && real_children_comments.length == 0">
-            <soft-button color="dark" variant="gradient" class="ms-5"
-                @click="get_children_comment(comment_id)">查看更多回覆</soft-button>
-        </div> -->
-
     </div>
-
     <div class="modal fade" :id="'staticBackdrop' + comment_id" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -156,7 +136,6 @@ export default {
         }
     },
     created() {
-
         this.$watch(
             () => ({
                 user_comment_like: this.user_comment_like,
@@ -187,8 +166,6 @@ export default {
                         }
                     }
                 });
-
-
             },
             { deep: true, immediate: true }
         );
@@ -213,7 +190,6 @@ export default {
             this.now_user_pic_url = this.$cookies.get("now_user_pic_url")
         if (this.children_comment_count <= this.$child_comment_onceshow)
             this.noResult_corner = 1;
-
     },
     props: {
         hasCorner: {
@@ -291,7 +267,6 @@ export default {
                 this.$parent.real_children_comments.push(comment[0]);
                 this.$parent.self_add++
             }
-
             this.$nextTick(() => {
                 document.getElementById("comment_" + comment[0].id).scrollIntoView({ block: "center" });
             });
@@ -311,7 +286,6 @@ export default {
         delete_child_comment(comment_id) {
             console.log(comment_id)
             this.real_children_comments.forEach((comment, index) => {
-
                 if (comment.id == comment_id) {
                     console.log(index)
                     this.real_children_comments.splice(index, 1);
@@ -385,11 +359,9 @@ export default {
                             break;
                     }
                     this.loading++
-
                 })
         },
         get_children_comment(comment_id) {
-
             this.axios
                 .post("/api/forum/get_children_comment", {
                     parent_comment_id: comment_id,
@@ -423,14 +395,12 @@ export default {
                         }
                     });
                     console.log('this.real_children_comment_count' + this.real_children_comment_count)
-
                 })
         },
     }
 };
 </script>
   
-
 <style>
 .comment {
     position: relative;

@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-12">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
@@ -42,11 +41,9 @@
                 <label>作業檔案</label>
                 <admin-file-upload ref="FileUpload" />
               </div>
-
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
                   @click.stop.prevent="assignment()">{{ showtext }}</soft-button>
-
                 <soft-button color="warning" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 <soft-button color="danger" full-width variant="gradient" class="mt-5" data-bs-toggle="modal"
@@ -83,14 +80,11 @@
 </template>
 
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import { ElConfigProvider } from 'element-plus'
-
 import en from 'element-plus/dist/locale/en'
 import dayjs from 'dayjs'
-
 import AdminFileUpload from "@/components/AdminFileUpload.vue";
 
 export default {
@@ -163,7 +157,6 @@ export default {
         ElMessage.error("請先登入以進行操作");
         this.$router.push({ name: 'Sign In' });
       }
-
       var file_ = []
       if (this.assignment_id) {
         var FileUpload = this.$refs.FileUpload.returnFiles();
@@ -172,7 +165,6 @@ export default {
             file_.push({ 'name': value.name, 'size': value.size, "success": true, "progress": "100.00", "id": value.id })
         });
       }
-
       this.axios
         .post("/api/class/admin/assignment", {
           coding_class_id: this.coding_class_id,
@@ -189,7 +181,6 @@ export default {
           }
         })
         .then((res) => {
-
           console.log(res);
           if (!this.assignment_id) {
             this.$router.replace({
@@ -212,12 +203,9 @@ export default {
         .catch(function (error) {
           if (error.response) {
             console.log(error.response);
-
             ElMessage.error(error.response.data.error);
-
           }
         });
-
     },
     del_assignment() {
       if (!this.token) {
@@ -235,13 +223,10 @@ export default {
           }
         })
         .then((res) => {
-
           console.log(res);
-
           this.$router.replace({
             name: 'Assignment', params: { coding_class_id: this.coding_class_id }
           });
-
           ElMessage({
             message: "刪除成功",
             type: "success",
@@ -252,20 +237,14 @@ export default {
           if (error.response) {
             that.check = '';
             ElMessage.error(error.response.data.error);
-
           }
         });
-
     },
-
-
   },
-
-
 }
 </script>
 
-<style >
+<style>
 .el-select-dropdown__item {
   width: 300px;
   width: 100%;
@@ -279,6 +258,7 @@ export default {
   display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
   .video_pic {

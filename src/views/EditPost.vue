@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-12">
         <div class="card z-index-0">
-
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
@@ -17,12 +16,9 @@
               </div>
               <div class="mb-3">
                 <label>內容</label>
-
                 <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入貼文內容"
                   required></textarea>
-
               </div>
-
               <div class="mb-3">
                 <label>請選擇題目</label>
                 <el-select ref="elselect" :key="selreload" v-model="select_uva" popper-class="virtualSelect"
@@ -48,7 +44,6 @@
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="post()">更新
                   並同時更新綁定此貼文之期限內作業</soft-button>
-
                 <soft-button color="warning" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 <soft-button color="danger" full-width variant="gradient" class="mt-5" data-bs-toggle="modal"
@@ -59,9 +54,7 @@
         </div>
       </div>
     </div>
-
   </div>
-
   <div class="modal fade" :id="'staticBackdrop' + post_id" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -72,7 +65,6 @@
         </div>
         <div class="modal-body">
           <h6> 請注意 若此篇文章有當作業繳交 將會取消繳交作業</h6>
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -85,13 +77,11 @@
 </template>
 
 <script>
-
 import virtualList from 'vue3-virtual-scroll-list'
 import ElOptionNode from '@/components/el-option-node';
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import Codemirror from "codemirror-editor-vue3"
-
 // language
 import "codemirror/mode/clike/clike.js";
 import "codemirror/mode/python/python.js";
@@ -99,7 +89,6 @@ import "codemirror/mode/python/python.js";
 import "codemirror/addon/display/placeholder.js";
 // theme
 import "codemirror/theme/lucario.css";
-
 
 export default {
   name: "EditPost",
@@ -163,9 +152,7 @@ export default {
             this.select_uva = { value: res.data.success.uva_topic.id, serial: res.data.success.uva_topic.serial, label: res.data.success.uva_topic.show }
             this.code_select = { value: res.data.success.code_editor_type, label: res.data.success.code_type }
             this.code = res.data.success.code
-
           })
-
       },
       { deep: true, immediate: true }
     );
@@ -200,7 +187,6 @@ export default {
         this.reload++;
       })
   },
-
   methods: {
     remoteMethod(query) {
       if (query !== '') {
@@ -215,11 +201,9 @@ export default {
     },
     visibleVirtualoptions(bool) {
       if (!bool) {
-        // this.selreload++
       }
       if (this.select_uva) {
         this.$refs.VirtualList.scrollToIndex(this.select_uva.value - 3)
-
       }
     },
     post() {
@@ -245,13 +229,10 @@ export default {
             }
           })
           .then((res) => {
-
             console.log(res);
-
             this.$router.push({
               name: 'Video', params: { post_id: res.data.post_id }
             });
-
             ElMessage({
               message: res.data.success,
               type: "success",
@@ -282,13 +263,10 @@ export default {
           }
         })
         .then((res) => {
-
           console.log(res);
-
           this.$router.push({
             name: 'Profile', params: { user_account: this.token_user_account }
           });
-
           ElMessage({
             message: "刪除成功",
             type: "success",
@@ -303,12 +281,8 @@ export default {
             }
           }
         });
-
     },
-
   },
-
-
 }
 </script>
 
@@ -326,6 +300,7 @@ export default {
   display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
   .video_pic {

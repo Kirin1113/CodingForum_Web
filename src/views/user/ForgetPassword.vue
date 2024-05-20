@@ -1,8 +1,7 @@
 <template>
-  <navbar btn-background="bg-gradient-primary" />
-  <div class="pt-5 m-3 page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
+  <div class="page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
     backgroundImage:
-      'url(' + require('@/assets/img/curved-images/curveda' + randompic + '.jpg') + ')',
+      'url(' + require('@/assets/img/gradiented-images/gradiented' + randompic + '.jpg') + ')',
   }">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container">
@@ -10,8 +9,7 @@
         <div class="mx-auto text-center col-lg-5">
           <h1 class="mt-5 mb-2 text-white">寄送更改密碼信</h1>
           <p class="text-white text-lead">
-            同學你好，忘記密碼了嗎<br>不用擔心，填寫當初註冊的信箱，我們會將更改密碼的信寄給您。謝謝！
-
+            填寫當初註冊的信箱，更改密碼的信將會寄給你！
           </p>
         </div>
       </div>
@@ -23,16 +21,12 @@
         <el-main style="padding:0" v-loading="loading" element-loading-text="發送中"
           element-loading-background="rgb(248 248 248)">
           <div class="card z-index-0">
-
             <div class="card-body">
               <form role="form" @submit.prevent="register">
-
                 <div class="mb-3">
                   <label>信箱</label>
                   <input class="form-control" v-model="email" type="email" placeholder="信箱" aria-label="信箱" />
                 </div>
-
-
                 <div class="text-center">
                   <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2">發送更改密碼信</soft-button>
                 </div>
@@ -49,28 +43,22 @@
       </div>
     </div>
   </div>
-  <app-footer />
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
-import AppFooter from "@/examples/PageLayout/Footer.vue";
 import SoftButton from "@/components/SoftButton.vue";
-
 import { mapMutations } from "vuex";
 import { ElMessage } from "element-plus";
 
 export default {
   name: "SignupBasic",
   components: {
-    Navbar,
-    AppFooter,
     SoftButton,
   },
   data() {
     return {
       email: "",
-      randompic: Math.floor(Math.random() * 9),
+      randompic: Math.floor(Math.random() * 18),
       loading: false
     };
   },
@@ -95,7 +83,6 @@ export default {
           .post("/api/auth/reset_password/send", {
             email: this.email,
           })
-
           .then((res) => {
             console.log(res);
             ElMessage({
@@ -105,7 +92,6 @@ export default {
             });
             this.$router.push({ name: 'Sign In' });
           })
-
           .catch(function (error) {
             if (error.response) {
               console.log(error.response.status);

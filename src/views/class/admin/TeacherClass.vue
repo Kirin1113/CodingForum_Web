@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
                         <router-link :to="{ name: 'OperateTeacherClass' }"> <soft-button color="dark" full-width
                                 variant="gradient" style="    font-size: 15px;">新增課程</soft-button></router-link>
@@ -15,7 +14,6 @@
                                     <template #default="scope">
                                         {{ scope.row.name }}
                                     </template>
-
                                 </el-table-column>
                                 <el-table-column label="目前加選人數" prop="student_count"
                                     :min-width="window.innerWidth < 1200 ? '120%' : ''">
@@ -54,7 +52,6 @@
 
                                                 編輯作業
                                             </el-button>
-
                                         </router-link>
                                         <router-link
                                             :to="{ name: 'OperateTeacherClass', params: { coding_class_id: scope.row.id } }">
@@ -62,9 +59,7 @@
 
                                                 編輯課程
                                             </el-button>
-
                                         </router-link>
-
                                     </template>
                                 </el-table-column>
                             </el-table>
@@ -73,14 +68,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
-import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
 
 export default {
@@ -122,12 +114,10 @@ export default {
             });
         },
     },
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -141,6 +131,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {

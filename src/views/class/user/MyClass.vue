@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card z-index-0">
-
                     <div class="card-body">
                         <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
                             element-loading-background="rgb(248 248 248)">
@@ -58,7 +57,6 @@
 </template>
   
 <script>
-
 import SoftButton from "@/components/SoftButton.vue";
 import { ElMessage } from "element-plus";
 import SelectUser from '@/components/SelectUser.vue';
@@ -103,7 +101,6 @@ export default {
         },
     },
     methods: {
-
         user_class(coding_class_id) {
             if (!this.token) {
                 ElMessage.error("請先登入以進行操作");
@@ -118,13 +115,10 @@ export default {
                     }
                 })
                 .then((res) => {
-
                     console.log(res);
-
                     this.$router.push({
                         name: 'UserClass'
                     }).then(() => { this.$router.go() });
-
                     ElMessage({
                         message: "加選成功",
                         type: "success",
@@ -134,19 +128,14 @@ export default {
                 .catch(function (error) {
                     if (error.response) {
                         ElMessage.error(error.response.data.error);
-
                     }
                 });
-
         },
-
     },
-
-
 }
 </script>
   
-<style >
+<style>
 .el-select-dropdown__item {
     width: 300px;
     width: 100%;
@@ -160,6 +149,7 @@ export default {
     display: block;
 }
 </style>
+
 <style scoped>
 @media (min-width: 1200px) {
     .video_pic {
