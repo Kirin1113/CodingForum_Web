@@ -16,6 +16,7 @@
         <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">{{ user.name }}</h5>
+            <p class="logout" @click="logout" v-if="token_user_account == this.$route.params.user_account" >登出</p>
           </div>
         </div>
       </div>
@@ -29,26 +30,24 @@
           <div class="card h-100">
             <div class="p-3 pb-0 card-header">
               <div class="row">
-                <soft-button color="dark" full-width variant="gradient" style="    font-size: 15px;" @click="logout"
-                  v-if="token_user_account == this.$route.params.user_account">登出</soft-button>
-                <div class="col-md-4 d-flex align-items-center">
-                  <h6 class="mb-0">個人資訊</h6>
-                </div>
-                <div class="col-md-8 edit_button">
+                <div class="edit_button">
                   <a>
-                    <router-link class="ms-2" style=" font-size: 13px;" :to="{ name: 'EditUser' }"
+                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditUser' }"
                       v-if="token_user_account == this.$route.params.user_account">
-                      <i class="text-sm fas fa-user-edit text-secondary me-2"></i>編輯</router-link>
-                    <router-link class="ms-2" style=" font-size: 13px;" :to="{ name: 'EditPic' }"
+                      編輯個資</router-link>
+                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditPic' }"
                       v-if="token_user_account == this.$route.params.user_account">
-                      <i class="text-sm fas fa-user-edit text-secondary me-2"></i>編輯頭貼</router-link>
-                    <router-link class="ms-2" style=" font-size: 13px;" :to="{ name: 'EditCover' }"
+                      編輯頭貼</router-link>
+                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditCover' }"
                       v-if="token_user_account == this.$route.params.user_account">
-                      <i class="text-sm fas fa-user-edit text-secondary me-2"></i>編輯封面</router-link>
-                    <router-link class="ms-2" style=" font-size: 13px;" :to="{ name: 'EditPassword' }"
+                      編輯封面</router-link>
+                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditPassword' }"
                       v-if="token_user_account == this.$route.params.user_account">
-                      <i class="text-sm fas fa-user-edit text-secondary me-2"></i>修改密碼</router-link>
+                      修改密碼</router-link>
                   </a>
+                </div>
+                <div class="d-flex align-items-center">
+                  <h6 class="mb-0">個人資訊</h6>
                 </div>
               </div>
             </div>
@@ -76,9 +75,7 @@
           <div class="card">
             <div class="card-body p-3">
               <div class="row">
-                <soft-button color="dark" full-width variant="gradient" style="    font-size: 15px;" @click="upload"
-                  v-if="token_user_account == this.$route.params.user_account">上傳貼文</soft-button>
-                <h4 v-if="posts.length == 0" style="text-align: center;">無符合條件之貼文</h4>
+                <h4 v-if="posts.length == 0" style="text-align: center;">尚未有影片</h4>
                 <div class="col-lg-4" v-for="post in posts" :key="post.id">
                   <div class="card mb-2" aria-hidden="true">
                     <div style="overflow: hidden;">
@@ -89,7 +86,7 @@
                       <h5 class="card-title placeholder-glow">
                         {{ post.uva_topic.serial + "-" + post.uva_topic.title }}
                       </h5>
-                      <p>CPE星數: <i class="fa-solid fa-star-of-david" v-for="star in post.uva_topic.star"></i>
+                      <p>CPE星數: <span v-for="star in post.uva_topic.star">⭐</span>
                       <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div>
                       <br>
                       語言: {{ post.code_type }}
@@ -101,9 +98,9 @@
                       留言數: {{ post.comments_count }}
                       </p>
                       {{ post.created_at }}
-                      <router-link class="ms-2" style=" font-size: 13px;" v-if="token_user_id == post.user_id"
+                      <router-link class="ms-3" style=" font-size: 13px;" v-if="token_user_id == post.user_id"
                         :to="{ name: 'EditPost', params: { post_id: post.id } }">
-                        <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>編輯貼文</router-link>
+                        編輯影片</router-link>
                     </div>
                   </div>
                 </div>
@@ -136,7 +133,6 @@
 </template>
 
 <script>
-import ProfileInfoCard from "./components/ProfileInfoCard.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 import { ElMessage } from "element-plus";
 import SoftButton from "../components/SoftButton.vue";
@@ -144,7 +140,6 @@ import SoftButton from "../components/SoftButton.vue";
 export default {
   name: "ProfileOverview",
   components: {
-    ProfileInfoCard,
     InfiniteScroll,
     SoftButton
   },
@@ -208,10 +203,6 @@ export default {
 
             if (this.user.github != null) {
               this.social.push({ link: this.user.github, iconclass: "fa-brands fa-github" })
-            } if (this.user.instagram != null) {
-              this.social.push({ link: this.user.instagram, iconclass: "fa-brands fa-instagram" })
-            } if (this.user.facebook != null) {
-              this.social.push({ link: this.user.facebook, iconclass: "fa-brands fa-facebook" })
             }
           }).catch(function (error) {
             if (error.response) {
@@ -245,9 +236,6 @@ export default {
             duration: 3000,
           });
         })
-    },
-    upload() {
-      this.$router.push({ name: 'Upload' });
     },
     resetpost() {
       this.send_serial = ''
@@ -387,5 +375,15 @@ export default {
   .edit_button {
     text-align: center !important;
   }
+}
+</style>
+
+<style>
+.logout {
+  cursor: pointer;
+}
+
+.logout:hover {
+  color: #830866;
 }
 </style>

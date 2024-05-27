@@ -21,18 +21,10 @@
                 <label>github</label>
                 <input class="form-control" v-model="github" type="text" placeholder="請貼入網址" />
               </div>
-              <div class="mb-3">
-                <label>instagram</label>
-                <input class="form-control" v-model="instagram" type="text" placeholder="請貼入網址" />
-              </div>
-              <div class="mb-3">
-                <label>facebook</label>
-                <input class="form-control" v-model="facebook" type="text" placeholder="請貼入網址" />
-              </div>
               <div class="text-center">
-                <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
+                <soft-button color="warning" full-width variant="gradient" class="mt-2 mb-2"
                   @click.stop.prevent="edit()">更新</soft-button>
-                <soft-button color="warning" full-width variant="gradient" class="mb-5"
+                <soft-button color="dark" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
               </div>
             </form>
@@ -60,8 +52,6 @@ export default {
       name: '',
       intro: '',
       github: '',
-      instagram: '',
-      facebook: '',
       token: this.$cookies.get("token"),
       token_user_id: this.$cookies.get("user_id"),
       token_user_account: this.$cookies.get("user_account"),
@@ -82,8 +72,6 @@ export default {
         this.name = res.data.user.name
         this.intro = res.data.user.intro
         this.github = res.data.user.github
-        this.instagram = res.data.user.instagram
-        this.facebook = res.data.user.facebook
       })
       .catch(function (error) {
         if (error.response) {
@@ -106,8 +94,6 @@ export default {
           name: this.name,
           intro: this.intro,
           github: this.github,
-          instagram: this.instagram,
-          facebook: this.facebook,
         }, {
           headers: {
             'Authorization': `Bearer ` + this.token,

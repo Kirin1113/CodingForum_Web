@@ -15,20 +15,25 @@
                   <h5 class="card-title placeholder-glow">
                     {{ post.uva_topic.serial + "-" + post.uva_topic.title }}
                   </h5>
-                  <p>CPE星數: <i class="fa-solid fa-star-of-david" v-for="star in post.uva_topic.star"></i>
-                  <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div>
+                  <p>CPE星數: <span v-for="star in post.uva_topic.star">⭐</span>
+                  <div v-if="post.uva_topic.star == null" style="display: inline-block;">無</div>
                   <br>
                   語言: {{ post.code_type }}
+                  <br>
+                  愛心數:
                   <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
                     style="display: inline;">
-                    愛心數:
-                    <span class="vote__count-n"> <i class="fa-solid fa-heart"></i> x {{ post.likes }} </span>
+                    <span class="vote__count-n">
+                      <i :class="post.likes >= 0 ? 'fa-solid fa-heart' : 'fa-solid fa-heart-broken'"></i> x {{ post.likes }}
+                    </span>
                   </div>
+                  <br>
                   留言數: {{ post.comments_count }}
                   </p>
                   <p class="card-text placeholder-glow">
+                    作者 : 
                     <router-link class="" :to="{ name: 'Profile', params: { user_account: post.user_account } }">
-                      作者 : {{ post.user_name }}。 </router-link>
+                      {{ post.user_name }} </router-link>。
                     <timeago :datetime="post.created_at.replaceAll('/', '-')" />
                   </p>
                 </div>

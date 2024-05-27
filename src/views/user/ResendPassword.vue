@@ -9,7 +9,7 @@
         <div class="mx-auto text-center col-lg-5">
           <h1 class="mt-5 mb-2 text-white">更改密碼連結已過期或不存在</h1>
           <p class="text-white text-lead">
-            點選下方按鈕，重新填寫信箱
+            點選下方按鈕，重新填寫信箱!
           </p>
         </div>
       </div>
@@ -21,8 +21,8 @@
         <div class="card z-index-0">
           <div class="card-body">
             <div class="text-center">
-              <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2"
-                @click="this.$router.push({ name: 'forget_password' });">前往重新填寫信箱</soft-button>
+              <soft-button color="info" full-width variant="gradient" class="my-4 mb-2"
+                @click="this.$router.push({ name: 'forget_password' });">前往</soft-button>
             </div>
             <p class="text-sm mt-3 mb-0">
               想起原本的密碼了嗎?

@@ -6,7 +6,7 @@
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
-                <p>圖片會自動套用當初上傳Youtube之圖片 因此若要更改 請至Youtube</p>
+                <p>圖片是套用你在YT上傳影片時所設之封面</p>
                 <img :src="video_pic_url" alt="" class="video_pic">
               </div>
               <div class="mb-3">
@@ -42,12 +42,12 @@
                 </Codemirror>
               </div>
               <div class="text-center">
-                <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="post()">更新
-                  並同時更新綁定此貼文之期限內作業</soft-button>
-                <soft-button color="warning" full-width variant="gradient" class="mb-5"
+                <soft-button color="warning" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="post()">更新
+                  <!-- 並同時更新綁定此貼文之期限內作業 --></soft-button>
+                <soft-button color="dark" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 <soft-button color="danger" full-width variant="gradient" class="mt-5" data-bs-toggle="modal"
-                  :data-bs-target="'#staticBackdrop' + post_id" @click.stop.prevent="">刪除貼文</soft-button>
+                  :data-bs-target="'#staticBackdrop' + post_id" @click.stop.prevent="">刪除影片</soft-button>
               </div>
             </form>
           </div>

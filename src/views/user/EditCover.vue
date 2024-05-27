@@ -7,7 +7,7 @@
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
                 <p>目前封面</p>
-                <p>若手機無法顯示上傳圖片 請使用電腦版</p>
+                <!-- <p>若手機無法顯示上傳圖片 請使用電腦版</p> -->
                 <img :src="$global_url + cover" alt="" class="user_pic">
                 <p v-if="max_pic" class="mt-4">待更新封面</p>
                 <div class="upload-example__cropper-wrapper">
@@ -30,9 +30,9 @@
                 <p v-if="max_pic">調整裁切圖片的區域後 直接按下方更新就好</p>
               </div>
               <div class="text-center">
-                <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="edit()"
+                <soft-button color="warning" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="edit()"
                   v-if="max_pic">更新</soft-button>
-                <soft-button color="warning" full-width variant="gradient" class="mb-5"
+                <soft-button color="dark" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 <soft-button color="danger mt-4" full-width variant="gradient" class="mt-2 mb-2" data-bs-toggle="modal"
                   data-bs-target="#deletepic" @click.stop.prevent="">回復預設封面</soft-button>

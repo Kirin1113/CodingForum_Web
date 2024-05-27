@@ -20,8 +20,8 @@
                       {{ post.user_name }} </router-link>
                   </h3>
                   <div v-if="post.length != 0">
-                    CPE星數: <i class="fa-solid fa-star-of-david" v-for="star in post.uva_topic.star"></i>
-                    <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div> 。
+                    CPE星數: <span v-for="star in post.uva_topic.star">⭐</span>
+                    <div v-if="post.uva_topic.star == null" style="display: inline-block;">無</div> 。
                     語言: {{ post.code_type }}。
                   </div>
                   <div class="breakline"></div>
@@ -36,7 +36,7 @@
                     }" />
                   <router-link style=" font-size: 13px;" v-if="token_user_id == post.user_id"
                     :to="{ name: 'EditPost', params: { post_id: post.id } }">
-                    <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>編輯貼文</router-link>
+                    編輯影片</router-link>
                 </div>
                 <div class="mt-2">
                   <textarea class="form-control" id="content" v-model="post.content" rows="4" readonly></textarea>
@@ -48,13 +48,7 @@
         <div class="col-lg-4">
           <div class="card" style="height: 100%;">
             <div class="card-body p-3">
-              <div class="mb-3">
-                <label>程式語言</label>
-                <el-select v-model="post.code_editor_type" class="" placeholder="請選擇程式語言" disabled>
-                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-                </el-select>
-              </div>
-              <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
+              <soft-button color="info" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
                 @click="showcode = !showcode">查看程式碼</soft-button>
               <div class="mb-3 pc">
                 <label>程式碼</label>
@@ -73,10 +67,10 @@
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-md-5 col-12 mb-4 mobileshow" v-if="window.innerWidth < 1200">
+        <!-- <div class="col-md-5 col-12 mb-4 mobileshow" v-if="window.innerWidth < 1200">
           <div class="card">
             <div class="card-body p-3">
-              <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
+              <soft-button color="info" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
                 @click="showpdf = !showpdf">查看題目說明</soft-button>
               <soft-button v-if="post.length != 0 && showpdf" color="dark" full-width variant="gradient"
                 class="mt-2 mb-2 mobileshow"
@@ -86,8 +80,8 @@
                 @rendered="rendered" :controls="pdfcontrols" />
             </div>
           </div>
-        </div>
-        <div class="col-md-7 col-12">
+        </div> -->
+        <div class="col-md-8 col-12">
           <div class="card">
             <div class="card-body p-3">
               <div class="mx-1 mx-xxl-4 mt-xxl-5">
@@ -126,7 +120,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-5 pc" v-if="window.innerWidth > 1200">
+        <!-- <div class="col-md-5 pc" v-if="window.innerWidth > 1200">
           <div class="card">
             <div class="card-body p-3">
               <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
@@ -135,7 +129,7 @@
                 style="height: 80vh;" ref="pdfviewer" @rendered="rendered" :controls="pdfcontrols" />
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </infinite-scroll>
@@ -149,8 +143,8 @@ import CommentTextArea from "@/components/CommentTextArea.vue";
 import Vote from "@/components/Vote.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 import SoftButton from "../components/SoftButton.vue";
-import PDFViewer from 'pdf-viewer-vue'
-import download from 'downloadjs'
+// import PDFViewer from 'pdf-viewer-vue'
+// import download from 'downloadjs'
 
 const axios = require('axios');
 
@@ -162,7 +156,7 @@ export default {
     CommentTextArea,
     Vote,
     InfiniteScroll,
-    PDFViewer,
+    // PDFViewer,
     SoftButton
   },
   data() {
@@ -186,7 +180,6 @@ export default {
       more_lock: false,
       limit: 0,
       all_user: [],
-      options: [{ value: 'text/x-csrc', label: 'C' }, { value: 'text/x-c++src', label: 'C++' }, { value: 'text/x-java', label: 'Java' }, { value: 'python', label: 'Python' }],
       code_type: 'text/x-csrc',
       selete_loading: 0,
       cmOptions: {
@@ -200,14 +193,14 @@ export default {
         autofocus: true,
         readOnly: true,
       },
-      showcode: false,
-      showpdf: false,
-      pdfcontrols: [
-        'print',
-        'rotate',
-        'zoom',
-        'switchPage',
-      ]
+      showcode: false//,
+      // showpdf: false,
+      // pdfcontrols: [
+      //   'print',
+      //   'rotate',
+      //   'zoom',
+      //   'switchPage',
+      // ]
     };
   },
   created() {
@@ -355,24 +348,23 @@ export default {
     console.log(this.$refs.test)
   },
   methods: {
-    downloadpdf(url) {
-      ElMessage({
-        message: "請稍等，正在準備下載",
-        type: "success",
-        duration: 3000,
-      });
-      download(url);
-    },
-    rendered() {
-      this.$nextTick(() => {
-        this.$nextTick(() => {
-          console.log("12222")
-          console.log(this.$refs.pdfviewer)
-          this.$refs.pdfviewer.handleToggleFullpage()
-        });
-      });
-
-    },
+    // downloadpdf(url) {
+    //   ElMessage({
+    //     message: "請稍等，正在準備下載",
+    //     type: "success",
+    //     duration: 3000,
+    //   });
+    //   download(url);
+    // },
+    // rendered() {
+    //   this.$nextTick(() => {
+    //     this.$nextTick(() => {
+    //       console.log("12222")
+    //       console.log(this.$refs.pdfviewer)
+    //       this.$refs.pdfviewer.handleToggleFullpage()
+    //     });
+    //   });
+    // },
     checklogin() {
       if (!this.token) {
         ElMessage.error("請先登入以進行操作");

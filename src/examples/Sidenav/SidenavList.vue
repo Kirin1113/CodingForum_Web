@@ -1,15 +1,15 @@
 <template>
   <!-- max-height-vh-100 h-100 -->
   <div class="w-auto h-auto collapse navbar-collapse " id="sidenav-collapse-main">
-    <ul class="navbar-nav" style="    flex-direction: row!important;">
+    <ul class="navbar-nav">
       <li class="nav-item">
         <sidenav-collapse navText="首頁" :to="{ name: 'Dashboard' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse navText="同學列表" :to="{ name: 'AllUser' }" class="m-0 justify-content-center"></sidenav-collapse>
+        <sidenav-collapse navText="所有使用者" :to="{ name: 'AllUser' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
     </ul>
-    <ul class="navbar-nav" style="    flex-direction: row!important;">
+    <!-- <ul class="navbar-nav">
       <li class="nav-item" v-if="this.$cookies.get('isadmin') != 1 && this.$cookies.get('token')">
         <sidenav-collapse navText="選課" :to="{ name: 'UserClass' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
@@ -17,15 +17,57 @@
         <sidenav-collapse navText="我的課程" :to="{ name: 'MyClass' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
     </ul>
-    <ul class="navbar-nav" style="    flex-direction: row!important;">
+    <ul class="navbar-nav">
       <li class="nav-item" v-if="this.$cookies.get('isadmin') == 1">
         <sidenav-collapse navText="教授課程" :to="{ name: 'TeacherClass' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
       <li class="nav-item" v-if="this.$cookies.get('isadmin') == 2">
         <sidenav-collapse navText="TA" :to="{ name: 'TAClass' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
-    </ul>
+    </ul> -->
+    <hr class="mt-4 horizontal dark" />
     <ul class="navbar-nav">
+      <li class="nav-item">
+        <sidenav-collapse navText="靜宜大學" :to="{ name: 'PU' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="UVa" :to="{ name: 'UVa' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="CPE" :to="{ name: 'CPE' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+    </ul>
+    <hr class="mt-4 horizontal dark" />
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <sidenav-collapse navText="C Tutorial" :to="{ name: 'CTutorial' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="C++ Tutorial" :to="{ name: 'CPPTutorial' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="JAVA Tutorial" :to="{ name: 'JAVATutorial' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="PYTHON Tutorial" :to="{ name: 'PYTHONTutorial' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+    </ul>
+    <hr class="mt-4 horizontal dark" />
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <sidenav-collapse navText="Online C Compiler" :to="{ name: 'COnlineGDB' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="Online C++ Compiler" :to="{ name: 'CPPOnlineGDB' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="Online JAVA Compiler" :to="{ name: 'JAVAOnlineGDB' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="Online PYTHON Compiler" :to="{ name: 'PYTHONOnlineGDB' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+    </ul>
+    <!-- <ul class="navbar-nav">
       <li class="nav-item" v-if="this.$route.name == 'Dashboard' || this.$route.name == 'Profile'"
         :key="this.$route.name">
         <div class="relative  rounded-xl bg-deep-black px-3 py-3 text-white" style="font-size: 13px;">
@@ -69,14 +111,14 @@
           </div>
         </div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 <script>
 import SidenavCollapse from "./SidenavCollapse.vue";
-import CodeCard from "./CodeCard.vue";
-import SelectUva from "@/components/SelectUva.vue";
-import SoftButton from "@/components/SoftButton.vue";
+// import CodeCard from "./CodeCard.vue";
+// import SelectUva from "@/components/SelectUva.vue";
+// import SoftButton from "@/components/SoftButton.vue";
 
 export default {
   name: "SidenavList",
@@ -93,9 +135,9 @@ export default {
   },
   components: {
     SidenavCollapse,
-    CodeCard,
-    SelectUva,
-    SoftButton,
+    // CodeCard,
+    // SelectUva,
+    // SoftButton,
   },
   methods: {
     resetpost() {

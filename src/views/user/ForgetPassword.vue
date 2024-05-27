@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="mx-auto text-center col-lg-5">
-          <h1 class="mt-5 mb-2 text-white">寄送更改密碼信</h1>
+          <h1 class="mt-5 mb-2 text-white">忘記密碼</h1>
           <p class="text-white text-lead">
             填寫當初註冊的信箱，更改密碼的信將會寄給你！
           </p>
@@ -25,10 +25,10 @@
               <form role="form" @submit.prevent="register">
                 <div class="mb-3">
                   <label>信箱</label>
-                  <input class="form-control" v-model="email" type="email" placeholder="信箱" aria-label="信箱" />
+                  <input class="form-control" v-model="email" type="email" placeholder="請輸入信箱" aria-label="信箱" />
                 </div>
                 <div class="text-center">
-                  <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2">發送更改密碼信</soft-button>
+                  <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2">發送</soft-button>
                 </div>
                 <p class="text-sm mt-3 mb-0">
                   想起原本的密碼了嗎?

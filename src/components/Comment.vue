@@ -26,18 +26,18 @@
                                 type: 1 //0post //1comment
                             }" />
                         <div class="breakline"></div>
-                        <a class="btn btn-link text-dark px-3 mb-0" @click="reply" v-if="token_user_id">
-                            <i class="fa-solid fa-comment  me-2"></i>回應
-                        </a>
+                        <!-- <a class="btn btn-link text-dark px-3 mb-0" @click="reply" v-if="token_user_id">
+                            回應
+                        </a> -->
                         <a class="btn btn-link text-dark px-3 mb-0" v-if="token_user_id == user_id" @click="edit">
-                            <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>{{ showtext }}
+                            {{ showtext }}
                         </a>
                         <a class="btn btn-link text-dark px-3 mb-0" v-if="!readOnly" @click="$refs.comment.save()">
-                            <i class="fa-solid fa-floppy-disk  me-2"></i>保存
+                            保存
                         </a>
                         <a class="btn btn-link text-dark px-3 mb-0" data-bs-toggle="modal"
                             :data-bs-target="'#staticBackdrop' + comment_id" v-if="token_user_id == user_id && readOnly">
-                            <i class="fa-solid fa-trash me-2"></i>刪除
+                            刪除
                         </a>
                     </div>
                 </div>
@@ -273,11 +273,11 @@ export default {
             console.log(this.real_children_comments);
             console.log(this.real_children_comment_count);
         },
-        reply() {
-            this.open_reply = !this.open_reply
-            this.reply_content = '<p><span class="mention" data-index="0" data-denotation-char="@" data-id="' + this.user_account + '" data-value="' + this.user_name + '"><span contenteditable="false"><span class="ql-mention-denotation-char">@</span>' + this.user_name + '</span></span>  </p>'
-            console.log(this.reply_content)
-        },
+        // reply() {
+        //     this.open_reply = !this.open_reply
+        //     this.reply_content = '<p><span class="mention" data-index="0" data-denotation-char="@" data-id="' + this.user_account + '" data-value="' + this.user_name + '"><span contenteditable="false"><span class="ql-mention-denotation-char">@</span>' + this.user_name + '</span></span>  </p>'
+        //     console.log(this.reply_content)
+        // },
         updatevalue(newvalue) {
             console.log('new' + newvalue)
             this.real_content = newvalue

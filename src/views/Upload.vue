@@ -7,7 +7,7 @@
           <div class="card z-index-0">
             <div class="card-body">
               <form role="form" @submit.prevent="post" class="mx-auto col-xl-9">
-                <p>圖片會自動套用當初上傳Youtube之圖片 因此若要更改 請至Youtube</p>
+                <p>圖片將自動套用你在YT上傳影片時所設之封面</p>
                 <div class="mb-3">
                   <label>影片網址(只限Youtube)</label>
                   <input class="form-control" v-model="video_url" id="video_url" type="text" placeholder="請貼入網址"
@@ -35,9 +35,9 @@
                   </Codemirror>
                 </div>
                 <div class="text-center">
-                  <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2"
+                  <soft-button color="warning" full-width variant="gradient" class="my-4 mb-2"
                     :disabled="post_check">上傳</soft-button>
-                  <soft-button color="warning" full-width variant="gradient" class="mb-5 mt-5"
+                  <soft-button color="dark" full-width variant="gradient" class="mb-5 mt-5"
                     @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 </div>
               </form>

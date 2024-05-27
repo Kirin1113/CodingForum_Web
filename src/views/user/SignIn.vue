@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="mx-auto text-center col-lg-5">
-          <h1 class="mt-5 mb-2 text-white">歡迎回來!</h1>
+          <h1 class="mt-5 mb-2 text-white">登入</h1>
           <p class="text-white text-lead">
             登入後繼續你的學習旅程吧!
           </p>
@@ -23,7 +23,7 @@
             <form role="form" @submit.prevent="login">
               <div class="mb-3">
                 <label>學號</label>
-                <input class="form-control" v-model="account" id="account" type="text" placeholder="請輸入學號 小寫s開頭"
+                <input class="form-control" v-model="account" id="account" type="text" placeholder="sxxxxxxx"
                   name="account" />
               </div>
               <div class="mb-3">
@@ -38,7 +38,7 @@
               <p class="text-sm mt-3 mb-0">
                 忘記密碼了嗎?
                 <router-link :to="{ name: 'forget_password' }" class="text-dark font-weight-bolder">
-                  修改密碼
+                  忘記密碼
                 </router-link>
               </p>
               <p class="text-sm mt-3 mb-0">

@@ -12,7 +12,9 @@
         ]">
             <transition-slide>
                 <div v-if="isVisible" class="box">
-                    <span class="vote__count-n"> <i class="fa-solid fa-heart"></i> x {{ num }} </span>
+                    <span class="vote__count-n">
+                        <i :class="num >= 0 ? 'fa-solid fa-heart' : 'fa-solid fa-heart-broken'"></i> x {{ num }}
+                    </span>
                 </div>
             </transition-slide>
         </div>
@@ -185,11 +187,11 @@ export default {
 }
 
 .vote__count.negative {
-    color: #d34f57;
+    color: #2ea83a;
 }
 
 .vote__count.positive {
-    color: #2ea83a;
+    color: #d34f57;
 }
 
 .vote__down-vote {
@@ -201,7 +203,7 @@ export default {
 }
 
 .vote__down-vote.voted svg path {
-    stroke: #d34f57;
+    stroke: #2ea83a;
 }
 
 .vote__down-vote.voted:hover {
@@ -221,7 +223,7 @@ export default {
 }
 
 .vote__up-vote.voted svg path {
-    stroke: #2ea83a;
+    stroke: #d34f57;
 }
 
 .vote__up-vote.voted:hover {

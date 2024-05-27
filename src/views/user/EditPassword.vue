@@ -11,7 +11,7 @@
               </div>
               <div class="mb-3">
                 <label>新密碼</label>
-                <input class="form-control" v-model="password" type="text" placeholder="新密碼" aria-label="密碼" />
+                <input class="form-control" v-model="password" type="text" placeholder="請輸入新密碼" aria-label="密碼" />
               </div>
               <div class="mb-3">
                 <label>請再輸入一次新密碼</label>
@@ -19,9 +19,9 @@
                   aria-label="密碼" />
               </div>
               <div class="text-center">
-                <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
+                <soft-button color="warning" full-width variant="gradient" class="mt-2 mb-2"
                   @click.stop.prevent="edit()">更新</soft-button>
-                <soft-button color="warning" full-width variant="gradient" class="mb-5"
+                <soft-button color="dark" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
               </div>
             </form>

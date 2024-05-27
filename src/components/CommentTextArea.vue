@@ -126,7 +126,7 @@ export default {
             key: 0,
             incontent: this.content ? this.content : '',
             output: [],
-            placeholder: this.content ? '' : '發表留言:',
+            placeholder: this.content ? '' : '發表留言...',
             post_id: this.$route.params.post_id,
             editorOptions: {
                 modules: {

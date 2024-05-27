@@ -7,6 +7,10 @@
         <div class="pe-md-3 d-flex align-items-center ms-md-auto">
         </div>
         <ul class="navbar-nav justify-content-end">
+          <div v-if="user_account" @click="upload" class="me-3 mt-3" style="cursor:pointer">
+            <i class="fas fa-upload"></i>
+          </div>
+          <!-- <TagedCard class="me-2" :key="TagedCardkey" @TagedCardkeyadd="TagedCardkeyadd" v-if="user_account" /> -->
           <li class="nav-item d-flex align-items-center">
             <router-link v-if="user_account" :to="{ name: 'Profile', params: { user_account: user_account } }"
               class="px-0 nav-link font-weight-bold text-body">
@@ -14,7 +18,6 @@
             </router-link>
             <div v-if="!user_account" @click="login" class="px-0 nav-link font-weight-bold text-body"
               style="cursor:pointer">
-              <i class="fa fa-user me-2 fa-xl"></i>
               <span class="d-sm-inline d-none">登入</span>
             </div>
           </li>
@@ -27,7 +30,6 @@
               </div>
             </a>
           </li>
-          <TagedCard class="ms-4" :key="TagedCardkey" @TagedCardkeyadd="TagedCardkeyadd" v-if="user_account" />
         </ul>
       </div>
     </div>
@@ -37,13 +39,13 @@
 <script>
 import Breadcrumbs from "../Breadcrumbs.vue";
 import { mapMutations, mapActions } from "vuex";
-import TagedCard from "../../views/components/TagedCard.vue";
+// import TagedCard from "../../views/components/TagedCard.vue";
 
 export default {
   name: "navbar",
   components: {
     Breadcrumbs,
-    TagedCard
+    // TagedCard
   },
   data() {
     return {
@@ -51,7 +53,7 @@ export default {
       token: this.$cookies.get("token"),
       user_account: this.$cookies.get("user_account"),
       now_user_pic_url: this.$cookies.get("now_user_pic_url"),
-      TagedCardkey: 0
+      // TagedCardkey: 0
     };
   },
   props: ["minNav", "textWhite"],
@@ -87,9 +89,9 @@ export default {
   methods: {
     ...mapMutations(["navbarMinimize"]),
     ...mapActions(["toggleSidebarColor"]),
-    TagedCardkeyadd() {
-      this.TagedCardkey++;
-    },
+    // TagedCardkeyadd() {
+    //   this.TagedCardkey++;
+    // },
     toggleSidebar() {
       this.toggleSidebarColor("bg-white");
       this.navbarMinimize();
@@ -99,6 +101,9 @@ export default {
         this.$cookies.set("go_login_then_backpost", this.post_id, "3min");
       }
       this.$router.push({ name: 'Sign In' });
+    },
+    upload() {
+      this.$router.push({ name: 'Upload' });
     },
     test() {
       console.log(this.$refs.SelectUva.return_select_uva())

@@ -23,7 +23,7 @@
             <form role="form" @submit.prevent="register">
               <div class="mb-3">
                 <label>密碼</label>
-                <input class="form-control" v-model="password" type="password" placeholder="密碼" aria-label="密碼" />
+                <input class="form-control" v-model="password" type="password" placeholder="請輸入密碼" aria-label="密碼" />
               </div>
               <div class="mb-3">
                 <label>請再輸入一次密碼</label>
@@ -31,7 +31,7 @@
                   aria-label="密碼" />
               </div>
               <div class="text-center">
-                <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2">確認更改</soft-button>
+                <soft-button color="warning" full-width variant="gradient" class="my-4 mb-2">確認</soft-button>
               </div>
               <p class="text-sm mt-3 mb-0">
                 想起原本的密碼了嗎?
