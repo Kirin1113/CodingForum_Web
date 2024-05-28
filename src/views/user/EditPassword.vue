@@ -7,15 +7,15 @@
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
                 <label>舊密碼</label>
-                <input class="form-control" v-model="old_password" type="text" placeholder="請輸入舊密碼" required />
+                <input class="form-control" v-model="old_password" type="password" placeholder="請輸入舊密碼" required />
               </div>
               <div class="mb-3">
                 <label>新密碼</label>
-                <input class="form-control" v-model="password" type="text" placeholder="請輸入新密碼" aria-label="密碼" />
+                <input class="form-control" v-model="password" type="password" placeholder="請輸入新密碼" aria-label="密碼" />
               </div>
               <div class="mb-3">
                 <label>請再輸入一次新密碼</label>
-                <input class="form-control" v-model="repeat_password" type="text" placeholder="請再輸入一次新密碼"
+                <input class="form-control" v-model="repeat_password" type="password" placeholder="請再輸入一次新密碼"
                   aria-label="密碼" />
               </div>
               <div class="text-center">
