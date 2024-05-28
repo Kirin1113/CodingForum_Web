@@ -90,11 +90,15 @@
                       <div v-if="post.uva_topic.star == null" style="    display: inline-block;">無</div>
                       <br>
                       語言: {{ post.code_type }}
+                      <br>
+                      愛心數:
                       <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
                         style="display: inline;">
-                        愛心數:
-                        <span class="vote__count-n"> <i class="fa-solid fa-heart"></i> x {{ post.likes }} </span>
+                        <span class="vote__count-n">
+                          <i :class="post.likes >= 0 ? 'fa-solid fa-heart' : 'fa-solid fa-heart-broken'"></i> x {{ post.likes }}
+                        </span>
                       </div>
+                      <br>
                       留言數: {{ post.comments_count }}
                       </p>
                       {{ post.created_at }}

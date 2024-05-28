@@ -38,7 +38,7 @@ export default {
           name: '個人檔案',
         }, {
           route_name: 'EditUser',
-          name: '用戶編輯',
+          name: '個人資料編輯',
         }, {
           route_name: 'EditPic',
           name: '編輯頭貼',
