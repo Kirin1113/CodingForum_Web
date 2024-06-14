@@ -2,10 +2,10 @@
   <sidenav :custom_class="this.$store.state.mcolor" :class="[
     this.$store.state.isTransparent,
     'fixed-start',
-  ]" v-if="this.$store.state.showSidenav" @changepost="ref_changepost" @resetpost="ref_resetpost" />
+  ]" v-if="this.$store.state.showSidenav" />
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <navbar :class="[navClasses]" :textWhite="this.$store.state.isAbsolute ? 'text-white opacity-8' : ''"
-      :minNav="navbarMinimize" v-if="this.$store.state.showNavbar" :key="$route.fullPath" />
+      :minNav="navbarMinimize" v-if="this.$store.state.showNavbar" :key="$route.fullPath" @changepost="ref_changepost" @resetpost="ref_resetpost" />
     <router-view v-slot="{ Component }">
       <component ref="view" :is="Component" :key="$route.fullPath" />
     </router-view>
@@ -133,10 +133,6 @@ button {
 }
 
 @media (min-width: 1200px) {
-  .footer_logoicon {
-    width: 10%;
-  }
-
   .mobileshow {
     display: none !important;
   }
@@ -151,10 +147,6 @@ button {
 }
 
 @media (max-width: 1200px) {
-  .footer_logoicon {
-    width: 25%;
-  }
-
   .sidenav {
     z-index: 9999;
   }

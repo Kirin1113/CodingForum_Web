@@ -16,7 +16,6 @@
         <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">{{ user.name }}</h5>
-            <p class="logout" @click="logout" v-if="token_user_account == this.$route.params.user_account" >登出</p>
           </div>
         </div>
       </div>
@@ -30,22 +29,6 @@
           <div class="card h-100">
             <div class="p-3 pb-0 card-header">
               <div class="row">
-                <div class="edit_button">
-                  <a>
-                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditUser' }"
-                      v-if="token_user_account == this.$route.params.user_account">
-                      編輯個資</router-link>
-                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditPic' }"
-                      v-if="token_user_account == this.$route.params.user_account">
-                      編輯頭貼</router-link>
-                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditCover' }"
-                      v-if="token_user_account == this.$route.params.user_account">
-                      編輯封面</router-link>
-                    <router-link class="ms-2" style="font-size: 13px;" :to="{ name: 'EditPassword' }"
-                      v-if="token_user_account == this.$route.params.user_account">
-                      修改密碼</router-link>
-                  </a>
-                </div>
                 <div class="d-flex align-items-center">
                   <h6 class="mb-0">個人資訊</h6>
                 </div>
@@ -102,6 +85,7 @@
                       留言數: {{ post.comments_count }}
                       </p>
                       {{ post.created_at }}
+                      <br>
                       <router-link class="ms-3" style=" font-size: 13px;" v-if="token_user_id == post.user_id"
                         :to="{ name: 'EditPost', params: { post_id: post.id } }">
                         編輯影片</router-link>
@@ -220,27 +204,6 @@ export default {
     );
   },
   methods: {
-    logout() {
-      this.axios
-        .post("/api/auth/logout", {
-        }, {
-          headers: {
-            'Authorization': `Bearer ` + this.token
-          }
-        }).then((res) => {
-          this.$router.go()
-          this.$cookies.remove("token")
-          this.$cookies.remove("user_account")
-          this.$cookies.remove("user_id")
-          this.$cookies.remove("now_user_pic_url")
-          this.$cookies.remove("isadmin")
-          ElMessage({
-            message: "登出成功",
-            type: "success",
-            duration: 3000,
-          });
-        })
-    },
     resetpost() {
       this.send_serial = ''
       this.posts = [];
@@ -361,10 +324,6 @@ export default {
   .cover_height {
     min-height: 300px !important;
   }
-
-  .edit_button {
-    text-align: end !important;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -375,19 +334,5 @@ export default {
   .cover_height {
     height: 7vh;
   }
-
-  .edit_button {
-    text-align: center !important;
-  }
-}
-</style>
-
-<style>
-.logout {
-  cursor: pointer;
-}
-
-.logout:hover {
-  color: #830866;
 }
 </style>

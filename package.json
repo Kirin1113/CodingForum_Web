@@ -34,7 +34,7 @@
     "pdfvuer": "^2.0.1",
     "quill-mention": "^3.2.0",
     "shortid": "^2.2.16",
-    "vue": "3.3.6",
+    "vue": "^3.3.6",
     "vue-advanced-cropper": "^2.8.8",
     "vue-axios": "^3.5.2",
     "vue-cookies": "^1.8.3",

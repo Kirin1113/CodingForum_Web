@@ -26,9 +26,9 @@
                                 type: 1 //0post //1comment
                             }" />
                         <div class="breakline"></div>
-                        <!-- <a class="btn btn-link text-dark px-3 mb-0" @click="reply" v-if="token_user_id">
+                        <a class="btn btn-link text-dark px-3 mb-0" @click="reply" v-if="token_user_id">
                             回應
-                        </a> -->
+                        </a>
                         <a class="btn btn-link text-dark px-3 mb-0" v-if="token_user_id == user_id" @click="edit">
                             {{ showtext }}
                         </a>
@@ -85,7 +85,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">是否確認要刪除這則留言</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <CommentTextArea :content="real_content" :readOnly="true" :comment_id="comment_id" :key="textrefresh" />
@@ -273,11 +272,11 @@ export default {
             console.log(this.real_children_comments);
             console.log(this.real_children_comment_count);
         },
-        // reply() {
-        //     this.open_reply = !this.open_reply
-        //     this.reply_content = '<p><span class="mention" data-index="0" data-denotation-char="@" data-id="' + this.user_account + '" data-value="' + this.user_name + '"><span contenteditable="false"><span class="ql-mention-denotation-char">@</span>' + this.user_name + '</span></span>  </p>'
-        //     console.log(this.reply_content)
-        // },
+        reply() {
+            this.open_reply = !this.open_reply
+            this.reply_content = '<p><span class="mention" data-index="0" data-denotation-char="@" data-id="' + this.user_account + '" data-value="' + this.user_name + '"><span contenteditable="false"><span class="ql-mention-denotation-char">@</span>' + this.user_name + '</span></span>  </p>'
+            console.log(this.reply_content)
+        },
         updatevalue(newvalue) {
             console.log('new' + newvalue)
             this.real_content = newvalue

@@ -10,17 +10,17 @@
                 <img :src="video_pic_url" alt="" class="video_pic">
               </div>
               <div class="mb-3">
-                <label>影片網址(只限Youtube)</label>
+                <label>*影片網址(只限Youtube)</label>
                 <input class="form-control" v-model="video_url" id="video_url" type="text" placeholder="請貼入網址"
                   name="video_url" required />
               </div>
               <div class="mb-3">
-                <label>內容</label>
+                <label>*內容</label>
                 <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入貼文內容"
                   required></textarea>
               </div>
               <div class="mb-3">
-                <label>請選擇題目</label>
+                <label>*請選擇題目</label>
                 <el-select ref="elselect" :key="selreload" v-model="select_uva" popper-class="virtualSelect"
                   @visible-change="visibleVirtualoptions" filterable remote :remote-method="remoteMethod"
                   placeholder="請選擇題目" no-data-text="找不到題目" loading-text="題目加載中...">
@@ -30,7 +30,7 @@
                 </el-select>
               </div>
               <div class="mb-3">
-                <label>請選擇程式語言</label>
+                <label>*請選擇程式語言</label>
                 <el-select v-model="code_select" class="" placeholder="請選擇程式語言">
                   <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item" />
                 </el-select>
@@ -43,7 +43,7 @@
               </div>
               <div class="text-center">
                 <soft-button color="warning" full-width variant="gradient" class="mt-2 mb-2" @click.stop.prevent="post()">更新
-                  <!-- 並同時更新綁定此貼文之期限內作業 --></soft-button>
+                  (若期限內之作業有綁定此影片將同時更新)</soft-button>
                 <soft-button color="dark" full-width variant="gradient" class="mb-5"
                   @click.stop.prevent="$router.go(-1)">取消</soft-button>
                 <soft-button color="danger" full-width variant="gradient" class="mt-5" data-bs-toggle="modal"
@@ -60,11 +60,11 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">是否確認要刪除這篇貼文</h5>
+          <h5 class="modal-title">是否確認要刪除這部影片</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h6> 請注意 若此篇文章有當作業繳交 將會取消繳交作業</h6>
+          <h6> 請注意 若此影片有當作業繳交 將會取消繳交作業</h6>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>

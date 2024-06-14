@@ -32,7 +32,7 @@ export default {
             }),
             () => {
                 this.$nextTick(() => {
-                    this.$parent.$parent.$emit('changepost', { type: 99, select_uva: this.select_uva })
+                    this.$parent.$emit('changepost', { type: 99, select_uva: this.select_uva })
                 });
             },
             { deep: true }

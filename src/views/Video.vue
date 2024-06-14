@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="row mt-4">
-        <!-- <div class="col-md-5 col-12 mb-4 mobileshow" v-if="window.innerWidth < 1200">
+        <div class="col-md-4 col-12 mb-4 mobileshow" v-if="window.innerWidth < 1200">
           <div class="card">
             <div class="card-body p-3">
               <soft-button color="info" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
@@ -80,7 +80,7 @@
                 @rendered="rendered" :controls="pdfcontrols" />
             </div>
           </div>
-        </div> -->
+        </div>
         <div class="col-md-8 col-12">
           <div class="card">
             <div class="card-body p-3">
@@ -120,7 +120,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-md-5 pc" v-if="window.innerWidth > 1200">
+        <div class="col-md-4 pc" v-if="window.innerWidth > 1200">
           <div class="card">
             <div class="card-body p-3">
               <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
@@ -129,7 +129,7 @@
                 style="height: 80vh;" ref="pdfviewer" @rendered="rendered" :controls="pdfcontrols" />
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </infinite-scroll>
@@ -143,8 +143,8 @@ import CommentTextArea from "@/components/CommentTextArea.vue";
 import Vote from "@/components/Vote.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 import SoftButton from "../components/SoftButton.vue";
-// import PDFViewer from 'pdf-viewer-vue'
-// import download from 'downloadjs'
+import PDFViewer from 'pdf-viewer-vue'
+import download from 'downloadjs'
 
 const axios = require('axios');
 
@@ -156,7 +156,7 @@ export default {
     CommentTextArea,
     Vote,
     InfiniteScroll,
-    // PDFViewer,
+    PDFViewer,
     SoftButton
   },
   data() {
@@ -193,14 +193,14 @@ export default {
         autofocus: true,
         readOnly: true,
       },
-      showcode: false//,
-      // showpdf: false,
-      // pdfcontrols: [
-      //   'print',
-      //   'rotate',
-      //   'zoom',
-      //   'switchPage',
-      // ]
+      showcode: false,
+      showpdf: false,
+      pdfcontrols: [
+        'print',
+        'rotate',
+        'zoom',
+        'switchPage',
+      ]
     };
   },
   created() {
@@ -304,10 +304,6 @@ export default {
             });
           }
           this.comments = this.comments.concat(res2.data.success.slice(0, 3));
-          this.$nextTick(() => {
-            document.getElementById("comment_" + this.comment_id).classList.add('tagcolor');
-            document.getElementById("comment_" + this.comment_id).scrollIntoView({ block: "center" });
-          });
         } else {//無tag
           this.comments = res2.data.success.slice(0, 3);
         }
@@ -348,23 +344,23 @@ export default {
     console.log(this.$refs.test)
   },
   methods: {
-    // downloadpdf(url) {
-    //   ElMessage({
-    //     message: "請稍等，正在準備下載",
-    //     type: "success",
-    //     duration: 3000,
-    //   });
-    //   download(url);
-    // },
-    // rendered() {
-    //   this.$nextTick(() => {
-    //     this.$nextTick(() => {
-    //       console.log("12222")
-    //       console.log(this.$refs.pdfviewer)
-    //       this.$refs.pdfviewer.handleToggleFullpage()
-    //     });
-    //   });
-    // },
+    downloadpdf(url) {
+      ElMessage({
+        message: "請稍等，正在準備下載",
+        type: "success",
+        duration: 3000,
+      });
+      download(url);
+    },
+    rendered() {
+      this.$nextTick(() => {
+        this.$nextTick(() => {
+          console.log("12222")
+          console.log(this.$refs.pdfviewer)
+          this.$refs.pdfviewer.handleToggleFullpage()
+        });
+      });
+    },
     checklogin() {
       if (!this.token) {
         ElMessage.error("請先登入以進行操作");
@@ -507,29 +503,5 @@ textarea:focus {
 #textbox {
   width: 100vw;
   height: 100vh;
-}
-</style>
-
-<style>
-.tagcolor {
-  background-color: #e9f1ff;
-  border-radius: 15px;
-  animation-name: example;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes example {
-  from {
-    background-color: #e9f1ff;
-  }
-
-  50% {
-    background-color: #6294ff46;
-  }
-
-  to {
-    background-color: #e9f1ff;
-  }
 }
 </style>

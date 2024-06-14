@@ -9,21 +9,21 @@
               <form role="form" @submit.prevent="post" class="mx-auto col-xl-9">
                 <p>圖片將自動套用你在YT上傳影片時所設之封面</p>
                 <div class="mb-3">
-                  <label>影片網址(只限Youtube)</label>
+                  <label>*影片網址(只限Youtube)</label>
                   <input class="form-control" v-model="video_url" id="video_url" type="text" placeholder="請貼入網址"
                     name="video_url" required />
                 </div>
                 <div class="mb-3">
-                  <label>內容</label>
+                  <label>*內容</label>
                   <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入貼文內容"
                     required></textarea>
                 </div>
                 <div class="mb-3">
-                  <label>請選擇題目</label>
+                  <label>*請選擇題目</label>
                   <SelectUva ref="SelectUva" />
                 </div>
                 <div class="mb-3">
-                  <label>請選擇程式語言</label>
+                  <label>*請選擇程式語言</label>
                   <el-select v-model="code_select" class="" placeholder="請選擇程式語言">
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item" />
                   </el-select>
