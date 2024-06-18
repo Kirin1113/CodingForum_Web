@@ -5,10 +5,10 @@
         <el-main style="padding:0" v-loading="video_loading" element-loading-text="影片載入中"
           element-loading-background="rgba(0, 0, 0)">
           <router-link :to="{ name: 'Video', params: { post_id: post.post_id } }">
-            <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2">
+            <soft-button color="info" full-width variant="gradient" class="mt-2 mb-2">
               查看原始影片</soft-button>
           </router-link>
-          <h4 style="text-align: center;">此畫面為作業暫存<br>為作業批改用<br>為學生在作業繳交期限內之影片</h4>
+          <h4 style="text-align: center;">此頁面為學生在作業繳交期限內繳交之影片<br>為作業批改用</h4>
           <div class="container_video" style="background-color: black;">
             <YoutubeVue3 ref="youtube" :videoid="post.video_id" :controls="1" class="youtub" @played="onPlayed" />
           </div>
@@ -40,13 +40,7 @@
       <div class="col-lg-4">
         <div class="card" style="height: 100%;">
           <div class="card-body p-3">
-            <div class="mb-3">
-              <label>程式語言</label>
-              <el-select v-model="post.code_editor_type" class="" placeholder="請選擇程式語言" disabled>
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-              </el-select>
-            </div>
-            <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
+            <soft-button color="info" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
               @click="showcode = !showcode">查看程式碼</soft-button>
             <div class="mb-3 pc">
               <label>程式碼</label>
@@ -71,7 +65,6 @@
 import { ElMessage } from "element-plus";
 import { YoutubeVue3 } from 'youtube-vue3'
 import SoftButton from "../components/SoftButton.vue";
-import download from 'downloadjs'
 
 const axios = require('axios');
 
@@ -101,7 +94,6 @@ export default {
       more_lock: false,
       limit: 0,
       all_user: [],
-      options: [{ value: 'text/x-csrc', label: 'C' }, { value: 'text/x-c++src', label: 'C++' }, { value: 'text/x-java', label: 'Java' }, { value: 'python', label: 'Python' }],
       code_type: 'text/x-csrc',
       selete_loading: 0,
       cmOptions: {
@@ -116,13 +108,6 @@ export default {
         readOnly: true,
       },
       showcode: false,
-      showpdf: false,
-      pdfcontrols: [
-        'print',
-        'rotate',
-        'zoom',
-        'switchPage',
-      ]
     };
   },
   created() {
@@ -184,23 +169,6 @@ export default {
     console.log(this.$refs.test)
   },
   methods: {
-    downloadpdf(url) {
-      ElMessage({
-        message: "請稍等，正在準備下載",
-        type: "success",
-        duration: 3000,
-      });
-      download(url);
-    },
-    rendered() {
-      this.$nextTick(() => {
-        this.$nextTick(() => {
-          console.log("12222")
-          console.log(this.$refs.pdfviewer)
-          this.$refs.pdfviewer.handleToggleFullpage()
-        });
-      });
-    },
     checklogin() {
       if (!this.token) {
         ElMessage.error("請先登入以進行操作");
@@ -255,29 +223,5 @@ textarea:focus {
 #textbox {
   width: 100vw;
   height: 100vh;
-}
-</style>
-
-<style>
-.tagcolor {
-  background-color: #e9f1ff;
-  border-radius: 15px;
-  animation-name: example;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes example {
-  from {
-    background-color: #e9f1ff;
-  }
-
-  50% {
-    background-color: #6294ff46;
-  }
-
-  to {
-    background-color: #e9f1ff;
-  }
 }
 </style>

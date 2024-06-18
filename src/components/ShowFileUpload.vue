@@ -13,7 +13,7 @@
                         <tr v-for="(file, index) in files" :key="file.id">
                             <td>
                                 <div class="filename">
-                                    <a :href="$global_assignment_url + '/' + assignment_id + '/' + user_account + '/' + file.name"
+                                    <a :href="$global_assignment_url + assignment_id + '/' + file.name"
                                         target="_blank">
                                         {{ file.name }}</a>
                                 </div>

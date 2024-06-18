@@ -25,7 +25,7 @@
                                     @click="this.$router.push({ name: 'Upload' });">尚未發片，去發片</soft-button>
                             </div>
                             <div class="mb-3" v-show="type != 1">
-                                <label>檔案</label>
+                                <label>檔案(檔名勿重複)</label>
                                 <FileUpload ref="FileUpload" :in_time="in_time" />
                             </div>
                             <div class="text-center">

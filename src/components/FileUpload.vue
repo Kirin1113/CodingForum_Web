@@ -142,7 +142,7 @@ export default {
                 }
                 if (newFile.error && !oldFile.error) {
                     console.log(newFile.error)
-                    ElMessage.error("不在繳交作業的期限內");
+                    ElMessage.error("檔名重複或不在繳交作業的期限內");
                     this.$router.push({
                         name: 'MyAssignment', params: { coding_class_id: this.coding_class_id }
                     });

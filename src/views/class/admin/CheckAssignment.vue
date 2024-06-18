@@ -4,8 +4,8 @@
             <div class="col-12">
                 <div class="card z-index-0">
                     <div class="card-body">
-                        <soft-button color="dark" full-width variant="gradient" style="    font-size: 15px;"
-                            @click="ouput_file" v-if="file_exist">匯出所有學生所交檔案</soft-button>
+                        <soft-button color="info" full-width variant="gradient" style="    font-size: 15px;"
+                            @click="ouput_file" v-if="file_exist">匯出本作業所有檔案</soft-button>
                         <el-main style="padding:0" v-loading="data_loading" element-loading-text="載入中"
                             element-loading-background="rgb(248 248 248)">
                             <el-table :data="filteruser" style="width: 100%" empty-text="目前尚無學生修課" ref="table"

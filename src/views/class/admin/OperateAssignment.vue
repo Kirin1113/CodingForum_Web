@@ -37,10 +37,11 @@
                   </div>
                 </el-config-provider>
               </div>
-              <div class="mb-3">
-                <label>作業檔案</label>
+              <div class="mb-3" v-if="assignment_id">
+                <label>作業檔案(檔名勿重複)</label>
                 <admin-file-upload ref="FileUpload" />
               </div>
+
               <div class="text-center">
                 <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
                   @click.stop.prevent="assignment()">{{ showtext }}</soft-button>
@@ -65,7 +66,7 @@
         </div>
         <div class="modal-body">
           <h6>請注意 此操作將會刪除學生繳交之檔案</h6>
-          <h6>請複製下方這段文字並貼上 以確認刪除</h6>
+          <h6>請在下方輸入這段文字 以確認刪除</h6>
           <h6>確認刪除{{ name }}</h6>
           <input class="form-control" v-model="check" type="text" :placeholder="'確認刪除' + name" required />
         </div>
@@ -104,7 +105,7 @@ export default {
       token: this.$cookies.get("token"),
       coding_class_id: this.$route.params.coding_class_id,
       assignment_id: this.$route.params.assignment_id,
-      showtext: '發佈作業',
+      showtext: '下一步',
       type: '',
       disabled: false
     };
@@ -141,7 +142,6 @@ export default {
               this.start_at = res.data.success.start_at
               this.end_at = res.data.success.end_at
               this.$refs.FileUpload.files = res.data.success.file ? res.data.success.file : []
-
             }).catch(function (error) {
               ElMessage.error(error.response.data.error);
               that.$router.push({ name: 'Assignment', params: { coding_class_id: this.coding_class_id } });
@@ -182,15 +182,21 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          if (updatefile != 1) {
-            this.$router.push({
-              name: 'Assignment', params: { coding_class_id: this.coding_class_id }
+          if (!this.assignment_id) {
+            this.$router.replace({
+              name: 'OperateAssignment', params: { coding_class_id: this.coding_class_id, assignment_id: res.data.assignment_id }
             });
-            ElMessage({
-              message: res.data.success,
-              type: "success",
-              duration: 3000,
-            });
+          } else {
+            if (updatefile != 1) {
+              this.$router.push({
+                name: 'Assignment', params: { coding_class_id: this.coding_class_id }
+              });
+              ElMessage({
+                message: res.data.success,
+                type: "success",
+                duration: 3000,
+              });
+            }
           }
         })
         .catch(function (error) {

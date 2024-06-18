@@ -26,7 +26,7 @@
                         <tr v-for="(file, index) in files" :key="file.id">
                             <td>
                                 <div class="filename">
-                                    <a :href="$global_assignment_url + '/' + assignment_id + '/' + user_account + '/' + file.name"
+                                    <a :href="$global_assignment_url + assignment_id + '/' + file.name"
                                         target="_blank">
                                         {{ file.name }}</a>
                                 </div>
@@ -54,6 +54,16 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="example-foorer">
+                <div class="btn-group">
+                    <file-upload ref="upload" class="btn btn-primary " :post-action="postAction" :extensions="extensions"
+                        :accept="accept" :multiple="multiple" :size="size || 0"
+                        :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)" :headers="headers" :drop="drop"
+                        :add-index="addIndex" v-model="files" @input-file="inputFile">
+                        選擇檔案
+                    </file-upload>
+                </div>
             </div>
         </div>
     </div>

@@ -6,11 +6,11 @@
           <div class="card-body">
             <form role="form" class="mx-auto col-xl-9">
               <div class="mb-3">
-                <label>學年度</label>
+                <label>*學年度</label>
                 <input class="form-control" v-model="school_year" type="text" placeholder="範例 112-1" required />
               </div>
               <div class="mb-3">
-                <label>課程名稱</label>
+                <label>*課程名稱</label>
                 <input class="form-control" v-model="name" type="text" placeholder="請輸入課程名稱" required />
               </div>
               <div class="mb-3">
@@ -18,7 +18,7 @@
                 <SelectUser ref="selectuser" :TA_user_ids="TA_user_ids" :key="TA_user_ids" />
               </div>
               <div class="mb-3">
-                <label>開放選課</label>
+                <label>*開放選課</label>
                 <el-select v-model="enable" class="m-2" placeholder="請選擇開放or關閉選課">
                   <el-option label="開放" :value=1 />
                   <el-option label="關閉" :value=0 />

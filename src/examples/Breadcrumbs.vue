@@ -70,7 +70,7 @@ export default {
         },
         {
           route_name: 'UserClass',
-          name: '選課系統',
+          name: '選課',
         }, {
           route_name: 'MyClass',
           name: '我的課程',
