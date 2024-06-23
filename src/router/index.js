@@ -15,6 +15,8 @@ import EditPic from "@/views/user/EditPic.vue";
 import EditCover from "@/views/user/EditCover.vue";
 import EditPassword from "@/views/user/EditPassword.vue";
 import AllUser from "@/views/AllUser.vue";
+import MyVideo from "@/views/MyVideo.vue";
+import OnlineComplier from "@/views/OnlineCompiler.vue";
 import TeacherClass from "@/views/class/admin/TeacherClass.vue";
 import OperateTeacherClass from "@/views/class/admin/OperateTeacherClass.vue";
 import Assignment from "@/views/class/admin/Assignment.vue";
@@ -182,6 +184,17 @@ const routes = [
     path: "/alluser",
     name: "AllUser",
     component: AllUser,
+  },
+  {
+    path: "/myvideo",
+    name: "MyVideo",
+    component: MyVideo,
+    beforeEnter: islogin,
+  },
+  {
+    path: "/onlinecompiler",
+    name: "OnlineComplier",
+    component: OnlineComplier,
   },
   {
     path: "/userclass",

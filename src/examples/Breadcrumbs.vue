@@ -69,6 +69,14 @@ export default {
           name: '所有使用者',
         },
         {
+          route_name: 'MyVideo',
+          name: '我的影片',
+        },
+        {
+          route_name: 'OnlineComplier',
+          name: '線上編譯器',
+        },
+        {
           route_name: 'UserClass',
           name: '選課',
         }, {

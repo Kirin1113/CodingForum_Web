@@ -66,9 +66,9 @@
         </div>
         <div class="modal-body">
           <h6>請注意 此操作將會刪除學生繳交之檔案</h6>
-          <h6>請在下方輸入這段文字 以確認刪除</h6>
+          <!-- h6>請在下方輸入這段文字 以確認刪除</h6>
           <h6>確認刪除{{ name }}</h6>
-          <input class="form-control" v-model="check" type="text" :placeholder="'確認刪除' + name" required />
+          <input class="form-control" v-model="check" type="text" :placeholder="'確認刪除' + name" required /> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -211,11 +211,11 @@ export default {
         ElMessage.error("請先登入以進行操作");
         this.$router.push({ name: 'Sign In' });
       }
-      const that = this
+      // const that = this
       this.axios
         .post("/api/class/admin/del_assignment", {
           assignment_id: this.assignment_id,
-          check: this.check
+          // check: this.check
         }, {
           headers: {
             'Authorization': `Bearer ` + this.token
@@ -234,7 +234,7 @@ export default {
         })
         .catch(function (error) {
           if (error.response) {
-            that.check = '';
+            // that.check = '';
             ElMessage.error(error.response.data.error);
           }
         });

@@ -48,10 +48,10 @@
         </div>
         <div class="modal-body">
           <h6>請注意 此操作將會刪除學生繳交之檔案</h6>
-          <h6>請複製下方這段文字並貼上 以確認刪除</h6>
+          <!-- <h6>請複製下方這段文字並貼上 以確認刪除</h6>
           <h6>確認刪除{{ school_year }}_{{ name }}</h6>
           <input class="form-control" v-model="check" type="text" :placeholder="'確認刪除' + school_year + '_' + name"
-            required />
+            required /> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -84,7 +84,7 @@ export default {
       TA_user_ids: [],
       showtext: '開課',
       enable: '',
-      check: ''
+      // check: ''
     };
   },
   created() {
@@ -171,11 +171,11 @@ export default {
         ElMessage.error("請先登入以進行操作");
         this.$router.push({ name: 'Sign In' });
       }
-      const that = this
+      // const that = this
       this.axios
         .post("/api/class/admin/del_teacher_class", {
           coding_class_id: this.coding_class_id,
-          check: this.check
+          // check: this.check
         }, {
           headers: {
             'Authorization': `Bearer ` + this.token
@@ -194,7 +194,7 @@ export default {
         })
         .catch(function (error) {
           if (error.response) {
-            that.check = '';
+            // that.check = '';
             ElMessage.error(error.response.data.error);
           }
         });

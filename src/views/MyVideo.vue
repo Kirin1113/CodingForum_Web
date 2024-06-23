@@ -1,90 +1,90 @@
 <template>
-  <div class="py-4 container-fluid">
-    <infinite-scroll @infinite-scroll="loadDataFromServer" :message="message" :noResult="noResult">
-      <div class="card">
-        <div class="card-body p-3">
-          <div class="row">
-            <h4 v-if="posts.length == 0" style="text-align: center;">無符合條件之影片</h4>
-            <div class="col-lg-3" v-for="post in posts" :key="post.id">
-              <div class="card mb-2" aria-hidden="true">
-                <div style="overflow: hidden;">
-                  <router-link :to="{ name: 'Video', params: { post_id: post.id } }"><img
-                      class="card-img-top youtube_img_fix" :src="post.video_pic_url" alt=""></router-link>
-                </div>
-                <div class=" card-body" style="    text-align: center;">
-                  <h5 class="card-title placeholder-glow">
-                    {{ post.uva_topic.serial + "-" + post.uva_topic.title }}
-                  </h5>
-                  <p>CPE星數: <span v-for="star in post.uva_topic.star">⭐</span>
-                  <div v-if="post.uva_topic.star == null" style="display: inline-block;">無</div>
-                  <br>
-                  語言: {{ post.code_type }}
-                  <br>
-                  愛心數:
-                  <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
-                    style="display: inline;">
-                    <span class="vote__count-n">
-                      <i :class="post.likes >= 0 ? 'fa-solid fa-heart' : 'fa-solid fa-heart-broken'"></i> x {{ post.likes }}
-                    </span>
+    <div class="py-4 container-fluid">
+      <infinite-scroll @infinite-scroll="loadDataFromServer" :message="message" :noResult="noResult">
+        <div class="card">
+          <div class="card-body p-3">
+            <div class="row">
+              <h4 v-if="posts.length == 0" style="text-align: center;">你尚未發布過任何影片</h4>
+              <div class="col-lg-3" v-for="post in posts" :key="post.id">
+                <div class="card mb-2" aria-hidden="true">
+                  <div style="overflow: hidden;">
+                    <router-link :to="{ name: 'Video', params: { post_id: post.id } }"><img
+                        class="card-img-top youtube_img_fix" :src="post.video_pic_url" alt=""></router-link>
                   </div>
-                  <br>
-                  留言數: {{ post.comments_count }}
-                  </p>
-                  <p class="card-text placeholder-glow">
-                    作者 : 
-                    <router-link class="" :to="{ name: 'Profile', params: { user_account: post.user_account } }">
-                      {{ post.user_name }} </router-link>。
-                    <timeago :datetime="post.created_at.replaceAll('/', '-')" />
-                  </p>
+                  <div class=" card-body" style="    text-align: center;">
+                    <h5 class="card-title placeholder-glow">
+                      {{ post.uva_topic.serial + "-" + post.uva_topic.title }}
+                    </h5>
+                    <p>CPE星數: <span v-for="star in post.uva_topic.star">⭐</span>
+                    <div v-if="post.uva_topic.star == null" style="display: inline-block;">無</div>
+                    <br>
+                    語言: {{ post.code_type }}
+                    <br>
+                    愛心數:
+                    <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
+                      style="display: inline;">
+                      <span class="vote__count-n">
+                        <i :class="post.likes >= 0 ? 'fa-solid fa-heart' : 'fa-solid fa-heart-broken'"></i> x {{ post.likes }}
+                      </span>
+                    </div>
+                    <br>
+                    留言數: {{ post.comments_count }}
+                    </p>
+                    {{ post.created_at }}
+                    <br>
+                    <router-link class="ms-3" style=" font-size: 13px;"
+                        :to="{ name: 'EditPost', params: { post_id: post.id } }">
+                        編輯影片</router-link>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-3" v-for="n in 8" v-show="loading">
-              <div class="card mb-2" aria-hidden="true">
-                <img src="@\assets\img\loadingbak.jpg" class="card-img-top" alt="">
-                <div class="card-body">
-                  <h5 class="card-title placeholder-glow">
-                    <span class="placeholder col-6"></span>
-                  </h5>
-                  <p class="card-text placeholder-glow">
-                    <span class="placeholder col-7"></span>
-                    <span class="placeholder col-4"></span>
-                    <span class="placeholder col-4"></span>
-                    <span class="placeholder col-6"></span>
-                    <span class="placeholder col-8"></span>
-                  </p>
+            <div class="row">
+              <div class="col-lg-3" v-for="n in 8" v-show="loading">
+                <div class="card mb-2" aria-hidden="true">
+                  <img src="@\assets\img\loadingbak.jpg" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title placeholder-glow">
+                      <span class="placeholder col-6"></span>
+                    </h5>
+                    <p class="card-text placeholder-glow">
+                      <span class="placeholder col-7"></span>
+                      <span class="placeholder col-4"></span>
+                      <span class="placeholder col-4"></span>
+                      <span class="placeholder col-6"></span>
+                      <span class="placeholder col-8"></span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </infinite-scroll>
-  </div>
+      </infinite-scroll>
+    </div>
 </template>
 
 <script>
 import InfiniteScroll from "infinite-loading-vue3";
 
 export default {
-  name: "Dashboard",
+  name: "MyVideo",
+  components: {
+    InfiniteScroll,
+  },
   data() {
     return {
       posts: [],
       loading: true,
       noResult: false,
       message: "",
+      social: [],
       more_lock: false,
       sort: '',
       star: [],
       code_type: [],
       send_serial: ''
     };
-  },
-  components: {
-    InfiniteScroll
   },
   mounted() {
     this.loadDataFromServer()
@@ -166,6 +166,7 @@ export default {
               code_type: this.code_type,
               star: this.star,
               sort: this.sort,
+              user_account: this.$cookies.get("user_account"),
               serial: this.send_serial
             })
             .then((res) => {
@@ -198,3 +199,4 @@ export default {
   },
 };
 </script>
+  

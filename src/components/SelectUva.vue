@@ -32,7 +32,11 @@ export default {
             }),
             () => {
                 this.$nextTick(() => {
-                    this.$parent.$emit('changepost', { type: 99, select_uva: this.select_uva })
+                    this.$parent.$emit('changepost', { type: 99, select_uva: this.select_uva });
+
+                    if (this.select_uva && this.select_uva.serial) {
+                        this.$emit('updateSerial', this.select_uva.serial);
+                    }
                 });
             },
             { deep: true }

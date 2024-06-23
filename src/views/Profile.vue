@@ -58,7 +58,7 @@
           <div class="card">
             <div class="card-body p-3">
               <div class="row">
-                <h4 v-if="posts.length == 0" style="text-align: center;">尚未有影片</h4>
+                <h4 v-if="posts.length == 0" style="text-align: center;">你尚未發布過任何影片</h4>
                 <div class="col-lg-4" v-for="post in posts" :key="post.id">
                   <div class="card mb-2" aria-hidden="true">
                     <div style="overflow: hidden;">
@@ -123,17 +123,14 @@
 <script>
 import InfiniteScroll from "infinite-loading-vue3";
 import { ElMessage } from "element-plus";
-import SoftButton from "../components/SoftButton.vue";
 
 export default {
   name: "ProfileOverview",
   components: {
     InfiniteScroll,
-    SoftButton
   },
   data() {
     return {
-      showMenu: false,
       user: [],
       token: '',
       self: 0,
