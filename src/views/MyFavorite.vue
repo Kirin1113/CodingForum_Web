@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
-            <h4 v-if="posts.length == 0" style="text-align: center;">無符合條件之影片</h4>
+            <h4 v-if="posts.length == 0" style="text-align: center;">你尚未收藏任何影片</h4>
             <div class="col-lg-3" v-for="post in posts" :key="post.id">
               <div class="card mb-2" aria-hidden="true">
                 <div style="overflow: hidden;">
@@ -69,7 +69,7 @@
 import InfiniteScroll from "infinite-loading-vue3";
 
 export default {
-  name: "Dashboard",
+  name: "MyFavorite",
   data() {
     return {
       posts: [],
@@ -161,40 +161,32 @@ export default {
         this.more_lock = true;
         if (!this.noResult) {
           this.loading = true;
-          await this.axios
-            .post("/api/forum/get_post", {
-              code_type: this.code_type,
-              star: this.star,
-              sort: this.sort,
-              serial: this.send_serial
-            })
-            .then((res) => {
-              let allsame = true;
-              let newpostcount = 0;
-              console.log(res.data.success)
-              res.data.success.forEach((item) => {
-                if (newpostcount == 8) return;
-                let same = false;
-                this.posts.forEach((post) => {
-                  if (post.id == item.id) {
-                    same = true;
-                    return;
-                  };
-                });
-                if (same == false) {
-                  this.posts.push(item);
-                  newpostcount++;
-                  allsame = false;
-                }
-              });
-              if (allsame)
-                this.noResult = true
-            })
+          try {
+            const res = await this.axios.post("/api/forum/get_collect_post", {}, {
+              headers: {
+                'Authorization': `Bearer ${this.$cookies.get("token")}`
+              }
+            });
+
+            if (res.data && Array.isArray(res.data.success)) {
+              let newPosts = res.data.success.filter(item => !this.posts.some(post => post.id === item.id));
+              this.posts = [...this.posts, ...newPosts.slice(0, 8)];
+              if (newPosts.length === 0) {
+                this.noResult = true;
+              }
+            } else {
+              console.error("Unexpected response format:", res.data);
+            }
+          } catch (error) {
+            console.error("Error loading data:", error);
+            // Handle error state
+          }
         }
         this.loading = false;
         this.more_lock = false;
       }
     }
+
   },
 };
 </script>

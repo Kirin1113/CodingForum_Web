@@ -20,11 +20,11 @@
                     <br>
                     語言: {{ post.code_type }}
                     <br>
-                    愛心數:
+                    按讚數:
                     <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
                       style="display: inline;">
                       <span class="vote__count-n">
-                        <i :class="post.likes >= 0 ? 'fa-solid fa-heart' : 'fa-solid fa-heart-broken'"></i> x {{ post.likes }}
+                        <i :class="post.likes >= 0 ? 'fa fa-thumbs-up' : 'fa fa-thumbs-down'"></i> x {{ post.likes }}
                       </span>
                     </div>
                     <br>

@@ -33,6 +33,9 @@
       <li class="nav-item" v-if="this.$cookies.get('token')">
         <sidenav-collapse navText="我的影片" :to="{ name: 'MyVideo' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
+      <li class="nav-item" v-if="this.$cookies.get('token')">
+        <sidenav-collapse navText="我的收藏" :to="{ name: 'MyFavorite' }" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
     </ul>
     <hr class="mt-4 horizontal dark" />
     <ul class="navbar-nav">

@@ -13,7 +13,7 @@
             <transition-slide>
                 <div v-if="isVisible" class="box">
                     <span class="vote__count-n">
-                        <i :class="num >= 0 ? 'fa-solid fa-heart' : 'fa-solid fa-heart-broken'"></i> x {{ num }}
+                        <i :class="num >= 0 ? 'fa fa-thumbs-up' : 'fa fa-thumbs-down'"></i> x {{ num }}
                     </span>
                 </div>
             </transition-slide>

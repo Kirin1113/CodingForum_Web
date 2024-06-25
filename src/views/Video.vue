@@ -34,6 +34,14 @@
                       loading: this.loading,
                       type: 0//0post //1comment
                     }" />
+                  <div @click="collect_post(isCollect ? 0 : 1)">
+                    <div v-if="isCollect" style="cursor: pointer;">
+                      <i class="fa-solid fa-heart red-heart" data-bs-toggle="tooltip" title="已收藏"></i>
+                    </div>
+                    <div v-if="!isCollect" style="cursor: pointer;">
+                      <i class="fa-regular fa-heart" data-bs-toggle="tooltip" title="未收藏"></i>
+                    </div>
+                  </div>
                   <router-link style=" font-size: 13px;" v-if="token_user_id == post.user_id"
                     :to="{ name: 'EditPost', params: { post_id: post.id } }">
                     編輯影片</router-link>
@@ -200,7 +208,9 @@ export default {
         'rotate',
         'zoom',
         'switchPage',
-      ]
+      ],
+      isCollect: false,
+      user_post_collect: 0,
     };
   },
   created() {
@@ -249,6 +259,20 @@ export default {
       else
         return ''
     }
+    function get_collect(post_id, token) {
+      if (token) {
+        return axios
+          .post("/api/forum/get_collect", {
+            post_id: post_id,
+          }, {
+            headers: {
+              'Authorization': `Bearer ` + token
+            }
+          });
+      }
+      else
+        return ''
+    }
     function get_all_user() {
       return axios
         .get("/api/auth/get_all_user", {
@@ -260,8 +284,8 @@ export default {
           comment_id: comment_id
         });
     }
-    this.axios.all([get_post(this.post_id), get_comment(this.post_id), get_like(this.post_id, this.token), get_all_user(), check_is_children_comment(this.comment_id)]).then(
-      this.axios.spread((res1, res2, res3, res4, res5) => {
+    this.axios.all([get_post(this.post_id), get_comment(this.post_id), get_like(this.post_id, this.token), get_all_user(), check_is_children_comment(this.comment_id), get_collect(this.post_id, this.token)]).then(
+      this.axios.spread((res1, res2, res3, res4, res5, res6) => {
         console.log(res4.data.success);
         this.all_user = res4.data.success;
         console.log(res1);
@@ -330,17 +354,28 @@ export default {
             break;
         }
         this.user_comment_like = res3.data.user_comment_like;
-        this.loading++
+        this.loading++;
+        this.user_post_collect = res6.data.user_post_collect
+        switch (this.user_post_collect) {
+          case null:
+            this.isCollect = false;
+            break;
+          case 1:
+            this.isCollect = true;
+            break;
+          default:
+            this.isCollect = false;
+            break;
+        }
       })
     )
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.response.status);
-          ElMessage.error("影片不存在");
-          that.$router.push({ name: 'Dashboard' });
-        }
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.status);
+        ElMessage.error("影片不存在");
+        that.$router.push({ name: 'Dashboard' });
       }
-      );
+    });
     console.log(this.$refs.test)
   },
   methods: {
@@ -382,6 +417,23 @@ export default {
 
     },
     onPlayed() {
+    },
+    collect_post(collect) {
+      this.checklogin();
+
+      this.axios
+      .post("/api/forum/collect_post", {
+        post_id: this.post_id,
+        collect: collect,
+      }, {
+        headers: {
+          'Authorization': `Bearer ` + this.token
+        }
+      })
+      .then((res) => {
+          this.user_post_collect = res.data.user_post_collect;
+          this.isCollect = this.user_post_collect === 1;
+      })
     },
     like_post(dislike_or_like) {
       this.axios
@@ -503,5 +555,9 @@ textarea:focus {
 #textbox {
   width: 100vw;
   height: 100vh;
+}
+
+.red-heart {
+  color: red;
 }
 </style>

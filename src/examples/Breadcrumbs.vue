@@ -73,6 +73,10 @@ export default {
           name: '我的影片',
         },
         {
+          route_name: 'MyFavorite',
+          name: '我的收藏',
+        },
+        {
           route_name: 'OnlineComplier',
           name: '線上編譯器',
         },
