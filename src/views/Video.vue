@@ -26,6 +26,7 @@
                   </div>
                   <div class="breakline"></div>
                   <timeago :datetime="post.created_at.replaceAll('/', '-')" v-if="post.length != 0" />。
+                  <i class="fa-solid fa-eye"></i> x {{ post.views }}
                   <Vote @like_function="like_post" v-bind="{
                       post_id: post.id,
                       count: this.post_likes,
@@ -172,6 +173,7 @@ export default {
       post: [],
       uva_topic: [],
       post_id: this.$route.params.post_id,
+      user_id: this.$cookies.get("user_id"),
       comment_id: this.$route.params.comment_id,
       video_loading: true,
       loading: 0,
@@ -233,10 +235,11 @@ export default {
     if (this.$cookies.isKey("now_user_pic_url"))
       this.now_user_pic_url = this.$cookies.get("now_user_pic_url")
     const that = this;
-    function get_post(post_id) {
+    function get_post(post_id, user_id) {
       return axios
         .post("/api/forum/get_post", {
           post_id: post_id,
+          user_id: user_id
         });
     }
     function get_comment(post_id) {
@@ -284,7 +287,7 @@ export default {
           comment_id: comment_id
         });
     }
-    this.axios.all([get_post(this.post_id), get_comment(this.post_id), get_like(this.post_id, this.token), get_all_user(), check_is_children_comment(this.comment_id), get_collect(this.post_id, this.token)]).then(
+    this.axios.all([get_post(this.post_id, this.user_id), get_comment(this.post_id), get_like(this.post_id, this.token), get_all_user(), check_is_children_comment(this.comment_id), get_collect(this.post_id, this.token)]).then(
       this.axios.spread((res1, res2, res3, res4, res5, res6) => {
         console.log(res4.data.success);
         this.all_user = res4.data.success;

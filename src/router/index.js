@@ -17,6 +17,7 @@ import EditPassword from "@/views/user/EditPassword.vue";
 import AllUser from "@/views/AllUser.vue";
 import MyVideo from "@/views/MyVideo.vue";
 import MyFavorite from "@/views/MyFavorite.vue";
+import MyWatch from "@/views/MyWatch.vue";
 import OnlineComplier from "@/views/OnlineCompiler.vue";
 import TeacherClass from "@/views/class/admin/TeacherClass.vue";
 import OperateTeacherClass from "@/views/class/admin/OperateTeacherClass.vue";
@@ -196,6 +197,12 @@ const routes = [
     path: "/myfavorite",
     name: "MyFavorite",
     component: MyFavorite,
+    beforeEnter: islogin,
+  },
+  {
+    path: "/mywatch",
+    name: "MyWatch",
+    component: MyWatch,
     beforeEnter: islogin,
   },
   {

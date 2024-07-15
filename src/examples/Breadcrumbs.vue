@@ -77,6 +77,10 @@ export default {
           name: '我的收藏',
         },
         {
+          route_name: 'MyWatch',
+          name: '觀看紀錄',
+        },
+        {
           route_name: 'OnlineComplier',
           name: '線上編譯器',
         },

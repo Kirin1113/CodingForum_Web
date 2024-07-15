@@ -20,6 +20,8 @@
                   <br>
                   語言: {{ post.code_type }}
                   <br>
+                  點擊次數: <i class="fa-solid fa-eye"></i> x {{ post.views }}
+                  <br>
                   按讚數:
                   <div class="vote__count" :class="[{ positive: post.likes > 0 }, { negative: post.likes < 0 },]"
                     style="display: inline;">
