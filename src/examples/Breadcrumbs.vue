@@ -81,6 +81,10 @@ export default {
           name: '觀看紀錄',
         },
         {
+          route_name: 'MyLike',
+          name: '喜歡的影片',
+        },
+        {
           route_name: 'OnlineComplier',
           name: '線上編譯器',
         },
