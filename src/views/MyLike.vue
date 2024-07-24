@@ -79,10 +79,7 @@
         noResult: false,
         message: "",
         more_lock: false,
-        sort: '',
-        star: [],
-        code_type: [],
-        send_serial: ''
+        send_author_id: ''
       };
     },
     components: {
@@ -93,7 +90,7 @@
     },
     methods: {
       resetpost() {
-        this.send_serial = ''
+        this.send_author_id = ''
         this.posts = [];
         this.noResult = false
         this.loadDataFromServer()
@@ -105,49 +102,9 @@
       },
       changepost(options) {
         console.log('type ' + options.type)
-        if (options.type <= 5) {
-          this.sort = options.type;
-        } else if (options.type == 6) {
-          this.star = [];
-        }
-        else if (options.type == 7) {
-          if (!this.star.includes(null))
-            this.star.push(null);
-          else {
-            this.star.forEach((star, index) => {
-              if (star == null) {
-                this.star.splice(index, 1);
-              };
-            });
-          }
-        }
-        else if (options.type >= 8 && options.type <= 12) {
-          if (!this.star.includes(options.type - 7))
-            this.star.push(options.type - 7)
-          else {
-            this.star.forEach((star, index) => {
-              if (star == options.type - 7 || star == null) {
-                this.star.splice(index, 1);
-              };
-            });
-          }
-        } else if (options.type == 13) {
-          this.code_type = []
-        }
-        else if (options.type >= 14 && options.type <= 17) {
-          if (!this.code_type.includes(options.type))
-            this.code_type.push(options.type)
-          else {
-            this.code_type.forEach((code_type, index) => {
-              if (code_type == options.type) {
-                this.code_type.splice(index, 1);
-              };
-            });
-          }
-        }
-        else if (options.type == 99) {
-          console.log(options.select_uva)
-          this.send_serial = options.select_uva.serial
+        if (options.type == 99) {
+          console.log(options.author_id)
+          this.send_author_id = options.author_id
         }
         this.posts = [];
         this.noResult = false
@@ -165,10 +122,7 @@
             this.loading = true;
             try {
               const res = await this.axios.post("/api/forum/get_like_post", {
-                code_type: this.code_type,
-                star: this.star,
-                sort: this.sort,
-                serial: this.send_serial
+                author_id: this.send_author_id
               }, {
                 headers: {
                   'Authorization': `Bearer ${this.$cookies.get("token")}`

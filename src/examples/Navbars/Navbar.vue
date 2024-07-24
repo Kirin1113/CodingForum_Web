@@ -21,6 +21,16 @@
                 <i class="fas fa-filter" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop'"></i>
               </div>
             </div>
+            <div v-if="this.$route.name == 'MyFavorite' || this.$route.name == 'MyLike' 
+            || this.$route.name == 'MyWatch'"
+            :key="this.$route.name" style="display: flex;">
+              <div class="mt-1" style="cursor: pointer;" @click="resetpost"  data-bs-toggle="tooltip" title="全部">
+                <i class="fa-solid fa-video"></i>
+              </div>
+              <div class="me-3 selectuva">
+                <SelectAuthor :key="resetpostvalue"/>
+              </div>
+            </div>
             <div v-if="user_account" @click="upload" class="me-3" style="cursor: pointer"  data-bs-toggle="tooltip" title="上傳影片">
               <i class="fas fa-upload"></i>
             </div>
@@ -94,34 +104,36 @@
                           <div class="d-flex flex-column gap-2">
                               <CodeCard type=0 sort='"最新發布" ' />
                               <CodeCard type=1 sort='"最早發布" ' />
-                              <CodeCard type=2 sort='"最多愛心" ' />
-                              <CodeCard type=3 sort='"最少愛心" ' />
+                              <CodeCard type=2 sort='"按讚最多" ' />
+                              <CodeCard type=3 sort='"按讚最少" ' />
                               <CodeCard type=4 sort='"最多留言" ' />
                               <CodeCard type=5 sort='"最少留言" ' />
+                              <CodeCard type=6 sort='"點擊最多" ' />
+                              <CodeCard type=7 sort='"點擊最少" ' />
                           </div>
                       </div>
                       <!-- 影片CPE星數 -->
                       <div class="col-md-4 col-12">
                           <h6>影片CPE星數</h6>
                           <div class="d-flex flex-column gap-2">
-                              <CodeCard type=6 sort='"全部" ' />
-                              <CodeCard type=7 sort='"0星" ' />
-                              <CodeCard type=8 sort='"1星" ' />
-                              <CodeCard type=9 sort='"2星" ' />
-                              <CodeCard type=10 sort='"3星" ' />
-                              <CodeCard type=11 sort='"4星" ' />
-                              <CodeCard type=12 sort='"5星" ' />
+                              <CodeCard type=8 sort='"全部" ' />
+                              <CodeCard type=9 sort='"0星" ' />
+                              <CodeCard type=10 sort='"1星" ' />
+                              <CodeCard type=11 sort='"2星" ' />
+                              <CodeCard type=12 sort='"3星" ' />
+                              <CodeCard type=13 sort='"4星" ' />
+                              <CodeCard type=14 sort='"5星" ' />
                           </div>
                       </div>
                       <!-- 影片程式語言 -->
                       <div class="col-md-4 col-12">
                           <h6>影片程式語言</h6>
                           <div class="d-flex flex-column gap-2">
-                              <CodeCard type=13 sort='"全部" ' />
-                              <CodeCard type=14 sort='"C"' />
-                              <CodeCard type=15 sort='"C++" ' />
-                              <CodeCard type=16 sort='"Java" ' />
-                              <CodeCard type=17 sort='"Python" ' />
+                              <CodeCard type=15 sort='"全部" ' />
+                              <CodeCard type=16 sort='"C"' />
+                              <CodeCard type=17 sort='"C++" ' />
+                              <CodeCard type=18 sort='"Java" ' />
+                              <CodeCard type=19 sort='"Python" ' />
                           </div>
                       </div>
                   </div>
@@ -138,6 +150,7 @@ import { ElMessage } from "element-plus";
 import SelectUva from "@/components/SelectUva.vue";
 import TagedCard from "../../views/components/TagedCard.vue";
 import CodeCard from "../Sidenav/CodeCard.vue";
+import SelectAuthor from "@/components/SelectAuthor.vue";
 
 export default {
   name: "navbar",
@@ -145,7 +158,8 @@ export default {
     Breadcrumbs,
     SelectUva,
     CodeCard,
-    TagedCard
+    TagedCard,
+    SelectAuthor,
   },
   data() {
     return {
@@ -280,7 +294,7 @@ export default {
 
 @media (max-width: 1200px) {
   .selectuva {
-    width: 163px;
+    width: 160px;
   }
 }
 </style>

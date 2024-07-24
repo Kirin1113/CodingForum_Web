@@ -105,12 +105,12 @@ export default {
     },
     changepost(options) {
       console.log('type ' + options.type)
-      if (options.type <= 5) {
+      if (options.type <= 7) {
         this.sort = options.type;
-      } else if (options.type == 6) {
+      } else if (options.type == 8) {
         this.star = [];
       }
-      else if (options.type == 7) {
+      else if (options.type == 9) {
         if (!this.star.includes(null))
           this.star.push(null);
         else {
@@ -121,20 +121,20 @@ export default {
           });
         }
       }
-      else if (options.type >= 8 && options.type <= 12) {
-        if (!this.star.includes(options.type - 7))
-          this.star.push(options.type - 7)
+      else if (options.type >= 10 && options.type <= 14) {
+        if (!this.star.includes(options.type - 9))
+          this.star.push(options.type - 9)
         else {
           this.star.forEach((star, index) => {
-            if (star == options.type - 7 || star == null) {
+            if (star == options.type - 9 || star == null) {
               this.star.splice(index, 1);
             };
           });
         }
-      } else if (options.type == 13) {
+      } else if (options.type == 15) {
         this.code_type = []
       }
-      else if (options.type >= 14 && options.type <= 17) {
+      else if (options.type >= 16 && options.type <= 19) {
         if (!this.code_type.includes(options.type))
           this.code_type.push(options.type)
         else {
