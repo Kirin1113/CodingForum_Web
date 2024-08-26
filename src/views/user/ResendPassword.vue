@@ -1,7 +1,7 @@
 <template>
   <div class="page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
     backgroundImage:
-      'url(' + require('@/assets/img/gradiented-images/gradiented' + randompic + '.jpg') + ')',
+      'url(' + require('@/assets/img/aicreated-images/aicreated' + randompic + '.jpg') + ')',
   }">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container">
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       email: "",
-      randompic: Math.floor(Math.random() * 18)
+      randompic: Math.floor(Math.random() * 5)
     };
   },
   created() {

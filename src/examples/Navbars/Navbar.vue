@@ -8,8 +8,7 @@
         </div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center dropdown">
-            <div v-if="this.$route.name == 'Dashboard' || this.$route.name == 'Profile' 
-            || this.$route.name == 'MyVideo'"
+            <div v-if="this.$route.name == 'Dashboard' || this.$route.name == 'Profile'"
             :key="this.$route.name" style="display: flex;">
               <div class="mt-1" style="cursor: pointer;" @click="resetpost"  data-bs-toggle="tooltip" title="所有影片">
                 <i class="fa-solid fa-video"></i>

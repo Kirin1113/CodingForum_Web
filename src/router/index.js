@@ -15,7 +15,6 @@ import EditPic from "@/views/user/EditPic.vue";
 import EditCover from "@/views/user/EditCover.vue";
 import EditPassword from "@/views/user/EditPassword.vue";
 import AllUser from "@/views/AllUser.vue";
-import MyVideo from "@/views/MyVideo.vue";
 import MyFavorite from "@/views/MyFavorite.vue";
 import MyWatch from "@/views/MyWatch.vue";
 import MyLike from "@/views/MyLike.vue";
@@ -187,12 +186,6 @@ const routes = [
     path: "/alluser",
     name: "AllUser",
     component: AllUser,
-  },
-  {
-    path: "/myvideo",
-    name: "MyVideo",
-    component: MyVideo,
-    beforeEnter: islogin,
   },
   {
     path: "/myfavorite",

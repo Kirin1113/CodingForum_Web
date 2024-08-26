@@ -69,10 +69,6 @@ export default {
           name: '所有使用者',
         },
         {
-          route_name: 'MyVideo',
-          name: '我的影片',
-        },
-        {
           route_name: 'MyFavorite',
           name: '我的收藏',
         },
