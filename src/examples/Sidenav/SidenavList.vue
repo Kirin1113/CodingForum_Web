@@ -8,9 +8,6 @@
       <li class="nav-item">
         <sidenav-collapse navText="所有使用者" :to="{ name: 'AllUser' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
-      <li class="nav-item">
-        <sidenav-collapse navText="線上編譯器" :to="{ name: 'OnlineComplier' }" class="m-0 justify-content-center"></sidenav-collapse>
-      </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item" v-if="this.$cookies.get('isadmin') != 1 && this.$cookies.get('token')">
@@ -28,10 +25,15 @@
         <sidenav-collapse navText="TA課程" :to="{ name: 'TAClass' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
     </ul>
-    <hr class="mt-4 horizontal dark" v-if="this.$cookies.get('token')" />
+    <hr class="mt-4 horizontal dark"/>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <sidenav-collapse navText="UVa練習" :to="{ name: 'OnlineComplier' }" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+    </ul>
     <ul class="navbar-nav">
       <li class="nav-item" v-if="this.$cookies.get('token')">
-        <sidenav-collapse navText="我的收藏" :to="{ name: 'MyFavorite' }" class="m-0 justify-content-center"></sidenav-collapse>
+        <sidenav-collapse navText="我的訂閱" :to="{ name: 'MySubscription' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
       <li class="nav-item" v-if="this.$cookies.get('token')">
         <sidenav-collapse navText="觀看紀錄" :to="{ name: 'MyWatch' }" class="m-0 justify-content-center"></sidenav-collapse>
@@ -40,7 +42,7 @@
         <sidenav-collapse navText="喜歡的影片" :to="{ name: 'MyLike' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
     </ul>
-    <hr class="mt-4 horizontal dark" />
+    <hr class="mt-4 horizontal dark"/>
     <ul class="navbar-nav">
       <li class="nav-item">
         <sidenav-collapse navText="靜宜大學" :to="{ name: 'PU' }" target="_blank" class="m-0 justify-content-center"></sidenav-collapse>

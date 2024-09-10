@@ -69,8 +69,8 @@ export default {
           name: '所有使用者',
         },
         {
-          route_name: 'MyFavorite',
-          name: '我的收藏',
+          route_name: 'MySubscription',
+          name: '我的訂閱',
         },
         {
           route_name: 'MyWatch',

@@ -19,6 +19,16 @@
                     <router-link class="" :to="{ name: 'Profile', params: { user_account: post.user_account } }">
                       {{ post.user_name }} </router-link>
                   </h3>
+                  <div v-if="token_user_id != post.user_id" @click="subscribe_author(isSubscribe ? 0 : 1)">
+                    <div v-if="isSubscribe" style="cursor: pointer;" class="cancel-subscribe-button">
+                      取消訂閱<i class="fa-solid fa-heart-crack"></i>
+                    </div>
+                    <div v-if="!isSubscribe" style="cursor: pointer;" class="subscribe-button">
+                      訂閱<i class="fa-solid fa-heart"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="comment__author " style="align-self: flex-start;" v-if="post.length != 0">
                   <div v-if="post.length != 0">
                     CPE星數: <span v-for="star in post.uva_topic.star">⭐</span>
                     <div v-if="post.uva_topic.star == null" style="display: inline-block;">無</div> 。
@@ -35,14 +45,6 @@
                       loading: this.loading,
                       type: 0//0post //1comment
                     }" />
-                  <div @click="collect_post(isCollect ? 0 : 1)">
-                    <div v-if="isCollect" style="cursor: pointer;">
-                      <i class="fa-solid fa-heart red-heart" data-bs-toggle="tooltip" title="已收藏"></i>
-                    </div>
-                    <div v-if="!isCollect" style="cursor: pointer;">
-                      <i class="fa-regular fa-heart" data-bs-toggle="tooltip" title="未收藏"></i>
-                    </div>
-                  </div>
                   <router-link style=" font-size: 13px;" v-if="token_user_id == post.user_id"
                     :to="{ name: 'EditPost', params: { post_id: post.id } }">
                     編輯影片</router-link>
@@ -211,8 +213,9 @@ export default {
         'zoom',
         'switchPage',
       ],
-      isCollect: false,
-      user_post_collect: 0,
+      isSubscribe: false,
+      user_aubscribe_author: 0,
+      author_id: '',
     };
   },
   created() {
@@ -262,11 +265,11 @@ export default {
       else
         return ''
     }
-    function get_collect(post_id, token) {
+    function get_subscribe(author_id, token) {
       if (token) {
         return axios
-          .post("/api/forum/get_collect", {
-            post_id: post_id,
+          .post("/api/forum/get_subscribe", {
+            author_id: author_id,
           }, {
             headers: {
               'Authorization': `Bearer ` + token
@@ -287,8 +290,8 @@ export default {
           comment_id: comment_id
         });
     }
-    this.axios.all([get_post(this.post_id, this.user_id), get_comment(this.post_id), get_like(this.post_id, this.token), get_all_user(), check_is_children_comment(this.comment_id), get_collect(this.post_id, this.token)]).then(
-      this.axios.spread((res1, res2, res3, res4, res5, res6) => {
+    this.axios.all([get_post(this.post_id, this.user_id), get_comment(this.post_id), get_like(this.post_id, this.token), get_all_user(), check_is_children_comment(this.comment_id)]).then(
+      this.axios.spread((res1, res2, res3, res4, res5) => {
         console.log(res4.data.success);
         this.all_user = res4.data.success;
         console.log(res1);
@@ -296,6 +299,7 @@ export default {
         if (this.post.code == null) {
           this.post.code = ''
         }
+        this.author_id = res1.data.success.user_id;
         this.cmOptions = {
           mode: this.post.code_editor_type, // Language mode
           theme: 'lucario', // Theme
@@ -358,18 +362,22 @@ export default {
         }
         this.user_comment_like = res3.data.user_comment_like;
         this.loading++;
-        this.user_post_collect = res6.data.user_post_collect
-        switch (this.user_post_collect) {
-          case null:
-            this.isCollect = false;
-            break;
-          case 1:
-            this.isCollect = true;
-            break;
-          default:
-            this.isCollect = false;
-            break;
-        }
+        this.axios.all([get_subscribe(this.author_id, this.token)]).then(
+          this.axios.spread((res6) => {
+            this.user_subscribe_author = res6.data.user_subscribe_author
+            switch (this.user_subscribe_author) {
+              case null:
+                this.isSubscribe = false;
+                break;
+              case 1:
+                this.isSubscribe = true;
+                break;
+              default:
+                this.isSubscribe = false;
+                break;
+            }
+          })
+        )
       })
     )
     .catch(function (error) {
@@ -421,21 +429,21 @@ export default {
     },
     onPlayed() {
     },
-    collect_post(collect) {
+    subscribe_author(subscribe) {
       this.checklogin();
 
       this.axios
-      .post("/api/forum/collect_post", {
-        post_id: this.post_id,
-        collect: collect,
+      .post("/api/forum/subscribe_author", {
+        author_id: this.author_id,
+        subscribe: subscribe,
       }, {
         headers: {
           'Authorization': `Bearer ` + this.token
         }
       })
       .then((res) => {
-          this.user_post_collect = res.data.user_post_collect;
-          this.isCollect = this.user_post_collect === 1;
+          this.user_subscribe_author = res.data.user_subscribe_author;
+          this.isSubscribe = this.user_subscribe_author === 1;
       })
     },
     like_post(dislike_or_like) {
@@ -560,7 +568,44 @@ textarea:focus {
   height: 100vh;
 }
 
-.red-heart {
-  color: red;
+.subscribe-button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.subscribe-button:hover {
+  background-color: red;
+  transform: scale(1.05);
+}
+
+.cancel-subscribe-button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: gray;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-subscribe-button:hover {
+  background-color: gray;
+  transform: scale(1.05);
+}
+
 </style>

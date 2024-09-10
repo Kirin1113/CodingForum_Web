@@ -40,6 +40,9 @@
               </p>
               <ul class="list-group">
                 <li class="text-sm border-0 list-group-item ps-0">
+                  <strong class="text-dark">訂閱人數:</strong> &nbsp; {{ user.subscriptions }}
+                </li>
+                <li class="text-sm border-0 list-group-item ps-0">
                   <strong class="text-dark">電子郵件:</strong> &nbsp; {{ user.email }}
                 </li>
                 <li v-if="social.length != 0" class="pb-0 border-0 list-group-item ps-0">

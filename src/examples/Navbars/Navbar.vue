@@ -20,8 +20,7 @@
                 <i class="fas fa-filter" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop'"></i>
               </div>
             </div>
-            <div v-if="this.$route.name == 'MyFavorite' || this.$route.name == 'MyLike' 
-            || this.$route.name == 'MyWatch'"
+            <div v-if="this.$route.name == 'MyLike' || this.$route.name == 'MyWatch'"
             :key="this.$route.name" style="display: flex;">
               <div class="mt-1" style="cursor: pointer;" @click="resetpost"  data-bs-toggle="tooltip" title="全部">
                 <i class="fa-solid fa-video"></i>

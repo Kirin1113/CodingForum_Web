@@ -15,7 +15,7 @@ import EditPic from "@/views/user/EditPic.vue";
 import EditCover from "@/views/user/EditCover.vue";
 import EditPassword from "@/views/user/EditPassword.vue";
 import AllUser from "@/views/AllUser.vue";
-import MyFavorite from "@/views/MyFavorite.vue";
+import MySubscription from "@/views/MySubscription.vue";
 import MyWatch from "@/views/MyWatch.vue";
 import MyLike from "@/views/MyLike.vue";
 import OnlineComplier from "@/views/OnlineCompiler.vue";
@@ -188,9 +188,9 @@ const routes = [
     component: AllUser,
   },
   {
-    path: "/myfavorite",
-    name: "MyFavorite",
-    component: MyFavorite,
+    path: "/mysubscription",
+    name: "MySubscription",
+    component: MySubscription,
     beforeEnter: islogin,
   },
   {
