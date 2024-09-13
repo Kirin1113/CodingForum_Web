@@ -214,7 +214,7 @@ export default {
         'switchPage',
       ],
       isSubscribe: false,
-      user_aubscribe_author: 0,
+      user_subscribe_author: 0,
       author_id: '',
     };
   },

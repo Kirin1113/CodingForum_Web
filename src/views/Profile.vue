@@ -18,6 +18,16 @@
             <h5 class="mb-1">{{ user.name }}</h5>
           </div>
         </div>
+        <div class="col-auto my-auto">
+          <div v-if="token_user_id != user.id" @click="subscribe_author(isSubscribe ? 0 : 1)">
+            <div v-if="isSubscribe" style="cursor: pointer;" class="cancel-subscribe-button">
+              取消訂閱<i class="fa-solid fa-heart-crack"></i>
+            </div>
+            <div v-if="!isSubscribe" style="cursor: pointer;" class="subscribe-button">
+              訂閱<i class="fa-solid fa-heart"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -152,7 +162,10 @@ export default {
       sort: '',
       star: [],
       code_type: [],
-      send_serial: ''
+      send_serial: '',
+      isSubscribe: false,
+      user_subscribe_author: 0,
+      author_id: '',
     };
   },
   created() {
@@ -191,9 +204,34 @@ export default {
             this.user = res.data.user
             this.self = res.data.self
 
+            this.author_id = this.user.id;
+
             if (this.user.github != null) {
               this.social.push({ link: this.user.github, iconclass: "fa-brands fa-github" })
             }
+
+            this.axios
+            .post("/api/forum/get_subscribe",{
+              author_id: this.author_id
+            },{
+              headers: {
+                'Authorization': `Bearer ` + this.token
+              }
+            })
+            .then((res) => {
+              this.user_subscribe_author = res.data.user_subscribe_author
+              switch (this.user_subscribe_author) {
+                case null:
+                  this.isSubscribe = false;
+                  break;
+                case 1:
+                  this.isSubscribe = true;
+                  break;
+                default:
+                  this.isSubscribe = false;
+                  break;
+              }
+            });
           }).catch(function (error) {
             if (error.response) {
               that.$router.push({ name: 'Dashboard' });
@@ -206,6 +244,35 @@ export default {
     );
   },
   methods: {
+    checklogin() {
+      if (!this.token) {
+        ElMessage.error("請先登入以進行操作");
+        this.$router.push({ name: 'Sign In' });
+      }
+    },
+    subscribe_author(subscribe) {
+      this.checklogin();
+
+      this.axios
+      .post("/api/forum/subscribe_author", {
+        author_id: this.author_id,
+        subscribe: subscribe,
+      }, {
+        headers: {
+          'Authorization': `Bearer ` + this.token
+        }
+      })
+      .then((res) => {
+          this.user_subscribe_author = res.data.user_subscribe_author;
+          this.isSubscribe = this.user_subscribe_author === 1;
+
+          if (this.isSubscribe) {
+            this.user.subscriptions += 1;
+          } else {
+            this.user.subscriptions -= 1;
+          }
+      })
+    },
     resetpost() {
       this.send_serial = ''
       this.posts = [];
@@ -337,4 +404,45 @@ export default {
     height: 7vh;
   }
 }
+
+.subscribe-button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.subscribe-button:hover {
+  background-color: red;
+  transform: scale(1.05);
+}
+
+.cancel-subscribe-button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: gray;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-subscribe-button:hover {
+  background-color: gray;
+  transform: scale(1.05);
+}
+
 </style>

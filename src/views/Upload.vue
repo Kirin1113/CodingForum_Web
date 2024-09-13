@@ -19,11 +19,11 @@
                     required></textarea>
                 </div>
                 <div class="mb-3">
-                  <label>*請選擇題目</label>
+                  <label>請選擇題目</label>
                   <SelectUva ref="SelectUva" />
                 </div>
                 <div class="mb-3">
-                  <label>*請選擇程式語言</label>
+                  <label>請選擇程式語言</label>
                   <el-select v-model="code_select" class="" placeholder="請選擇程式語言">
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item" />
                   </el-select>
