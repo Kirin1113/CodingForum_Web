@@ -82,7 +82,11 @@ export default {
         },
         {
           route_name: 'OnlineComplier',
-          name: '線上編譯器',
+          name: 'UVa練習',
+        },
+        {
+          route_name: 'CpeFortynine',
+          name: 'CPE49練習',
         },
         {
           route_name: 'UserClass',

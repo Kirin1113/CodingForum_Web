@@ -29,6 +29,7 @@ import SelectUva from "@/components/SelectUva.vue";
 import PDFViewer from 'pdf-viewer-vue';
 import SoftButton from "../components/SoftButton.vue";
 import download from 'downloadjs'
+import { ElMessage } from "element-plus";
 
 export default {
     name: 'OnlineCompiler',
@@ -40,7 +41,6 @@ export default {
     },
     data() {
         return {
-            select_uva: null,
             serial: '',
             pdfcontrols: [
                 'print',

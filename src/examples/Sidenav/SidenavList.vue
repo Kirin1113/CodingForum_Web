@@ -30,6 +30,9 @@
       <li class="nav-item">
         <sidenav-collapse navText="UVa練習" :to="{ name: 'OnlineComplier' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
+      <li class="nav-item" v-if="this.$cookies.get('token')">
+        <sidenav-collapse navText="CPE49練習" :to="{ name: 'CpeFortynine' }" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item" v-if="this.$cookies.get('token')">

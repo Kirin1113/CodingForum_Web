@@ -19,6 +19,7 @@ import MySubscription from "@/views/MySubscription.vue";
 import MyWatch from "@/views/MyWatch.vue";
 import MyLike from "@/views/MyLike.vue";
 import OnlineComplier from "@/views/OnlineCompiler.vue";
+import CpeFortynine from "@/views/CpeFortynine.vue";
 import TeacherClass from "@/views/class/admin/TeacherClass.vue";
 import OperateTeacherClass from "@/views/class/admin/OperateTeacherClass.vue";
 import Assignment from "@/views/class/admin/Assignment.vue";
@@ -209,6 +210,11 @@ const routes = [
     path: "/onlinecompiler",
     name: "OnlineComplier",
     component: OnlineComplier,
+  },
+  {
+    path: "/cpefortynine",
+    name: "CpeFortynine",
+    component: CpeFortynine,
   },
   {
     path: "/userclass",
