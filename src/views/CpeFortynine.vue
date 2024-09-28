@@ -29,7 +29,8 @@
                         </div>
                         <div class="input-output">
                             <label for="input">Input:</label>
-                            <textarea :value="currentInput" class="form-control" rows="5" readonly></textarea>
+                            <button @click="copyToClipboard" class="btn btn-primary">複製</button>
+                            <textarea id="input-textarea" :value="currentInput" class="form-control" rows="5" readonly></textarea>
                         </div>
                         <div class="input-output mt-3">
                             <label for="output">Output:</label>
@@ -44,10 +45,10 @@
                         <soft-button color="info" full-width variant="gradient" class="mt-2 mb-2"
                             @click="showcode = !showcode">code</soft-button>
                         <div class="mb-3" v-if="showcode">
-                            <Codemirror v-if="cpe.code !== null" v-model:value="cpe.code" :options="cmOptions" border ref="cmRef" height="600" width="100%"
+                            <button @click="copyCodeMirrorContent" class="btn btn-primary">複製</button>
+                            <Codemirror v-model:value="cpe.code" :options="cmOptions" border ref="cmRef" height="600" width="100%"
                                 @change="onChange" @input="onInput" @ready="onReady" :key="selete_loading">
                             </Codemirror>
-                            <Codemirror v-else :options="cmOptions" border ref="cmRef" height="600" width="100%"></Codemirror>
                         </div>
                     </div>
                 </div>
@@ -96,6 +97,7 @@ export default {
             },
             showcode: false,
             currentTest: '',
+            cmInstance: null, // 用來保存 Codemirror 實例
         };
     },
     computed: {
@@ -141,6 +143,45 @@ export default {
         selectTestCase(test) {
             this.currentTest = test;
         },
+        copyToClipboard() {
+            const textarea = document.getElementById("input-textarea");
+            textarea.select();
+            document.execCommand("copy");
+            
+            ElMessage({
+                message: '已複製內容到剪貼簿!',
+                type: 'success',
+                duration: 2000, 
+            });
+        },
+        onReady(editor) {
+            this.cmInstance = editor;  // 保存 Codemirror 實例
+        },
+        copyCodeMirrorContent() {
+            if (this.cmInstance) {  // 使用保存的實例
+                const codeContent = this.cmInstance.getValue();  // 獲取 Codemirror 的內容
+                
+                navigator.clipboard.writeText(codeContent).then(() => {
+                    ElMessage({
+                        message: '已複製內容到剪貼簿!',
+                        type: 'success',
+                        duration: 2000,
+                    });
+                }).catch(err => {
+                    ElMessage({
+                        message: '複製失敗!',
+                        type: 'error',
+                        duration: 2000,
+                    });
+                });
+            } else {
+                ElMessage({
+                    message: '無法取得 CodeMirror 實例!',
+                    type: 'error',
+                    duration: 2000,
+                });
+            }
+        }
     },
     mounted() {
         this.selectTestCase('');  // 預設顯示測資
