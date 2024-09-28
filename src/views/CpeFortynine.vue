@@ -130,9 +130,9 @@ export default {
         rendered() {
             this.$nextTick(() => {
                 this.$nextTick(() => {
-                console.log("12222")
-                console.log(this.$refs.pdfviewer)
-                this.$refs.pdfviewer.handleToggleFullpage()
+                    console.log("12222")
+                    console.log(this.$refs.pdfviewer)
+                    this.$refs.pdfviewer.handleToggleFullpage()
                 });
             });
         },
@@ -176,12 +176,13 @@ export default {
                 });
             } else {
                 ElMessage({
-                    message: '無法取得 CodeMirror 實例!',
+                    message: '無法取得實例!',
                     type: 'error',
                     duration: 2000,
                 });
             }
-        }
+        },
+
     },
     mounted() {
         this.selectTestCase('');  // 預設顯示測資
