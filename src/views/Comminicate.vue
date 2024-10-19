@@ -5,29 +5,37 @@
             <div class="col-12">
                 <div class="card z-index-0">
                     <div class="card-body">
-                        <div class="container-fluid p-0" v-for="community in communitys">
-                            <router-link class="" :to="{ name: 'Community', params: { community_id: community.id } }">
-                                <div class="mt-4  overflow-hidden card card-body blur shadow-blur user_cover" :style="{
-                                    backgroundImage:
-                                        'url(' + $global_url + '/uploads/coverpic/background3.png' + ')',
-                                    backgroundPositionY: '50%',
-                                    backgroundSize: 'cover'
-                                }">
-                                    <div class="row gx-4">
-                                        <div class="col-auto my-auto">
-                                            <div class="h-100">
-                                                <h5 class="mb-1" style="    
-                        background-color: #ffffffcf;
-                        color: black;
-                        border-radius: 5px;">
-                                                    {{ community.title }}
-                                                </h5>
+                        <!-- 關鍵字輸入框 -->
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="輸入關鍵字進行搜索" 
+                            v-model="searchQuery"
+                            @input="searchCommunity"
+                        />
+                        <!-- 顯示查詢結果 -->
+                        <div class="container-fluid p-0" v-if="communitys">
+                            <div v-for="community in communitys" :key="community.id">
+                                <router-link :to="{ name: 'Community', params: { community_id: community.id } }">
+                                    <div class="mt-4 overflow-hidden card card-body blur shadow-blur user_cover" :style="{
+                                        backgroundImage:
+                                            'url(' + $global_url + '/uploads/coverpic/background3.png' + ')',
+                                        backgroundPositionY: '50%',
+                                        backgroundSize: 'cover'
+                                    }">
+                                        <div class="row gx-4">
+                                            <div class="col-auto my-auto">
+                                                <div class="h-100">
+                                                    <h5 class="mb-1" style="background-color: #ffffffcf; color: black; border-radius: 5px;">
+                                                        {{ community.title }}
+                                                    </h5>
+                                                </div>
                                             </div>
+                                            {{ community.account }}
                                         </div>
-                                        {{ community.user_account }}
                                     </div>
-                                </div>
-                            </router-link>
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +119,8 @@ export default {
                 query: this.searchQuery, // 傳遞查詢關鍵字
             })
             .then((res) => {
-                this.communitys = res.data.success; // 更新查詢結果
+                console.log(res.data);
+                this.communitys = res.data; // 更新查詢結果
             })
             .catch((err) => {
                 console.log(err);
