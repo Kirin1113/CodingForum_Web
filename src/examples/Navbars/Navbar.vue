@@ -29,6 +29,18 @@
                 <SelectAuthor :key="resetpostvalue"/>
               </div>
             </div>
+            <div v-if="this.$route.name == 'Comminicate'"
+            :key="this.$route.name" style="display: flex;">
+              <div class="mt-1 me-3" style="cursor: pointer;" @click="resetpost"  data-bs-toggle="tooltip" title="全部">
+                <i class="fa-solid fa-comments"></i>
+              </div>
+              <div style="cursor: pointer;" class="me-3 mt-1"  data-bs-toggle="tooltip" title="篩選器" >
+                <i class="fas fa-filter" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop2'"></i>
+              </div>
+            </div>
+            <div v-if="user_account" @click="discuss" class="me-3" style="cursor: pointer"  data-bs-toggle="tooltip" title="發表或提問">
+              <i class="fa-regular fa-comment"></i>
+            </div>
             <div v-if="user_account" @click="upload" class="me-3" style="cursor: pointer"  data-bs-toggle="tooltip" title="上傳影片">
               <i class="fas fa-upload"></i>
             </div>
@@ -139,6 +151,29 @@
           </div>
       </div>
   </div>
+  <div class="modal fade" :id="'staticBackdrop2'" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">文章篩選</h5>
+                  <i class="fa fa-times" data-bs-dismiss="modal" style="cursor: pointer; font-size: 24px;"></i>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <div class="col-12">
+                          <div class="d-flex flex-column gap-2">
+                              <CodeCard type=20 sort='"最新發布" ' />
+                              <CodeCard type=21 sort='"最早發布" ' />
+                              <CodeCard type=22 sort='"最多留言" ' />
+                              <CodeCard type=23 sort='"最少留言" ' />
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -147,7 +182,7 @@ import { mapMutations, mapActions } from "vuex";
 import { ElMessage } from "element-plus";
 import SelectUva from "@/components/SelectUva.vue";
 import TagedCard from "../../views/components/TagedCard.vue";
-import CodeCard from "../Sidenav/CodeCard.vue";
+import CodeCard from "./CodeCard.vue";
 import SelectAuthor from "@/components/SelectAuthor.vue";
 
 export default {
@@ -218,6 +253,9 @@ export default {
     },
     upload() {
       this.$router.push({ name: 'Upload' });
+    },
+    discuss() {
+      this.$router.push({ name: 'Discuss' });
     },
     test() {
       console.log(this.$refs.SelectUva.return_select_uva())

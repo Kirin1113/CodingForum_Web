@@ -28,6 +28,11 @@
     <hr class="mt-4 horizontal dark"/>
     <ul class="navbar-nav">
       <li class="nav-item">
+        <sidenav-collapse navText="交流吧" :to="{ name: 'Comminicate' }" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
         <sidenav-collapse navText="UVa練習" :to="{ name: 'OnlineComplier' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
       <li class="nav-item" v-if="this.$cookies.get('token')">

@@ -20,6 +20,9 @@ import MyWatch from "@/views/MyWatch.vue";
 import MyLike from "@/views/MyLike.vue";
 import OnlineComplier from "@/views/OnlineCompiler.vue";
 import CpeFortynine from "@/views/CpeFortynine.vue";
+import Comminicate from "@/views/Comminicate.vue";
+import Community from "@/views/Community.vue";
+import Discuss from "@/views/Discuss.vue";
 import TeacherClass from "@/views/class/admin/TeacherClass.vue";
 import OperateTeacherClass from "@/views/class/admin/OperateTeacherClass.vue";
 import Assignment from "@/views/class/admin/Assignment.vue";
@@ -215,6 +218,23 @@ const routes = [
     path: "/cpefortynine",
     name: "CpeFortynine",
     component: CpeFortynine,
+    beforeEnter: islogin,
+  },
+  {
+    path: "/comminicate",
+    name: "Comminicate",
+    component: Comminicate,
+  },
+  {
+    path: "/discuss",
+    name: "Discuss",
+    component: Discuss,
+    beforeEnter: islogin,
+  },
+  {
+    path: "/comminicate/:community_id?/:comment_id?",
+    name: "Community",
+    component: Community,
   },
   {
     path: "/userclass",

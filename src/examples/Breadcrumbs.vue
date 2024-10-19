@@ -89,6 +89,19 @@ export default {
           name: 'CPE49練習',
         },
         {
+          route_name: 'Comminicate',
+          name: '交流吧',
+        },
+        {
+          route_name: 'Community',
+          name: '文章',
+          list: [{ route_name: 'Comminicate', name: '交流吧' }]
+        },
+        {
+          route_name: 'Discuss',
+          name: '發表文章',
+        },
+        {
           route_name: 'UserClass',
           name: '選課',
         }, {

@@ -16,7 +16,7 @@
               </div>
               <div class="mb-3">
                 <label>*內容</label>
-                <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入貼文內容"
+                <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入影片內容"
                   required></textarea>
               </div>
               <div class="mb-3">
