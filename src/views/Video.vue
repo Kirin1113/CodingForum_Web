@@ -47,7 +47,10 @@
                     }" />
                   <router-link style=" font-size: 13px;" v-if="token_user_id == post.user_id"
                     :to="{ name: 'EditPost', params: { post_id: post.id } }">
-                    編輯影片</router-link>
+                    <div style="cursor: pointer"  data-bs-toggle="tooltip" title="編輯影片">
+                      <i class="fa-solid fa-pen"></i>
+                    </div>
+                  </router-link>
                 </div>
                 <div class="mt-2">
                   <textarea class="form-control" id="content" v-model="post.content" rows="4" readonly></textarea>

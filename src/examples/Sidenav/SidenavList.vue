@@ -43,9 +43,9 @@
       <li class="nav-item" v-if="this.$cookies.get('token')">
         <sidenav-collapse navText="我的訂閱" :to="{ name: 'MySubscription' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
-      <li class="nav-item" v-if="this.$cookies.get('token')">
+      <!-- <li class="nav-item" v-if="this.$cookies.get('token')">
         <sidenav-collapse navText="觀看紀錄" :to="{ name: 'MyWatch' }" class="m-0 justify-content-center"></sidenav-collapse>
-      </li>
+      </li> -->
       <li class="nav-item" v-if="this.$cookies.get('token')">
         <sidenav-collapse navText="喜歡的影片" :to="{ name: 'MyLike' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>

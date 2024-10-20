@@ -9,12 +9,12 @@
                 <form role="form" @submit.prevent="post" class="mx-auto col-xl-9">
                   <div class="mb-3">
                     <label>*標題</label>
-                    <input class="form-control" v-model="title" id="title" type="text" placeholder="請輸入標題(限30字以內)"
+                    <input class="form-control" v-model="title" id="title" type="text" placeholder="請輸入文章標題(限30字以內)"
                       required />
                   </div>
                   <div class="mb-3">
                     <label>*內容</label>
-                    <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入內容"
+                    <textarea class="form-control" id="content" v-model="content" rows="5" placeholder="請輸入文章內容"
                       required></textarea>
                   </div>
                   <div class="text-center">

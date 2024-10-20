@@ -31,7 +31,7 @@
                                                     </h5>
                                                 </div>
                                             </div>
-                                            {{ community.account }}
+                                            {{ community.name }}
                                         </div>
                                     </div>
                                 </router-link>

@@ -114,6 +114,7 @@ export default {
             now_count: 0,
             readOnly: true,
             post_id: this.$route.params.post_id,
+            community_id: this.$route.params.community_id,
             noResult: false,
             noResult_corner: 1,
             isLiked: false,
@@ -140,7 +141,7 @@ export default {
                 user_comment_like: this.user_comment_like,
             }),
             () => {
-                if (this.$route.name != 'Video') {
+                if (this.$route.name != 'Video' || this.$route.name != 'Community') {
                     return;
                 }
                 this.user_comment_like.forEach(element => {
@@ -173,7 +174,7 @@ export default {
                 real_children_comment_count: this.real_children_comment_count
             }),
             () => {
-                if (this.$route.name != 'Video') {
+                if (this.$route.name != 'Video' || this.$route.name != 'Community') {
                     return;
                 }
                 if (this.real_children_comment_count <= 0) {

@@ -35,7 +35,7 @@ export default {
                 readOnly: this.readOnly,
             }),
             () => {
-                if (this.$route.name != 'Video') {
+                if (this.$route.name != 'Video' || this.$route.name != 'Community') {
                     return;
                 }
                 this.key++
@@ -48,14 +48,19 @@ export default {
     },
     methods: {
         comment() {
-            if (!this.token) {
+            if (!this.token && this.post_id) {
                 ElMessage.error("請先登入以進行操作");
                 this.$cookies.set("go_login_then_backpost", this.post_id, "3min");
+                this.$router.push({ name: 'Sign In' });
+            } else if(!this.token && this.community_id) {
+                ElMessage.error("請先登入以進行操作");
+                this.$cookies.set("go_login_then_backcommunity", this.community_id, "3min");
                 this.$router.push({ name: 'Sign In' });
             }
             this.axios
                 .post("/api/forum/comment", {
                     post_id: this.post_id,
+                    community_id : this.community_id,
                     content: this.incontent,
                     parent_comment_id: this.parent_comment_id,
                 }, {
@@ -85,14 +90,19 @@ export default {
                 });
         },
         save() {
-            if (!this.token) {
+            if (!this.token && this.post_id) {
                 ElMessage.error("請先登入以進行操作");
                 this.$cookies.set("go_login_then_backpost", this.post_id, "3min");
+                this.$router.push({ name: 'Sign In' });
+            } else if(!this.token && this.community_id) {
+                ElMessage.error("請先登入以進行操作");
+                this.$cookies.set("go_login_then_backcommunity", this.community_id, "3min");
                 this.$router.push({ name: 'Sign In' });
             }
             this.axios
                 .post("/api/forum/comment", {
                     post_id: this.post_id,
+                    community_id : this.community_id,
                     content: this.incontent,
                     mention: this.mention,
                     comment_id: this.comment_id,
@@ -128,6 +138,7 @@ export default {
             output: [],
             placeholder: this.content ? '' : '發表留言...',
             post_id: this.$route.params.post_id,
+            community_id : this.$route.params.community_id,
             editorOptions: {
                 modules: {
                     mention: {  // 重點： 提醒功能配置項

@@ -72,10 +72,10 @@ export default {
           route_name: 'MySubscription',
           name: '我的訂閱',
         },
-        {
-          route_name: 'MyWatch',
-          name: '觀看紀錄',
-        },
+        // {
+        //   route_name: 'MyWatch',
+        //   name: '觀看紀錄',
+        // },
         {
           route_name: 'MyLike',
           name: '喜歡的影片',
@@ -97,6 +97,11 @@ export default {
           name: '文章',
           list: [{ route_name: 'Comminicate', name: '交流吧' }]
         },
+        {
+          route_name: 'EditCommunity',
+          name: '編輯文章',
+          list: [{ route_name: 'Community', name: '文章', params: { community_id: this.$route.params.community_id } }]
+        }, 
         {
           route_name: 'Discuss',
           name: '發表文章',
