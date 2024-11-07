@@ -71,7 +71,7 @@
   import InfiniteScroll from "infinite-loading-vue3";
   
   export default {
-    name: "MyLike",
+    name: "MyLikeVideo",
     data() {
       return {
         posts: [],

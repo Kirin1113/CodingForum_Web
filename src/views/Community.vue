@@ -24,6 +24,23 @@
                       {{ community.user_name }} 
                     </router-link>
                   </h3>
+                  <div v-if="token_user_id != community.user_id" @click="follow_author(isFollow ? 0 : 1)">
+                    <div v-if="isFollow" style="cursor: pointer;" class="cancel-subscribe-button">
+                      <i class="fa-solid fa-square-plus"></i>取消關注
+                    </div>
+                    <div v-if="!isFollow" style="cursor: pointer;" class="subscribe-button">
+                      <i class="fa-regular fa-square-plus"></i>關注
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-eye"></i> x {{ community.views }}
+                  <Vote @like_function="like_community" v-bind="{
+                      community_id: community.id,
+                      count: this.community_likes,
+                      isLiked: this.isLiked,
+                      isDisliked: this.isDisliked,
+                      loading: this.loading,
+                      type: 0//0video //1comment
+                    }" />
                   <router-link v-if="token_user_id == community.user_id" 
                                class="ms-3" 
                                style="font-size: 13px;" 
@@ -87,6 +104,7 @@
 import { ElMessage } from "element-plus";
 import Comment from "@/components/Comment.vue";
 import CommentTextArea from "@/components/CommentTextArea.vue";
+import Vote from "@/components/Vote.vue";
 import InfiniteScroll from "infinite-loading-vue3";
 import SoftButton from "../components/SoftButton.vue";
 
@@ -97,6 +115,7 @@ export default {
   components: {
     Comment,
     CommentTextArea,
+    Vote,
     InfiniteScroll,
     SoftButton
   },
@@ -106,15 +125,23 @@ export default {
       community_id: this.$route.params.community_id,
       user_id: this.$cookies.get("user_id"),
       comment_id: this.$route.params.comment_id,
+      loading: 0,
       comments: [],
+      user_community_like: 0,
+      user_comment_like: [],
       token: this.$cookies.get("token"),
       token_user_id: this.$cookies.get("user_id"),
       now_user_pic_url: this.$global_default_pic_url,
+      isLiked: false,
+      isDisliked: false,
       noResult: false,
       message: "",
       more_lock: false,
       limit: 0,
       all_user: [],
+      isFollow: false,
+      user_follow_author: 0,
+      author_id: '',
     };
   },
   created() {
@@ -149,6 +176,34 @@ export default {
           community_id: community_id,
         });
     }
+    function get_like(community_id, token) {
+      if (token) {
+        return axios
+          .post("/api/forum/get_like", {
+            community_id: community_id,
+          }, {
+            headers: {
+              'Authorization': `Bearer ` + token
+            }
+          });
+      }
+      else
+        return ''
+    }
+    function get_follow(author_id, token) {
+      if (token) {
+        return axios
+          .post("/api/forum/get_follow", {
+            author_id: author_id,
+          }, {
+            headers: {
+              'Authorization': `Bearer ` + token
+            }
+          });
+      }
+      else
+        return ''
+    }
     function get_all_user() {
       return axios
         .get("/api/auth/get_all_user", {
@@ -160,14 +215,16 @@ export default {
           comment_id: comment_id
         });
     }
-    this.axios.all([get_community(this.community_id), get_comment(this.community_id), get_all_user(), check_is_children_comment(this.comment_id)]).then(
-      this.axios.spread((res1, res2, res3, res4) => {
-        console.log(res3.data.success);
-        this.all_user = res3.data.success;
+    this.axios.all([get_community(this.community_id), get_comment(this.community_id), get_like(this.community_id, this.token), get_all_user(), check_is_children_comment(this.comment_id)]).then(
+      this.axios.spread((res1, res2, res3, res4, res5) => {
+        console.log(res4.data.success);
+        this.all_user = res4.data.success;
         console.log(res1);
         this.community = res1.data.success;
+        this.author_id = res1.data.success.user_id;
+        this.community_likes = res1.data.success.likes;
         if (this.comment_id != null) {
-          if (!res4.data.success) //主留言
+          if (!res5.data.success) //主留言
           {
             res2.data.success.forEach((item, index) => {
               if (this.comment_id == item.id) {
@@ -177,7 +234,7 @@ export default {
               };
             });
           } else {
-            var parent_comment_id = res4.data.parent_comment_id;
+            var parent_comment_id = res5.data.parent_comment_id;
             res2.data.success.forEach((item, index) => {
               if (parent_comment_id == item.id) {
                 this.comments.push(item);
@@ -190,6 +247,46 @@ export default {
         } else {//無tag
           this.comments = res2.data.success.slice(0, 3);
         }
+        if (res3 == '') {
+          this.loading++
+        }
+        this.user_community_like = res3.data.user_community_like
+        switch (this.user_community_like) {
+          case null:
+            this.isLiked = false;
+            this.isDisliked = false;
+            break;
+          case 1:
+            this.isLiked = true;
+            this.isDisliked = false;
+            break;
+          case -1:
+            this.isLiked = false;
+            this.isDisliked = true;
+            break;
+          default:
+            this.isLiked = false;
+            this.isDisliked = false;
+            break;
+        }
+        this.user_comment_like = res3.data.user_comment_like;
+        this.loading++;
+        this.axios.all([get_follow(this.author_id, this.token)]).then(
+          this.axios.spread((res6) => {
+            this.user_follow_author = res6.data.user_follow_author
+            switch (this.user_follow_author) {
+              case null:
+                this.isFollow = false;
+                break;
+              case 1:
+                this.isFollow = true;
+                break;
+              default:
+                this.isFollow = false;
+                break;
+            }
+          })
+        )
       })
     )
     .catch(function (error) {
@@ -220,6 +317,56 @@ export default {
     newcomment(comment) {
       console.log(comment);
       this.comments.unshift(comment[0]);
+    },
+    follow_author(follow) {
+      this.checklogin();
+
+      this.axios
+      .post("/api/forum/follow_author", {
+        author_id: this.author_id,
+        follow: follow,
+      }, {
+        headers: {
+          'Authorization': `Bearer ` + this.token
+        }
+      })
+      .then((res) => {
+          this.user_follow_author = res.data.user_follow_author;
+          this.isFollow = this.user_follow_author === 1;
+      })
+    },
+    like_community(dislike_or_like) {
+      this.axios
+        .post("/api/forum/like_community", {
+          community_id: this.community_id,
+          dislike_or_like: dislike_or_like,
+        }, {
+          headers: {
+            'Authorization': `Bearer ` + this.token
+          }
+        })
+        .then((res) => {
+          this.user_community_like = res.data.user_community_like;
+          switch (this.user_community_like) {
+            case null:
+              this.isLiked = false;
+              this.isDisliked = false;
+              break;
+            case 1:
+              this.isLiked = true;
+              this.isDisliked = false;
+              break;
+            case -1:
+              this.isLiked = false;
+              this.isDisliked = true;
+              break;
+            default:
+              this.isLiked = false;
+              this.isDisliked = false;
+              break;
+          }
+          this.loading++
+        })
     },
     timelimit() {
       this.limit++;

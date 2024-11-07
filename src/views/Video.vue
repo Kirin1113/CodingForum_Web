@@ -43,7 +43,7 @@
                       isLiked: this.isLiked,
                       isDisliked: this.isDisliked,
                       loading: this.loading,
-                      type: 0//0post //1comment
+                      type: 0//0video //1comment
                     }" />
                   <router-link style=" font-size: 13px;" v-if="token_user_id == post.user_id"
                     :to="{ name: 'EditPost', params: { post_id: post.id } }">
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-md-4 col-12 mb-4 mobileshow" v-if="window.innerWidth < 1200">
+        <!-- <div class="col-md-4 col-12 mb-4 mobileshow" v-if="window.innerWidth < 1200">
           <div class="card">
             <div class="card-body p-3">
               <soft-button color="info" full-width variant="gradient" class="mt-2 mb-2 mobileshow"
@@ -94,7 +94,7 @@
                 @rendered="rendered" :controls="pdfcontrols" />
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="col-md-8 col-12">
           <div class="card">
             <div class="card-body p-3">
@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 pc" v-if="window.innerWidth > 1200">
+        <!-- <div class="col-md-4 pc" v-if="window.innerWidth > 1200">
           <div class="card">
             <div class="card-body p-3">
               <soft-button color="dark" full-width variant="gradient" class="mt-2 mb-2"
@@ -143,7 +143,7 @@
                 style="height: 80vh;" ref="pdfviewer" @rendered="rendered" :controls="pdfcontrols" />
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </infinite-scroll>

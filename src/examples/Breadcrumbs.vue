@@ -72,13 +72,21 @@ export default {
           route_name: 'MySubscription',
           name: '我的訂閱',
         },
+        {
+          route_name: 'MyFollow',
+          name: '我的關注',
+        },
         // {
         //   route_name: 'MyWatch',
         //   name: '觀看紀錄',
         // },
         {
-          route_name: 'MyLike',
+          route_name: 'MyLikeVideo',
           name: '喜歡的影片',
+        },
+        {
+          route_name: 'MyLikeCommunity',
+          name: '喜歡的文章',
         },
         {
           route_name: 'OnlineComplier',

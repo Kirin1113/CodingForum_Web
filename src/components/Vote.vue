@@ -58,7 +58,7 @@ export default {
             type: Function
         },
         type: {
-            type: Number,//0post //1comment
+            type: Number,//0video //1comment
         },
     },
     data() {
@@ -77,7 +77,7 @@ export default {
                 loading: this.loading,
             }),
             () => {
-                if (this.$route.name != 'Video') {
+                if (this.$route.name != 'Video' || this.$route.name != 'Community') {
                     return;
                 }
                 if (this.type == 0) {

@@ -40,7 +40,7 @@
                 </div>
             </div>
         </a>
-        <a v-if="!source['comment_id']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="govideo">
+        <a v-if="!source['comment_id'] && source['post_id']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="govideo">
             <div class="py-1 d-flex">
                 <div class="my-auto">
                     <img :src="$global_url + source['comment_user_picture']" class="avatar avatar-sm me-3"
@@ -51,6 +51,25 @@
                         <span class="font-weight-bold">{{ source['comment_user_name'] }}</span>
                         上傳了最新影片
                         <span class="font-weight-bold">{{ source['post_uva_show'] }}</span> 快去看看吧!
+                    </h6>
+                    <p class="mb-0 text-xs text-secondary">
+                        <i class="fa fa-clock me-1"></i>
+                        <timeago :datetime="source['created_at'].replaceAll('/', '-')" />
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a v-if="!source['comment_id'] && source['community_id']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="govideo">
+            <div class="py-1 d-flex">
+                <div class="my-auto">
+                    <img :src="$global_url + source['comment_user_picture']" class="avatar avatar-sm me-3"
+                        alt="user image" />
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-1 text-sm font-weight-normal">
+                        <span class="font-weight-bold">{{ source['comment_user_name'] }}</span>
+                        發表了最新文章
+                        <span class="font-weight-bold">{{ source['community_title'] }}</span> 快去看看吧!
                     </h6>
                     <p class="mb-0 text-xs text-secondary">
                         <i class="fa fa-clock me-1"></i>

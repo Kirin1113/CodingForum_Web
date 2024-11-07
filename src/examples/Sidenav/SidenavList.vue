@@ -47,7 +47,13 @@
         <sidenav-collapse navText="觀看紀錄" :to="{ name: 'MyWatch' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li> -->
       <li class="nav-item" v-if="this.$cookies.get('token')">
-        <sidenav-collapse navText="喜歡的影片" :to="{ name: 'MyLike' }" class="m-0 justify-content-center"></sidenav-collapse>
+        <sidenav-collapse navText="喜歡的影片" :to="{ name: 'MyLikeVideo' }" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item" v-if="this.$cookies.get('token')">
+        <sidenav-collapse navText="我的關注" :to="{ name: 'MyFollow' }" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
+      <li class="nav-item" v-if="this.$cookies.get('token')">
+        <sidenav-collapse navText="喜歡的文章" :to="{ name: 'MyLikeCommunity' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
     </ul>
     <hr class="mt-4 horizontal dark"/>

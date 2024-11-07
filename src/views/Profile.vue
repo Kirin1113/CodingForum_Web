@@ -28,6 +28,16 @@
             </div>
           </div>
         </div>
+        <div class="col-auto my-auto">
+          <div v-if="token_user_id != user.id" @click="follow_author(isFollow ? 0 : 1)">
+            <div v-if="isFollow" style="cursor: pointer;" class="cancel-subscribe-button">
+              <i class="fa-solid fa-square-plus"></i>取消關注
+            </div>
+            <div v-if="!isFollow" style="cursor: pointer;" class="subscribe-button">
+              <i class="fa-regular fa-square-plus"></i>關注
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -51,6 +61,9 @@
               <ul class="list-group">
                 <li class="text-sm border-0 list-group-item ps-0">
                   <strong class="text-dark">訂閱人數:</strong> &nbsp; {{ user.subscriptions }}
+                </li>
+                <li class="text-sm border-0 list-group-item ps-0">
+                  <strong class="text-dark">關注人數:</strong> &nbsp; {{ user.follows }}
                 </li>
                 <li class="text-sm border-0 list-group-item ps-0">
                   <strong class="text-dark">電子郵件:</strong> &nbsp; {{ user.email }}
@@ -168,7 +181,10 @@ export default {
       send_serial: '',
       isSubscribe: false,
       user_subscribe_author: 0,
-      author_id: '',
+      author_post_id: '',
+      author_community_id: '',
+      isFollow: false,
+      user_follow_author: 0,
     };
   },
   created() {
@@ -207,7 +223,8 @@ export default {
             this.user = res.data.user
             this.self = res.data.self
 
-            this.author_id = this.user.id;
+            this.author_post_id = this.user.id;
+            this.author_community_id = this.user.id;
 
             if (this.user.github != null) {
               this.social.push({ link: this.user.github, iconclass: "fa-brands fa-github" })
@@ -215,14 +232,14 @@ export default {
 
             this.axios
             .post("/api/forum/get_subscribe",{
-              author_id: this.author_id
+              author_id: this.author_post_id
             },{
               headers: {
                 'Authorization': `Bearer ` + this.token
               }
             })
-            .then((res) => {
-              this.user_subscribe_author = res.data.user_subscribe_author
+            .then((res1) => {
+              this.user_subscribe_author = res1.data.user_subscribe_author
               switch (this.user_subscribe_author) {
                 case null:
                   this.isSubscribe = false;
@@ -235,10 +252,32 @@ export default {
                   break;
               }
             });
+            this.axios
+            .post("/api/forum/get_follow",{
+              author_id: this.author_community_id
+            },{
+              headers: {
+                'Authorization': `Bearer ` + this.token
+              }
+            })
+            .then((res2) => {
+              this.user_follow_author = res2.data.user_follow_author
+              switch (this.user_follow_author) {
+                case null:
+                  this.isFollow = false;
+                  break;
+                case 1:
+                  this.isFollow = true;
+                  break;
+                default:
+                  this.isFollow = false;
+                  break;
+              }
+            });
           }).catch(function (error) {
             if (error.response) {
               that.$router.push({ name: 'Dashboard' });
-              ElMessage.error("用戶不存在");
+              ElMessage.error("您未登入");
             }
           });
         this.loadDataFromServer()
@@ -258,7 +297,7 @@ export default {
 
       this.axios
       .post("/api/forum/subscribe_author", {
-        author_id: this.author_id,
+        author_id: this.author_post_id,
         subscribe: subscribe,
       }, {
         headers: {
@@ -273,6 +312,29 @@ export default {
             this.user.subscriptions += 1;
           } else {
             this.user.subscriptions -= 1;
+          }
+      })
+    },
+    follow_author(follow) {
+      this.checklogin();
+
+      this.axios
+      .post("/api/forum/follow_author", {
+        author_id: this.author_community_id,
+        follow: follow,
+      }, {
+        headers: {
+          'Authorization': `Bearer ` + this.token
+        }
+      })
+      .then((res) => {
+          this.user_follow_author = res.data.user_follow_author;
+          this.isFollow = this.user_follow_author === 1;
+
+          if (this.isFollow) {
+            this.user.follows += 1;
+          } else {
+            this.user.follows -= 1;
           }
       })
     },

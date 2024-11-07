@@ -16,8 +16,10 @@ import EditCover from "@/views/user/EditCover.vue";
 import EditPassword from "@/views/user/EditPassword.vue";
 import AllUser from "@/views/AllUser.vue";
 import MySubscription from "@/views/MySubscription.vue";
+import MyFollow from "@/views/MyFollow.vue";
 // import MyWatch from "@/views/MyWatch.vue";
-import MyLike from "@/views/MyLike.vue";
+import MyLikeVideo from "@/views/MyLikeVideo.vue";
+import MyLikeCommunity from "@/views/MyLikeCommunity.vue";
 import OnlineComplier from "@/views/OnlineCompiler.vue";
 import CpeFortynine from "@/views/CpeFortynine.vue";
 import Comminicate from "@/views/Comminicate.vue";
@@ -222,6 +224,12 @@ const routes = [
     component: MySubscription,
     beforeEnter: islogin,
   },
+  {
+    path: "/myfollow",
+    name: "MyFollow",
+    component: MyFollow,
+    beforeEnter: islogin,
+  },
   // {
   //   path: "/mywatch",
   //   name: "MyWatch",
@@ -229,9 +237,15 @@ const routes = [
   //   beforeEnter: islogin,
   // },
   {
-    path: "/mylike",
-    name: "MyLike",
-    component: MyLike,
+    path: "/mylikevideo",
+    name: "MyLikeVideo",
+    component: MyLikeVideo,
+    beforeEnter: islogin,
+  },
+  {
+    path: "/mylikecommunity",
+    name: "MyLikeCommunity",
+    component: MyLikeCommunity,
     beforeEnter: islogin,
   },
   {

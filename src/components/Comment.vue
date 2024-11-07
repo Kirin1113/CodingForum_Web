@@ -23,7 +23,7 @@
                                 isLiked: this.isLiked,
                                 isDisliked: this.isDisliked,
                                 loading: this.loading,
-                                type: 1 //0post //1comment
+                                type: 1 //0video //1comment
                             }" />
                         <div class="breakline"></div>
                         <a class="btn btn-link text-dark px-3 mb-0" @click="reply" v-if="token_user_id">
