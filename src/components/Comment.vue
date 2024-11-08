@@ -36,7 +36,7 @@
                             保存
                         </a>
                         <a class="btn btn-link text-dark px-3 mb-0" data-bs-toggle="modal"
-                            :data-bs-target="'#staticBackdrop' + comment_id" v-if="token_user_id == user_id && readOnly">
+                            :data-bs-target="'#staticBackdropComment' + comment_id" v-if="token_user_id == user_id && readOnly">
                             刪除
                         </a>
                     </div>
@@ -79,7 +79,7 @@
             </template>
         </div>
     </div>
-    <div class="modal fade" :id="'staticBackdrop' + comment_id" data-bs-backdrop="static" data-bs-keyboard="false"
+    <div class="modal fade" :id="'staticBackdropComment' + comment_id" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

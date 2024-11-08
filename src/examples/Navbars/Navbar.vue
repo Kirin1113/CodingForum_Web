@@ -98,7 +98,7 @@
       </div>
     </div>
   </nav>
-  <div class="modal fade" :id="'staticBackdroptwo'" data-bs-backdrop="static" data-bs-keyboard="false"
+  <div class="modal fade" :id="'staticBackdrop'" data-bs-backdrop="static" data-bs-keyboard="false"
       tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -151,7 +151,7 @@
           </div>
       </div>
   </div>
-  <div class="modal fade" :id="'staticBackdrop'" data-bs-backdrop="static" data-bs-keyboard="false"
+  <div class="modal fade" :id="'staticBackdroptwo'" data-bs-backdrop="static" data-bs-keyboard="false"
       tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm">
           <div class="modal-content">

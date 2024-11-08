@@ -21,7 +21,7 @@
                   <soft-button color="dark" full-width variant="gradient" class="mb-5"
                     @click.stop.prevent="$router.go(-1)">取消</soft-button>
                   <soft-button color="danger" full-width variant="gradient" class="mt-5" data-bs-toggle="modal"
-                    :data-bs-target="'#staticBackdroptwo' + community_id" @click.stop.prevent="">刪除文章</soft-button>
+                    :data-bs-target="'#staticBackdropCommunity' + community_id" @click.stop.prevent="">刪除文章</soft-button>
                 </div>
               </form>
             </div>
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" :id="'staticBackdroptwo' + community_id" data-bs-backdrop="static" data-bs-keyboard="false"
+    <div class="modal fade" :id="'staticBackdropCommunity' + community_id" data-bs-backdrop="static" data-bs-keyboard="false"
       tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

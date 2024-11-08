@@ -31,7 +31,7 @@
                                     </template>
                                     <template #default="scope">
                                         <el-button v-if="scope.row.enable == 1 && scope.row.is_take == 0"
-                                            data-bs-toggle="modal" :data-bs-target="'#staticBackdrop' + scope.row.id">
+                                            data-bs-toggle="modal" :data-bs-target="'#staticBackdropUserclass' + scope.row.id">
                                             加選
                                         </el-button>
                                         <el-button v-if="scope.row.enable == 0 && scope.row.is_take == 0" disabled>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div v-for="CodingClass in filteredCodingClasses">
-        <div class="modal fade" :id="'staticBackdrop' + CodingClass.id" data-bs-backdrop="static" data-bs-keyboard="false"
+        <div class="modal fade" :id="'staticBackdropUserclass' + CodingClass.id" data-bs-backdrop="static" data-bs-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">

@@ -4,7 +4,7 @@
         <div class="card">
           <div class="card-body p-3">
             <div class="row">
-              <h4 v-if="posts.length == 0" style="text-align: center;">無符合條件之影片</h4>
+              <h4 v-if="posts.length == 0" style="text-align: center;">您尚未按讚過任何影片</h4>
               <div class="col-lg-3" v-for="post in posts" :key="post.id">
                 <div class="card mb-2" aria-hidden="true">
                   <div style="overflow: hidden;">

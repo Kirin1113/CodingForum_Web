@@ -4,6 +4,7 @@
           <div class="col-12">
               <div class="card z-index-0">
                   <div class="card-body">
+                    <h4 v-if="!users || users.length === 0" style="text-align: center;">您尚未訂閱過任何作者</h4>
                       <div class="container-fluid p-0" v-for="user in users">
                           <router-link class="" :to="{ name: 'Profile', params: { user_account: user.account } }">
                               <div class="mt-4  overflow-hidden card card-body blur shadow-blur user_cover" :style="{
