@@ -31,22 +31,17 @@ export default {
     //type: 0影片留言 1父 ，2child
     created() {
         this.$watch(
-            () => ({
-                readOnly: this.readOnly,
-            }),
-            () => {
-                if (this.$route.name != 'Video' || this.$route.name != 'Community') {
-                    return;
-                }
-                this.key++
-                if (this.readOnly == true) {
-
-                }
+            () => this.readOnly,
+            (newValue) => {
+                this.reinitializeEditor(); // 動態重建編輯器
             },
-            { deep: true, immediate: true }
+            { immediate: true }
         );
     },
     methods: {
+        reinitializeEditor() {
+            this.key++; // 強制重新渲染編輯器，讓 readOnly 屬性更新
+        },
         comment() {
             if (!this.token && this.post_id) {
                 ElMessage.error("請先登入以進行操作");

@@ -456,4 +456,44 @@ export default {
     width: 100vw;
     height: 100vh;
   }
+
+  .subscribe-button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.subscribe-button:hover {
+  background-color: red;
+  transform: scale(1.05);
+}
+
+.cancel-subscribe-button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: gray;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-subscribe-button:hover {
+  background-color: gray;
+  transform: scale(1.05);
+}
 </style>
