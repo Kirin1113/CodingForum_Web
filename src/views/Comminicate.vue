@@ -138,41 +138,43 @@ export default {
         }
       },
       async loadDataFromServer() {
-        if (!this.more_lock) {
-            this.more_lock = true;
-            if (!this.noResult) {
-                this.loading = true;
-                await this.axios
-                  .post("/api/forum/get_community", {
-                    sort: this.sort,
-                  })
-                  .then((res) => {
-                    let allsame = true;
-                    let newpostcount = 0;
-                    console.log(res.data.success)
-                    res.data.success.forEach((item) => {
-                        if (newpostcount == 8) return;
-                        let same = false;
-                        this.communitys.forEach((community) => {
-                            if (community.id == item.id) {
-                                same = true;
-                                return;
-                            };
-                        });
-                        if (same == false) {
-                            this.communitys.push(item);
-                            newpostcount++;
-                            allsame = false;
-                        }
-                    });
-                    if (allsame)
-                        this.noResult = true
-                  })
-            }
-            this.loading = false;
-            this.more_lock = false;
+        if (this.more_lock) return; // 如果正在加載中，則不再觸發新的請求
+        this.more_lock = true;
+
+        if (!this.noResult) {
+            this.loading = true;
+            await this.axios
+            .post("/api/forum/get_community", { sort: this.sort })
+            .then((res) => {
+              let allsame = true;
+              let newpostcount = 0;
+              console.log(res.data.success);
+              res.data.success.forEach((item) => {
+                if (newpostcount == 8) return;
+                let same = false;
+                // 確保不會將重複的資料加入
+                this.communitys.forEach((community) => {
+                    if (community.id == item.id) {
+                    same = true;
+                    return;
+                    }
+                });
+                if (!same) {
+                    this.communitys.push(item);
+                    newpostcount++;
+                    allsame = false;
+                }
+              });
+              if (allsame) this.noResult = true;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         }
+        this.loading = false;
+        this.more_lock = false; // 加載完成後解鎖
       }
+
     },
 };
 </script>
