@@ -1,7 +1,7 @@
 <template>
   <infinite-scroll ref="test" @infinite-scroll="loadDataFromServer" :message="message" :noResult="noResult">
     <div class="container-fluid mt-4">
-      <div class="row justify-content-center">
+      <div class="row">
         <div class="col-lg-8 mb-4 mb-xxl-0">
           <div class="card">
             <div class="card-body">
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center mt-4">
+      <div class="row mt-4">
         <div class="col-md-8" style="overflow-y: auto;">
           <div class="card">
             <div class="card-body p-3">

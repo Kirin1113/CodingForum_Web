@@ -4,8 +4,9 @@
     'fixed-start',
   ]" v-if="this.$store.state.showSidenav" />
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-    <navbar :class="[navClasses]" :textWhite="this.$store.state.isAbsolute ? 'text-white opacity-8' : ''"
+    <navbar :class="[navClasses]" :textWhite="this.$store.state.isAbsolute ? 'text-white opacity-8' : ''" @toggle-notes-sidebar="toggleSidebar"
       :minNav="navbarMinimize" v-if="this.$store.state.showNavbar" :key="$route.fullPath" @changepost="ref_changepost" @resetpost="ref_resetpost" />
+    <NotesSidebar :isSidebarOpen="isSidebarOpen" @close-sidebar="toggleSidebar" />
     <router-view v-slot="{ Component }">
       <component ref="view" :is="Component" :key="$route.fullPath" />
     </router-view>
@@ -15,6 +16,7 @@
 <script>
 import Sidenav from "./examples/Sidenav";
 import Navbar from "@/examples/Navbars/Navbar.vue";
+import NotesSidebar from './components/NotesSidebar.vue';
 import { mapMutations } from "vuex";
 
 export default {
@@ -22,6 +24,12 @@ export default {
   components: {
     Sidenav,
     Navbar,
+    NotesSidebar,
+  },
+  data() {
+    return {
+      isSidebarOpen: false,
+    };
   },
   methods: {
     ...mapMutations(["navbarMinimize"]),
@@ -30,7 +38,10 @@ export default {
     },
     ref_resetpost() {
       this.$refs.view.resetpost();
-    }
+    },
+    toggleSidebar() {
+      this.isSidebarOpen = !this.isSidebarOpen;
+    },
   },
   computed: {
     navClasses() {

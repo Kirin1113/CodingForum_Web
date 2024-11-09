@@ -44,6 +44,9 @@
             <div v-if="user_account" @click="upload" class="me-3" style="cursor: pointer"  data-bs-toggle="tooltip" title="上傳影片">
               <i class="fas fa-upload"></i>
             </div>
+            <div v-if="user_account" @click="$emit('toggle-notes-sidebar')" class="me-3" style="cursor: pointer" data-bs-toggle="tooltip" title="筆記">
+              <i class="fa-regular fa-note-sticky"></i>
+            </div>
             <TagedCard :key="TagedCardkey" @TagedCardkeyadd="TagedCardkeyadd" v-if="user_account" data-bs-toggle="tooltip" title="通知" />
             <a v-if="user_account" class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
