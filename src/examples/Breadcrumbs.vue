@@ -106,6 +106,10 @@ export default {
           list: [{ route_name: 'Comminicate', name: '交流吧' }]
         },
         {
+          route_name: 'MyCommunity',
+          name: '我的文章',
+        },
+        {
           route_name: 'EditCommunity',
           name: '編輯文章',
           list: [{ route_name: 'Community', name: '文章', params: { community_id: this.$route.params.community_id } }]

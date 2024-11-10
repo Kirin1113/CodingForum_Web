@@ -24,6 +24,7 @@ import OnlineComplier from "@/views/OnlineCompiler.vue";
 import CpeFortynine from "@/views/CpeFortynine.vue";
 import Comminicate from "@/views/Comminicate.vue";
 import Community from "@/views/Community.vue";
+import MyCommunity from "@/views/MyCommunity.vue";
 import Discuss from "@/views/Discuss.vue";
 import EditCommunity from "@/views/EditCommunity.vue";
 import TeacherClass from "@/views/class/admin/TeacherClass.vue";
@@ -42,6 +43,7 @@ import HandInAssignment from "@/views/class/user/HandInAssignment.vue";
 import AssignmentIntro from "@/views/class/user/AssignmentIntro.vue";
 import { ElMessage } from "element-plus";
 import axios from "axios";
+import component from "infinite-loading-vue3";
 
 const PU = { template: "<div>PU</div>" };
 const UVa = { template: "<div>UVa</div>" };
@@ -274,6 +276,12 @@ const routes = [
     path: "/comminicate/:community_id?/:comment_id?",
     name: "Community",
     component: Community,
+  },
+  {
+    path: "/mycommunity",
+    name: "MyCommunity",
+    component: MyCommunity,
+    beforeEnter: islogin,
   },
   {
     path: "/comminicate/:community_id?/edit",

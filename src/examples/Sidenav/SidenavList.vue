@@ -30,7 +30,11 @@
       <li class="nav-item">
         <sidenav-collapse navText="交流吧" :to="{ name: 'Comminicate' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
+      <li class="nav-item" v-if="this.$cookies.get('token')">
+        <sidenav-collapse navText="我的文章" :to="{ name: 'MyCommunity' }" class="m-0 justify-content-center"></sidenav-collapse>
+      </li>
     </ul>
+    <hr class="mt-4 horizontal dark"/>
     <ul class="navbar-nav">
       <li class="nav-item">
         <sidenav-collapse navText="UVa練習" :to="{ name: 'OnlineComplier' }" class="m-0 justify-content-center"></sidenav-collapse>
@@ -39,6 +43,7 @@
         <sidenav-collapse navText="CPE49練習" :to="{ name: 'CpeFortynine' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
     </ul>
+    <hr class="mt-4 horizontal dark"/>
     <ul class="navbar-nav">
       <li class="nav-item" v-if="this.$cookies.get('token')">
         <sidenav-collapse navText="我的訂閱" :to="{ name: 'MySubscription' }" class="m-0 justify-content-center"></sidenav-collapse>

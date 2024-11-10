@@ -5,15 +5,6 @@
             <div class="col-12">
                 <div class="card z-index-0">
                     <div class="card-body">
-                        <!-- 關鍵字輸入框 -->
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            placeholder="輸入關鍵字進行搜索" 
-                            v-model="searchQuery"
-                            @input="searchCommunity"
-                        />
-                        <!-- 顯示查詢結果 -->
                         <div class="container-fluid p-0" v-if="communitys">
                             <div v-for="community in communitys" :key="community.id">
                                 <router-link :to="{ name: 'Community', params: { community_id: community.id } }">
@@ -31,7 +22,6 @@
                                                     </h5>
                                                 </div>
                                             </div>
-                                            {{ community.user_name }}
                                         </div>
                                     </div>
                                 </router-link>
@@ -68,16 +58,15 @@
 import InfiniteScroll from "infinite-loading-vue3";
 
 export default {
-    name: "Comminicate",
+    name: "MyCommunity",
     data() {
         return {
             communitys: [],
-            searchQuery: '', // 綁定關鍵字
             loading: true,
             noResult: false,
             message: "",
             more_lock: false,
-            sort: '',
+            user_account: this.$cookies.get("user_account"),
         };
     },
     components: {
@@ -87,56 +76,6 @@ export default {
       this.loadDataFromServer()
     },
     methods: {
-      resetpost() {
-        this.communitys = [];
-        this.searchQuery = '';
-        this.noResult = false
-        this.loadDataFromServer()
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        })
-      },
-      changepost(options) {
-        console.log('type ' + options.type)
-        this.sort = options.type;
-        this.communitys = [];
-        this.searchQuery = '';
-        this.noResult = false
-        this.loadDataFromServer()
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        })
-      },
-      searchCommunity() {
-        // 當輸入關鍵字時發送請求
-        if (this.searchQuery.length > 0) {
-            this.axios
-            .post("/api/search_community", {
-                query: this.searchQuery, // 傳遞查詢關鍵字
-            })
-            .then((res) => {
-                console.log(res.data);
-                this.communitys = res.data; // 更新查詢結果
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        } else {
-            this.communitys = []; // 若輸入框為空則清除結果
-            this.searchQuery = '';
-            this.noResult = false
-            this.loadDataFromServer()
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            })
-        }
-      },
       async loadDataFromServer() {
         if (this.more_lock) return; // 如果正在加載中，則不再觸發新的請求
         this.more_lock = true;
@@ -144,7 +83,7 @@ export default {
         if (!this.noResult) {
             this.loading = true;
             await this.axios
-            .post("/api/forum/get_community", { sort: this.sort })
+            .post("/api/forum/get_community", { user_account: this.user_account })
             .then((res) => {
               let allsame = true;
               let newpostcount = 0;
