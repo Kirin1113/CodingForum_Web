@@ -101,6 +101,12 @@
         }
       },
       async fetchNotes() {
+        // 檢查是否有 token
+        if (!this.token) {
+          console.log("未登入，無法載入筆記");
+          return; // 沒有 token 時跳過請求
+        }
+
         try {
           const response = await this.axios.post("/api/forum/get_note", {}, {
             headers: { 

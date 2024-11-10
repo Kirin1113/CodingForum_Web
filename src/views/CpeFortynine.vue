@@ -29,12 +29,14 @@
                         </div>
                         <div class="input-output">
                             <label for="input">Input:</label>
-                            <button @click="copyToClipboard" class="btn btn-primary">複製</button>
+                            <button v-if="serial" @click="copyToClipboard" class="btn btn-primary">複製</button>
                             <textarea id="input-textarea" :value="currentInput" class="form-control" rows="5" readonly></textarea>
                         </div>
                         <div class="input-output mt-3">
                             <label for="output">Output:</label>
                             <textarea :value="currentOutput" class="form-control" rows="5" readonly></textarea>
+                            <!-- <button v-if="serial" @click="compareOutput" class="btn btn-primary">比對</button>
+                            <textarea v-model="currentOutput" class="form-control" rows="5"></textarea> -->
                         </div>
                     </div>
                 </div>
@@ -97,6 +99,7 @@ export default {
             },
             showcode: false,
             currentTest: '',
+            //currentOutput: '',
             cmInstance: null, // 用來保存 Codemirror 實例
         };
     },
@@ -154,6 +157,32 @@ export default {
                 duration: 2000, 
             });
         },
+        /* compareOutput() {
+            this.axios
+                .post("/api/forum/compareoutput", {
+                    output: this.currentOutput,
+                    whichoutput: this.currentTest,
+                    serial: this.serial
+                })
+                .then((res) => {
+                    console.log(res.data.success); // 確認值是否正確
+                    console.log(res.data.serial_output);
+                    console.log(res.data.output);
+                    if (res.data.success) {
+                        ElMessage({
+                            message: res.data.success,
+                            type: 'success',
+                            duration: 2000,
+                        });
+                    } else {
+                        console.log("No success message found");
+                    }
+                })
+                .catch(function (error){
+                    if(error.response)
+                        console.log(error.response)
+                })
+        },*/
         onReady(editor) {
             this.cmInstance = editor;  // 保存 Codemirror 實例
         },

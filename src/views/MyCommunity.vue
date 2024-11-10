@@ -5,6 +5,7 @@
             <div class="col-12">
                 <div class="card z-index-0">
                     <div class="card-body">
+                        <h4 v-if="communitys.length == 0" style="text-align: center;">您尚未發表過任何文章</h4>
                         <div class="container-fluid p-0" v-if="communitys">
                             <div v-for="community in communitys" :key="community.id">
                                 <router-link :to="{ name: 'Community', params: { community_id: community.id } }">
