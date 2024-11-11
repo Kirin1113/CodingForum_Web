@@ -56,8 +56,8 @@ export default {
                     document.getElementById('a' + this.type).classList.toggle('text-white')
                     document.getElementById('a' + this.type).classList.toggle('code-links')
                 }
-            }else if(this.type >= 20 && this.type <= 23) {
-                for (let number = 20; number <= 23; number++) {
+            }else if(this.type >= 20 && this.type <= 27) {
+                for (let number = 20; number <= 27; number++) {
                     if (number == this.type) {
                         document.getElementById('a' + number).classList.add('bg-blue', 'text-white', 'code-links')
                     }

@@ -170,6 +170,10 @@
                               <CodeCard type=21 sort='"最早發布" ' />
                               <CodeCard type=22 sort='"最多留言" ' />
                               <CodeCard type=23 sort='"最少留言" ' />
+                              <CodeCard type=24 sort='"按讚最多" ' />
+                              <CodeCard type=25 sort='"按讚最少" ' />
+                              <CodeCard type=26 sort='"最多觀看" ' />
+                              <CodeCard type=27 sort='"最少觀看" ' />
                           </div>
                       </div>
                   </div>

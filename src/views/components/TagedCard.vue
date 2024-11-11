@@ -39,6 +39,11 @@ export default {
         };
     },
     created() {
+        if (!this.token) {
+          console.log("未登入，無法載入通知");
+          return; // 沒有 token 時跳過請求
+        }
+
         this.axios
             .post("/api/forum/get_tags", {
             }, {
