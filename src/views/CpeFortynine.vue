@@ -29,16 +29,19 @@
                         </div>
                         <div class="input-output">
                             <label for="input">Input:</label>
-                            <button v-if="serial" @click="copyToClipboard" class="btn btn-primary">複製</button>
+                            <button v-if="serial && (showInput!=null && showInput!='測資過長' && showInput!='測資A過長' && showInput!='測資B過長')" 
+                              @click="copyToClipboard" class="btn btn-primary">複製</button>
                             <textarea id="input-textarea" :value="currentInput" class="form-control" rows="5" readonly></textarea>
                         </div>
-                        <div v-if="serial==272 || serial==10062 || serial==10101 || serial==10189 || serial==10415 || serial==11321" class="input-output mt-3">
+                        <div v-if="serial==10062 || serial==10101 || serial==10415
+                          || showInput=='測資過長' || showInput=='測資A過長' || showInput=='測資B過長' || showInput==null" 
+                          class="input-output mt-3">
                             <label for="output">Output:</label>
                             <textarea :value="currentOutput" class="form-control" rows="5" readonly></textarea>
                         </div>
                         <div v-else class="input-output mt-3">
                             <label for="output">Output:</label>
-                            <button v-if="serial && showInput!='如果看到這行就表示沒有此測資' && showInput!='未考過此題'" @click="compareOutput" class="btn btn-primary">比對</button>
+                            <button v-if="serial" @click="compareOutput" class="btn btn-primary">比對</button>
                             <textarea v-model="userOutput" class="form-control" rows="5"></textarea>
                         </div>
                     </div>

@@ -219,6 +219,7 @@ const routes = [
     path: "/alluser",
     name: "AllUser",
     component: AllUser,
+    beforeEnter: islogin,
   },
   {
     path: "/mysubscription",
