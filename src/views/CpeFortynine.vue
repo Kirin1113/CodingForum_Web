@@ -32,11 +32,14 @@
                             <button v-if="serial" @click="copyToClipboard" class="btn btn-primary">複製</button>
                             <textarea id="input-textarea" :value="currentInput" class="form-control" rows="5" readonly></textarea>
                         </div>
-                        <div class="input-output mt-3">
+                        <div v-if="serial==272 || serial==10062 || serial==10101 || serial==10189 || serial==10415 || serial==11321" class="input-output mt-3">
                             <label for="output">Output:</label>
                             <textarea :value="currentOutput" class="form-control" rows="5" readonly></textarea>
-                            <!-- <button v-if="serial" @click="compareOutput" class="btn btn-primary">比對</button>
-                            <textarea v-model="currentOutput" class="form-control" rows="5"></textarea> -->
+                        </div>
+                        <div v-else class="input-output mt-3">
+                            <label for="output">Output:</label>
+                            <button v-if="serial && showInput!='如果看到這行就表示沒有此測資' && showInput!='未考過此題'" @click="compareOutput" class="btn btn-primary">比對</button>
+                            <textarea v-model="userOutput" class="form-control" rows="5"></textarea>
                         </div>
                     </div>
                 </div>
@@ -99,17 +102,21 @@ export default {
             },
             showcode: false,
             currentTest: '',
-            //currentOutput: '',
+            userOutput: '',
+            showInput: '',
             cmInstance: null, // 用來保存 Codemirror 實例
         };
     },
     computed: {
         currentInput() {
             if (this.currentTest === 'A') {
+                this.showInput = this.cpe.data_a_input;
                 return this.cpe.data_a_input;
             } else if (this.currentTest === 'B') {
+                this.showInput = this.cpe.data_b_input;
                 return this.cpe.data_b_input;
             }
+            this.showInput = this.cpe.data_input;
             return this.cpe.data_input;  // 如果沒有選擇特定測資，顯示全局測資
         },
         currentOutput() {
@@ -142,9 +149,11 @@ export default {
         updateSerial(serial, cpe) {
             this.serial = serial;
             this.cpe = cpe;
+            this.userOutput = '';
         },
         selectTestCase(test) {
             this.currentTest = test;
+            this.userOutput = '';
         },
         copyToClipboard() {
             const textarea = document.getElementById("input-textarea");
@@ -157,10 +166,10 @@ export default {
                 duration: 2000, 
             });
         },
-        /* compareOutput() {
+        compareOutput() {
             this.axios
                 .post("/api/forum/compareoutput", {
-                    output: this.currentOutput,
+                    output: this.userOutput,
                     whichoutput: this.currentTest,
                     serial: this.serial
                 })
@@ -182,7 +191,7 @@ export default {
                     if(error.response)
                         console.log(error.response)
                 })
-        },*/
+        },
         onReady(editor) {
             this.cmInstance = editor;  // 保存 Codemirror 實例
         },
