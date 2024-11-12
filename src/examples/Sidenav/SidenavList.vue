@@ -5,7 +5,7 @@
       <li class="nav-item">
         <sidenav-collapse navText="首頁" :to="{ name: 'Dashboard' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" v-if="this.$cookies.get('token')">
         <sidenav-collapse navText="所有使用者" :to="{ name: 'AllUser' }" class="m-0 justify-content-center"></sidenav-collapse>
       </li>
     </ul>
