@@ -1,6 +1,6 @@
 <template>
     <li class="mb-2">
-        <a v-if="source['comment_id'] && source['post_id']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="gocomment">
+        <a v-if="source['comment_id'] && source['post_id'] && !source['viewed']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="gocomment">
             <div class="py-1 d-flex">
                 <div class="my-auto">
                     <img :src="$global_url + source['comment_user_picture']" class="avatar avatar-sm me-3"
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </a>
-        <a v-if="source['comment_id'] && source['community_id']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="gocomment">
+        <a v-if="source['comment_id'] && source['community_id'] && !source['viewed']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="gocomment">
             <div class="py-1 d-flex">
                 <div class="my-auto">
                     <img :src="$global_url + source['comment_user_picture']" class="avatar avatar-sm me-3"
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </a>
-        <a v-if="!source['comment_id'] && source['post_id']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="govideo">
+        <a v-if="!source['comment_id'] && source['post_id'] && !source['viewed']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="govideo">
             <div class="py-1 d-flex">
                 <div class="my-auto">
                     <img :src="$global_url + source['comment_user_picture']" class="avatar avatar-sm me-3"
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </a>
-        <a v-if="!source['comment_id'] && source['community_id']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="govideo">
+        <a v-if="!source['comment_id'] && source['community_id'] && !source['viewed']" class="dropdown-item border-radius-md" :class="[real_viewed == 0 ? 'notview' : 'viewed']" @click="govideo">
             <div class="py-1 d-flex">
                 <div class="my-auto">
                     <img :src="$global_url + source['comment_user_picture']" class="avatar avatar-sm me-3"
