@@ -29,12 +29,12 @@
                         </div>
                         <div class="input-output">
                             <label for="input">Input:</label>
-                            <button v-if="serial && (showInput!=null && showInput!='測資過長' && showInput!='測資A過長' && showInput!='測資B過長')" 
+                            <button v-if="serial && (showInput!='測資過長' && showInput!='測資在此執行有問題' && showInput!='如果看到這行就表示沒有此測資' && showInput!='未考過此題')" 
                               @click="copyToClipboard" class="btn btn-primary">複製</button>
                             <textarea id="input-textarea" :value="currentInput" class="form-control" rows="5" readonly></textarea>
                         </div>
-                        <div v-if="serial==10062 || serial==10101 || serial==10415
-                          || showInput=='測資過長' || showInput=='測資A過長' || showInput=='測資B過長' || showInput==null" 
+                        <div v-if="serial==10101 || showInput=='測資過長' || showInput=='測資在此執行有問題' 
+                        || showInput=='如果看到這行就表示沒有此測資' || showInput=='未考過此題' || showInput==null" 
                           class="input-output mt-3">
                             <label for="output">Output:</label>
                             <textarea :value="currentOutput" class="form-control" rows="5" readonly></textarea>

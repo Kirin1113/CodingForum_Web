@@ -20,10 +20,19 @@
                 <i class="fas fa-filter" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop'"></i>
               </div>
             </div>
-            <div v-if="this.$route.name == 'MyLikeVideo' || this.$route.name == 'MyWatch' || this.$route.name == 'MyLikeCommunity'"
+            <div v-if="this.$route.name == 'MyLikeVideo'"
             :key="this.$route.name" style="display: flex;">
               <div class="mt-1" style="cursor: pointer;" @click="resetpost"  data-bs-toggle="tooltip" title="全部">
                 <i class="fa-solid fa-video"></i>
+              </div>
+              <div class="me-3 selectuva">
+                <SelectAuthor :key="resetpostvalue"/>
+              </div>
+            </div>
+            <div v-if="this.$route.name == 'MyLikeCommunity'"
+            :key="this.$route.name" style="display: flex;">
+              <div class="mt-1" style="cursor: pointer;" @click="resetpost"  data-bs-toggle="tooltip" title="全部">
+                <i class="fa-solid fa-comments"></i>
               </div>
               <div class="me-3 selectuva">
                 <SelectAuthor :key="resetpostvalue"/>
