@@ -75,17 +75,24 @@
         notes: [], // 確保初始化為空數組
         newNote: { title: '', content: '' },
         selectedNote: null,
-        token: this.$cookies.get("token"),
         searchQuery: '', // 綁定關鍵字
       };
     },
+    created() {
+      this.fetchNotes();
+    },
     methods: {
       searchNote() {
+        const token = this.$cookies.get("token");
         // 當輸入關鍵字時發送請求
         if (this.searchQuery.length > 0) {
             this.axios
-            .post("/api/search_note", {
+            .post("/api/forum/search_note", {
                 query: this.searchQuery, // 傳遞查詢關鍵字
+            }, {
+              headers: { 
+                'Authorization': `Bearer ` + token
+              }
             })
             .then((res) => {
                 console.log(res.data);
@@ -102,7 +109,8 @@
       },
       async fetchNotes() {
         // 檢查是否有 token
-        if (!this.token) {
+        const token = this.$cookies.get("token");
+        if (!token) {
           console.log("未登入，無法載入筆記");
           return; // 沒有 token 時跳過請求
         }
@@ -110,13 +118,12 @@
         try {
           const response = await this.axios.post("/api/forum/get_note", {}, {
             headers: { 
-              'Authorization': `Bearer ` + this.token
+              'Authorization': `Bearer ` + token
             }
           });
           this.notes = response.data.success;
         } catch (error) {
           console.error("載入筆記失敗", error);
-          ElMessage.error('筆記載入失敗');
         }
       },
       startAddingNote() {
@@ -125,13 +132,14 @@
         this.selectedNote = null;
       },
       async addNote() {
+        const token = this.$cookies.get("token");
         try {
-          const response = await this.axios.post("/api/forum/note", {
+          await this.axios.post("/api/forum/note", {
             title: this.newNote.title,
             content: this.newNote.content
           }, {
             headers: { 
-              'Authorization': `Bearer ` + this.token
+              'Authorization': `Bearer ` + token
             }
           });
           // 顯示成功訊息
@@ -163,6 +171,7 @@
         this.selectedNote = null;
       },
       async saveNote() {
+        const token = this.$cookies.get("token");
         try {
           await this.axios.post("/api/forum/note", {
             title: this.selectedNote.title,
@@ -170,7 +179,7 @@
             note_id: this.selectedNote.id
           }, {
             headers: { 
-              'Authorization': `Bearer ` + this.token
+              'Authorization': `Bearer ` + token
             }
           });
           // 顯示成功訊息
@@ -185,12 +194,13 @@
         }
       },
       async deleteNote() {
+        const token = this.$cookies.get("token");
         try {
           await this.axios.post("/api/forum/del_note", {
             note_id: this.selectedNote.id
           }, {
             headers: { 
-              'Authorization': `Bearer ` + this.token
+              'Authorization': `Bearer ` + token
             }
           });
           // 顯示成功訊息
@@ -206,9 +216,6 @@
         }
       }
     },
-    mounted() {
-      this.fetchNotes();
-    }
   };
   </script>
   
