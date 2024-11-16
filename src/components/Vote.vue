@@ -85,7 +85,7 @@ export default {
                 loading: this.loading,
             }),
             () => {
-                if (this.$route.name != 'Video' || this.$route.name != 'Community') {
+                if (this.$route.name != 'Video' && this.$route.name != 'Community') {
                     return;
                 }
                 if (this.type == 0) {
@@ -121,18 +121,8 @@ export default {
         },
         downvote() {
             this.check();
-            if (!this.limit) {
-                if(this.disliked==true) {
-                    return ;
-                } else if(this.liked==true) {
-                    this.num--;
-                    this.liked = false;
-                    this.disliked = false;
-                } else if(this.liked!=true && this.disliked!=true) {
-                    this.num--;
-                    this.disliked = true;
-                }
-                    
+            if (this.disliked != true && !this.limit) {
+                this.num-- 
                 this.$emit('like_function', -1);
                 this.limit = true;
                 this.change(0);
@@ -141,18 +131,8 @@ export default {
         },
         upvote() {
             this.check();
-            if (!this.limit) {
-                if(this.liked==true) {
-                    return ;
-                } else if(this.disliked==true) {
-                    this.num++;
-                    this.liked = false;
-                    this.disliked = false;
-                } else if(this.liked!=true && this.disliked!=true) {
-                    this.num++;
-                    this.liked = true;
-                }
-
+            if (this.liked != true && !this.limit) {
+                this.num++
                 this.$emit('like_function', 1);
                 this.limit = true;
                 this.change(0);
