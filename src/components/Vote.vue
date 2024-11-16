@@ -41,7 +41,15 @@ export default {
             type: Number,
             default: 0,
         },
+        id: {
+            type: Number,
+            default: 0,
+        },
         post_id: {
+            type: Number,
+            default: 0,
+        },
+        community_id: {
             type: Number,
             default: 0,
         },
@@ -113,8 +121,18 @@ export default {
         },
         downvote() {
             this.check();
-            if (this.disliked != true && !this.limit) {
-                this.num--
+            if (!this.limit) {
+                if(this.disliked==true) {
+                    return ;
+                } else if(this.liked==true) {
+                    this.num--;
+                    this.liked = false;
+                    this.disliked = false;
+                } else if(this.liked!=true && this.disliked!=true) {
+                    this.num--;
+                    this.disliked = true;
+                }
+                    
                 this.$emit('like_function', -1);
                 this.limit = true;
                 this.change(0);
@@ -123,8 +141,18 @@ export default {
         },
         upvote() {
             this.check();
-            if (this.liked != true && !this.limit) {
-                this.num++
+            if (!this.limit) {
+                if(this.liked==true) {
+                    return ;
+                } else if(this.disliked==true) {
+                    this.num++;
+                    this.liked = false;
+                    this.disliked = false;
+                } else if(this.liked!=true && this.disliked!=true) {
+                    this.num++;
+                    this.liked = true;
+                }
+
                 this.$emit('like_function', 1);
                 this.limit = true;
                 this.change(0);
