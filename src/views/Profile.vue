@@ -62,7 +62,7 @@
                 <li class="text-sm border-0 list-group-item ps-0">
                   <strong class="text-dark">訂閱人數:</strong> &nbsp; {{ user.subscriptions }}
                   <span style="display: inline-block; vertical-align: middle;">
-                    <div v-if="user.subscriptions >= 32 && user.subscriptions < 62">
+                    <div v-if="user.subscriptions >= 31 && user.subscriptions < 62">
                       <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge11.png" style="width: 32px; height: 35px; margin-left: 5px; margin-bottom: 10px;">
                     </div>
                     <div v-if="user.subscriptions >= 62 && user.subscriptions < 123">
@@ -76,7 +76,7 @@
                 <li class="text-sm border-0 list-group-item ps-0">
                   <strong class="text-dark">關注人數:</strong> &nbsp; {{ user.follows }}
                   <span style="display: inline-block; vertical-align: middle;">
-                    <div v-if="user.follows >= 32 && user.follows < 62">
+                    <div v-if="user.follows >= 31 && user.follows < 62">
                       <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge21.png" style="width: 30px; height: 30px; margin-left: 5px; margin-bottom: 5px;">
                     </div>
                     <div v-if="user.follows >= 62 && user.follows < 123">

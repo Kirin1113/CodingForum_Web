@@ -30,6 +30,35 @@
                             border-radius: 5px;">
                                                         {{ user.name }}
                                                     </h5>
+                                                    <div style="display: flex; align-items: flex-start;">
+                                                        <!-- 上面的徽章 -->
+                                                        <div v-if="user.subscriptions >= 31 && user.subscriptions < 62">
+                                                            <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge11.png" 
+                                                                style="width: 32px; height: 35px; margin-bottom: 10px;">
+                                                        </div>
+                                                        <div v-else-if="user.subscriptions >= 62 && user.subscriptions < 123">
+                                                            <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge12.png" 
+                                                                style="width: 32px; height: 37px; margin-bottom: 10px;">
+                                                        </div>
+                                                        <div v-else-if="user.subscriptions >= 123">
+                                                            <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge13.png" 
+                                                                style="width: 32px; height: 37px; margin-bottom: 10px;">
+                                                        </div>
+
+                                                        <!-- 下面的徽章 -->
+                                                        <div v-if="user.follows >= 31 && user.follows < 62">
+                                                            <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge21.png" 
+                                                                style="width: 30px; height: 30px; margin-left: 5px; margin-top: 6px;">
+                                                        </div>
+                                                        <div v-else-if="user.follows >= 62 && user.follows < 123">
+                                                            <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge22.png" 
+                                                                style="width: 30px; height: 30px; margin-left: 5px; margin-top: 6px;">
+                                                        </div>
+                                                        <div v-else-if="user.follows >= 123">
+                                                            <img src="http://localhost/Coding-platform/CodingPlatform_api/public/uploads/badge/badge23.png" 
+                                                                style="width: 30px; height: 30px; margin-left: 5px; margin-top: 6px;">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
