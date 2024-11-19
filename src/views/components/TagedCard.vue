@@ -58,6 +58,9 @@ export default {
                 console.log(res.data.success)
                 this.reload++;
             })
+            .catch((error) => {
+                console.log(error);
+            })
     },
     methods: {
         all_tag_view() {
