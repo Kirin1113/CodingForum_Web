@@ -157,7 +157,7 @@ export default {
                 name: 'Profile', params: { user_account: this.token_user_account }
               })
               ElMessage({
-                message: "更新成功，請重新登入",
+                message: "更新成功",
                 type: "success",
                 duration: 3000,
               });
