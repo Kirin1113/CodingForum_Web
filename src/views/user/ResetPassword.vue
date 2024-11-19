@@ -1,5 +1,5 @@
 <template>
-  <div class="page-header align-items-start min-vh-50 pb-11 border-radius-lg" :style="{
+  <div class="page-header align-items-start border-radius-lg" :style="{
     backgroundImage:
       'url(' + require('@/assets/img/aicreated-images/aicreated' + randompic + '.jpg') + ')',
   }">
