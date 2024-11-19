@@ -3,43 +3,32 @@
     backgroundImage:
       'url(' + require('@/assets/img/aicreated-images/aicreated' + randompic + '.jpg') + ')',
   }">
-    <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="mx-auto text-center col-lg-5">
-          <h1 class="mt-5 mb-2 text-white">更改密碼</h1>
-          <p class="text-white text-lead">
-            在底下輸入兩次相同的新密碼即可完成更改！
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
-      <div class="mx-auto col-xl-4 col-lg-5 col-md-7">
-        <div class="card z-index-0">
-          <div class="card-body">
-            <form role="form" @submit.prevent="register">
-              <div class="mb-3">
-                <label>密碼</label>
-                <input class="form-control" v-model="password" type="password" placeholder="請輸入密碼" aria-label="密碼" />
-              </div>
-              <div class="mb-3">
-                <label>請再輸入一次密碼</label>
-                <input class="form-control" v-model="password_confirmation" type="password" placeholder="請再輸入一次密碼"
-                  aria-label="密碼" />
-              </div>
-              <div class="text-center">
-                <soft-button color="warning" full-width variant="gradient" class="my-4 mb-2">確認</soft-button>
-              </div>
-              <p class="text-sm mt-3 mb-0">
-                想起原本的密碼了嗎?
-                <router-link :to="{ name: 'Sign In' }" class="text-dark font-weight-bolder">
-                  登入
-                </router-link>
-              </p>
-            </form>
+      <div class="row align-items-center min-vh-100 justify-content-center">
+        <div class="mx-auto col-xl-4 col-lg-5 col-md-7">
+          <div class="card z-index-0">
+            <div class="card-body">
+              <form role="form" @submit.prevent="register">
+                <div class="mb-3">
+                  <label>密碼</label>
+                  <input class="form-control" v-model="password" type="password" placeholder="請輸入密碼" aria-label="密碼" />
+                </div>
+                <div class="mb-3">
+                  <label>請再輸入一次密碼</label>
+                  <input class="form-control" v-model="password_confirmation" type="password" placeholder="請再輸入一次密碼"
+                    aria-label="密碼" />
+                </div>
+                <div class="text-center">
+                  <soft-button color="warning" full-width variant="gradient" class="my-4 mb-2">確認</soft-button>
+                </div>
+                <p class="text-sm mt-3 mb-0">
+                  想起原本的密碼了嗎?
+                  <router-link :to="{ name: 'Sign In' }" class="text-dark font-weight-bolder">
+                    登入
+                  </router-link>
+                </p>
+              </form>
+            </div>
           </div>
         </div>
       </div>
