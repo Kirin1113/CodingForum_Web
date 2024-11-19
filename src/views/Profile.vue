@@ -91,7 +91,7 @@
                   <strong class="text-dark">電子郵件:</strong> &nbsp; {{ user.email }}
                 </li>
                 <li v-if="social.length != 0" class="pb-0 border-0 list-group-item ps-0">
-                  <strong class="text-sm text-dark">社群媒體:</strong> &nbsp;
+                  <strong class="text-sm text-dark">GitHub:</strong> &nbsp;
                   <a v-for="({ link, iconclass }, index) of social" :key="index" class="py-0 mb-0 btn-simple ps-1 pe-2"
                     :href="link">
                     <i :class=iconclass></i>
