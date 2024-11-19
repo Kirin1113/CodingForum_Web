@@ -10,7 +10,7 @@
             <div class="card-body">
               <div class="text-center">
                 <soft-button color="info" full-width variant="gradient" class="my-4 mb-2"
-                  @click="this.$router.push({ name: 'forget_password' });">前往</soft-button>
+                  @click="this.$router.push({ name: 'forget_password' });">前往重新發送信件</soft-button>
               </div>
               <p class="text-sm mt-3 mb-0">
                 想起原本的密碼了嗎?
