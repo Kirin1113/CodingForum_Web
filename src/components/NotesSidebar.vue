@@ -12,6 +12,7 @@
           class="form-control" 
           placeholder="輸入關鍵字進行搜索" 
           v-model="searchQuery"
+          v-if="!selectedNote && !isEditingNote && !isAddingNote"
           @input="searchNote"
         />
         <div v-if="!selectedNote" @click="startAddingNote" style="cursor: pointer; font-size: 1.5em;" data-bs-toggle="tooltip" title="新增筆記">
