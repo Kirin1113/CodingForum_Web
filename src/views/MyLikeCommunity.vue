@@ -23,7 +23,7 @@
                                                     </h5>
                                                 </div>
                                             </div>
-                                            {{ community.name }}
+                                            {{ community.user_name }}
                                         </div>
                                     </div>
                                 </router-link>
@@ -90,7 +90,10 @@ export default {
       },
       changepost(options) {
         console.log('type ' + options.type)
-        this.sort = options.type;
+        if (options.type == 99) {
+          console.log(options.author_id)
+          this.send_author_id = options.author_id
+        }
         this.communitys = [];
         this.noResult = false
         this.loadDataFromServer()
